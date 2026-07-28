@@ -6,8 +6,15 @@
 
 @font-face {
     font-family: 'Mulish';
-    src: url('/fonts/mulish-latin-600-normal.woff2') format('woff2');
+    src: url('/fonts/mulish-latin-700-normal.woff2') format('woff2');
 }
+
+@font-face {
+    font-family: 'Nokora';
+    src: url('/fonts/nokora-latin-400-normal.woff2') format('woff2');
+}
+
+
 
 h1{
     font-family: 'Nerko-One', sans-serif;
@@ -15,7 +22,15 @@ h1{
     color: var(--primary-orange);
 }
 
-p{
+.basic-text{
     font-family: 'Mulish', sans-serif;
     color: var(--white);
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.btn-text{
+     color: var(--super-dark-lilac);
+     font-family: 'Nokora', sans-serif;
+     font-size: 18px;
 }

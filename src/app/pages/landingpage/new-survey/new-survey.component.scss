@@ -1,12 +1,17 @@
 .new_survey--container {
     width: 100%;
     max-width: 1218px;
-    height: 420px;
+    min-height: 420px;
 }
 
 .new_survey--text {
     width: 100%;
     max-width: 712px;
+    min-height: 380px;
+
+    >.headline_styling{
+        margin: 0px;
+    }
 }
 
 .survey-image {
