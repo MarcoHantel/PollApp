@@ -1,0 +1,21 @@
+
+@font-face {
+    font-family: 'Nerko-One';
+    src: url('/fonts/nerko-one-latin-400-normal.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Mulish';
+    src: url('/fonts/mulish-latin-600-normal.woff2') format('woff2');
+}
+
+h1{
+    font-family: 'Nerko-One', sans-serif;
+    font-size: 100px;
+    color: var(--primary-orange);
+}
+
+p{
+    font-family: 'Mulish', sans-serif;
+    color: var(--white);
+}

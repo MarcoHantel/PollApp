@@ -1,7 +1,13 @@
 @use "../../../styles/abstracts/colours";
 
-.landingpage_main-container {
+.landingpage_main--container {
     width: 100%;
+    max-width: 1218px;
     height: 100vh;
-    background-color: var(--primary-background-color);
+    background-color: rgb(71, 27, 97);
+
+    display: flex;
+    flex-direction: column;
+    
+    gap: 90px;
 }
