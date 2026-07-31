@@ -14,7 +14,34 @@
     }
 }
 
-.survey-image {
+.new_survey--image {
+    position: relative;
     width: 420px;
     height: 420px;
+
+    &:hover {
+        .survey_image--default {
+            opacity: 0;
+        }
+        .survey_image--hover {
+            opacity: 1;
+        }
+    }
+}
+
+.survey_image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 420px;
+    height: 420px;
+    transition: opacity 0.3s ease;
+}
+
+.survey_image--default {
+    opacity: 1;
+}
+
+.survey_image--hover {
+    opacity: 0;
 }
