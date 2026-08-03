@@ -1,0 +1,47 @@
+.survey_card {
+
+    width: 321px;
+    height: 310px;
+
+    font-family: 'Mulish', sans-serif;
+    background-color: var(--off-white);
+
+
+    border-radius: 0 80px 0 0;
+    border: none;
+
+
+    &--title {
+        width: 100%;
+        max-width: 220px;
+        height: 99px;
+        margin: 0px;
+
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--primary-purple);
+
+
+    }
+
+    &--subject {
+        width: 100%;
+        max-width: 220px;
+        margin: 0px;
+
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--primary-purple);
+    }
+
+    &--expire {
+        width: 100%;
+        max-width: 21px;
+        height: 15px;
+
+        font-size: 12px;
+        font-weight: 500;
+        color: var(--primary-purple);
+        background-color: var(--secondary-orange);
+    }
+}

@@ -1,4 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+export interface Survey {
+  subject: string;
+  title: string;
+  expire: number;
+}
 
 @Component({
   selector: 'app-survey-card',
@@ -7,5 +13,5 @@ import { Component } from '@angular/core';
   styleUrl: './survey-card.component.scss'
 })
 export class SurveyCardComponent {
-
+  @Input({ required: true }) survey!: Survey;
 }

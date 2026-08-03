@@ -1,3 +1,6 @@
-<h1>Survey Card</h1>
-<p>survey-card works! Das ist die Survey-Karte.</p>
 
+    <div class="survey_card ">
+        <p class="survey_card--subject">{{ survey.subject }}</p>
+        <h3 class="survey_card--title">{{ survey.title }}</h3>
+        <span class="survey_card--expire">Verfällt in {{ survey.expire }} Tagen</span>
+    </div>

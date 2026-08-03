@@ -1,0 +1,21 @@
+.your_survey--container {
+    width: 1042px;
+    // max-width: 1042px;
+    min-height: 522px;
+    background-color: rgb(245, 125, 245);
+}
+
+.card_wrapper{
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.position_center {
+    text-align: center;
+}
+
+.styling_h2 {
+    margin-bottom: 20px;
+}
