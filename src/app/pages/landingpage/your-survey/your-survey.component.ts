@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
+import { DisplySurveyService } from './../../../service/disply-survey.service';
 import { SurveyCardComponent } from './survey-card/survey-card.component';
-import { DisplySurveyService } from '../../../service/disply-survey.service';
-
 
 @Component({
   selector: 'app-your-survey',
@@ -10,9 +9,7 @@ import { DisplySurveyService } from '../../../service/disply-survey.service';
   styleUrl: './your-survey.component.scss'
 })
 export class YourSurveyComponent {
+  private surveyService = inject(DisplySurveyService);
 
-  private exitingSurveyService = inject(DisplySurveyService);
-
-currentSurveys = this.exitingSurveyService.surveys;
-
+  currentSurveys = this.surveyService.getEndingSoonSurveys();
 }

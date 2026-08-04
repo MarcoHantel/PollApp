@@ -6,16 +6,25 @@
     font-family: 'Mulish', sans-serif;
     background-color: var(--off-white);
 
-
     border-radius: 0 80px 0 0;
     border: none;
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    >.survey_card--wrapper{
+        width: 233px;
+        height: 210px ;
+        padding: 18px;
+    }
 
     &--title {
         width: 100%;
         max-width: 220px;
         height: 99px;
-        margin: 0px;
+        margin-top: 8px;
+        margin-bottom: 24px;
 
         font-size: 26px;
         font-weight: 700;
@@ -38,6 +47,11 @@
         width: 100%;
         max-width: 21px;
         height: 15px;
+
+        padding: 3px 6px;
+
+        border-radius: 0 13px 0 0;
+        border: none;
 
         font-size: 12px;
         font-weight: 500;
