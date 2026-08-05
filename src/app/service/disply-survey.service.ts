@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 
 export interface Survey {
   id: number;
-  subject: string;
+  category: string;
   title: string;
   expire: number;
+  active: boolean;
 }
 
 @Injectable({
@@ -16,10 +17,11 @@ export class DisplySurveyService {
 
   constructor() {
     this.surveys = [
-      { id: 1, subject: "Umfrage Laufen", title: "Das ist der Title", expire: 2 },
-      { id: 2, subject: "Umfrage sport", title: "Sport ist gesund", expire: 5 },
-      { id: 3, subject: "Umfrage zum Thema Essen", title: "Was ist dein Lieblingsessen?", expire: 3 },
-      { id: 4, subject: "Umfrage Party", title: "Was ist deine Lieblingsparty?", expire: 1 },
+      { id: 1, category: "Team Activities", title: "Das ist der Title", expire: 2, active: true },
+      { id: 2, category: "Health & Wellness", title: "Sport ist gesund", expire: 5, active: false },
+      { id: 3, category: "Gaming & Entertainment", title: "Was ist dein Lieblingsessen?", expire: 3, active: true },
+      { id: 4, category: "Team Activities", title: "Was ist deine Lieblingsparty?", expire: 1, active: true },
+      { id: 5, category: "Technology & Innovation", title: "Was ist deine Lieblingsmusik?", expire: 4, active: false },
     ];
   }
 

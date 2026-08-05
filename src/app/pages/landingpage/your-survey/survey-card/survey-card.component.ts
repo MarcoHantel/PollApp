@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 
 export interface Survey {
-  subject: string;
+  category: string;
   title: string;
   expire: number;
 }

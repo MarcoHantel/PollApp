@@ -1,0 +1,15 @@
+.overview_surveys--container {
+    width: 1042px;
+    min-height: 522px;
+    background-color: black;
+
+    >.overview_surveys--head {
+        background-color: var(--primary-background-color);
+        width: 100%;
+    }
+}
+
+
+.button_wrapper {
+    gap: 24px;
+}
