@@ -13,3 +13,77 @@
 .button_wrapper {
     gap: 24px;
 }
+
+
+.custom_select {
+    position: relative;
+
+    width: 246px;
+    height: 32px;
+
+    font-family: 'Mulish', sans-serif;
+
+    &--selected {
+        background-color: var(--primary-background-color);
+        color: var(--white);
+        padding: 4px 6px;
+        cursor: pointer;
+        font-size: 18px;
+
+        border: none;
+        border-radius: 4px;
+
+        &:hover {
+            background-color: rgba(142, 112, 153, 0.16);
+
+            .arrow {
+                border-top: 12px solid var(--primary-orange);
+            }
+        }
+    }
+
+    &--options {
+        position: absolute; // ← überlagert den Rest
+        top: 100%;
+        left: 0;
+        width: 100%;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        z-index: 10; // ← liegt über allem
+        background-color: var(--white);
+
+        border-radius: 6px;
+
+    }
+
+    &--option {
+        cursor: pointer;
+        font-size: 14px;
+        color: var(--primary-background-color);
+
+        &--text {
+            padding: 8px 12px;
+            margin: 0;
+            display: inline-block;
+
+            &:hover {
+                background-color: var(--super-light-lilac);
+                border-radius: 6px;
+            }
+        }
+    }
+}
+
+.arrow {
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 12px solid var(--white); // ← Dreieck zeigt nach unten
+    border-radius: 3px;
+
+    transition: transform 0.2s ease;
+
+    &.open {
+        transform: rotateX(3.142rad)
+    }
+}

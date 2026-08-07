@@ -6,19 +6,26 @@
             <button class="btn_select btn_past">Past survey</button>
         </div>
 
-        <div>
-            <label for="sort-surveys"></label>
-            <select id="sort-surveys" name="sort-surveys" class="basic_select">
-                <option value="" selected disabled>Sort by categories</option>
-                <option value="all">All Surveys</option>
-                <option value="category1">Team Activities</option>
-                <option value="category2">Health & Wellness</option>
-                <option value="category3">Gaming & Entertainment</option>
-                <option value="category1">Education & Learning</option>
-                <option value="category2">Lifestyle & Preferences</option>
-                <option value="category3">Technology & Innovation</option>
-            </select>
+
+        <!-- statt <select> ein eigenes Dropdown bauen -->
+
+        <div class="custom_select">
+            <div class="custom_select--selected displayflex_space--between" (click)="toggleDropdown()">
+                {{ selected }} <span class="arrow" [class.open]="isOpen"></span>
+            </div>
+            @if(isOpen) {
+            <ul class="custom_select--options">
+
+                @for(option of options; track option.value) {
+
+                <li class="custom_select--option" (click)="selectOption(option)">
+                    <p class="custom_select--option--text"> {{ option.label}}</p>
+                </li>
+                }
+            </ul>
+            }
         </div>
+
     </div>
 
 </div>

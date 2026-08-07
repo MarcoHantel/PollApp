@@ -65,36 +65,3 @@
         cursor: pointer;
     }
 }
-
-.basic_select {
-    appearance: base-select;
-
-    background-color: var(--primary-background-color);
-    color: var(--white);
-    border: none;
-
-    width: 206px;
-    height: 32px;
-    padding: 4px 6px;
-
-    font-family: 'Mulish', sans-serif;
-    font-size: 18px;
-    font-weight: 700;
-
-    &:hover{
-        cursor: pointer;
-        background-color: rgba(142, 112, 153, 0.16);
-
-        &::picker-icon {
-            color: var(--primary-orange);
-        }
-    }
-}
-
-.basic_select::picker-icon {
-    color: var(--white);
-}
-
-.basic_select:open::picker-icon {
-    transform: rotateX(3.142rad)
-}
