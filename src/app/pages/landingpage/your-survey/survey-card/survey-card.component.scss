@@ -13,6 +13,10 @@
     align-items: center;
     justify-content: center;
 
+    &:hover{
+        background-color: var(--super-light-lilac);
+    }
+
     >.survey_card--wrapper{
         width: 233px;
         height: 210px ;

@@ -1,0 +1,39 @@
+.card_wrapper {
+
+    background-color: var(--light-purple);
+    width: 513px;
+    height: 127px;
+
+    font-family: 'Mulish', sans-serif;
+
+    border: none;
+    border-radius: 5px 50px 5px 5px;
+
+
+    >.survey_card--category {
+        color: var(--secondary-orange);
+        font-weight: '500';
+        font-size: 16px;
+        font-style: medium;
+    }
+
+    >.survey_card--title {
+        font-weight: '700';
+        font-size: 24px;
+        font-style: bold;
+        color: var(--white);
+    }
+
+    >.survey_card--expire {
+        background-color: var(--secondary-orange);
+        width: 89px;
+        height: 21px;
+        padding: 3px 6px;
+
+        color: var(--primary-background-color);
+
+        border: none;
+        border-radius: 0 5px 0px 0px;
+    }
+
+}

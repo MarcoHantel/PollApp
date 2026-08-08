@@ -1,10 +1,12 @@
 import { Component, inject, } from '@angular/core';
 import { DisplySurveyService } from './../../../service/disply-survey.service';
+import { SurveyCardComponent } from './survey-cards/survey-cards.component';
+
 
 
 @Component({
   selector: 'app-overview-surveys',
-  imports: [],
+  imports: [SurveyCardComponent],
   templateUrl: './overview-surveys.component.html',
   styleUrl: './overview-surveys.component.scss'
 })
@@ -13,7 +15,7 @@ export class OverviewSurveysComponent {
   private surveyService = inject(DisplySurveyService);
   currentSurveys = this.surveyService.getEndingSoonSurveys();
 
-  isOpen = false;  
+  isOpen = false;
   selected = 'Sort by categories'; // default value für den Anfang
 
   options = [
@@ -34,4 +36,7 @@ export class OverviewSurveysComponent {
   toggleDropdown() {
     this.isOpen = !this.isOpen;  // ← togglen!
   }
+
+  // in der Komponente die alle anzeigen soll:
+  allSurveys = this.surveyService.getAllSurveys();
 }

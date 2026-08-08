@@ -1,12 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Input } from '@angular/core';
+import { Survey } from '../interfaces/survey.model';
 
-export interface Survey {
-  id: number;
-  category: string;
-  title: string;
-  expire: number;
-  active: boolean;
-}
+// export interface Survey {
+//   id: number;
+//   category: string;
+//   title: string;
+//   expire: number;
+//   active: boolean;
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +32,10 @@ export class DisplySurveyService {
       .sort((a, b) => a.expire - b.expire)
       .slice(0, limit);
   }
+
+  // neue Funktion für alle Surveys
+  getAllSurveys(): Survey[] {
+    return [...this.surveys]
+  }
+
 }

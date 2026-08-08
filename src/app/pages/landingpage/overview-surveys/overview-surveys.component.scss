@@ -1,7 +1,7 @@
 .overview_surveys--container {
     width: 1042px;
     min-height: 522px;
-    background-color: black;
+    background-color: var(--primary-background-color);
 
     >.overview_surveys--head {
         background-color: var(--primary-background-color);
@@ -86,4 +86,11 @@
     &.open {
         transform: rotateX(3.142rad)
     }
+}
+
+.all_cards_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
 }

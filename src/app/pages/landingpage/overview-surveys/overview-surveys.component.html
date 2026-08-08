@@ -28,4 +28,11 @@
 
     </div>
 
+    <div class="all_cards_wrapper">
+    <!-- Aller cards Anzeigen die es gibt  -->
+       @for(allSurveys of allSurveys; track allSurveys.id) {
+        <app-survey-cards [survey]="allSurveys"></app-survey-cards>
+    }
+    </div>
+
 </div>
