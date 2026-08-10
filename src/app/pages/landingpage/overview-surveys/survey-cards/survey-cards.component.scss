@@ -62,10 +62,10 @@
     }
 }
 
-// survey-cards.component.scss
-.survey-title {  // ← deine Title CSS Klasse
-    white-space: nowrap;      // ← kein Zeilenumbruch
-    overflow: hidden;         // ← überstehender Text wird versteckt
-    text-overflow: ellipsis;  // ← ... am Ende
-    max-width: 100%;          // ← Breite des Containers
+
+.survey-title { 
+    white-space: nowrap;      
+    overflow: hidden;         
+    text-overflow: ellipsis;  
+    max-width: 100%;          
 }
