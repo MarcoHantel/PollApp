@@ -1,11 +1,13 @@
 .overview_surveys--container {
-    width: 1042px;
+    width: 1082px;
     min-height: 522px;
     background-color: var(--primary-background-color);
+
 
     >.overview_surveys--head {
         background-color: var(--primary-background-color);
         width: 100%;
+        margin-bottom: 32px;
     }
 }
 
@@ -17,7 +19,6 @@
 
 .custom_select {
     position: relative;
-
     width: 246px;
     height: 32px;
 
@@ -43,14 +44,14 @@
     }
 
     &--options {
-        position: absolute; // ← überlagert den Rest
+        position: absolute;
         top: 100%;
         left: 0;
         width: 100%;
         list-style: none;
         margin: 0;
         padding: 0;
-        z-index: 10; // ← liegt über allem
+        z-index: 10;
         background-color: var(--white);
 
         border-radius: 6px;
@@ -78,7 +79,7 @@
 .arrow {
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
-    border-top: 12px solid var(--white); // ← Dreieck zeigt nach unten
+    border-top: 12px solid var(--white);
     border-radius: 3px;
 
     transition: transform 0.2s ease;
@@ -92,5 +93,29 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    gap: 16px;
+    max-height: 413px;
+    overflow-y: auto;
+    overflow-x: hidden;
 
+    app-survey-cards {
+        width: calc(50% - 8px);
+    }
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: var(--primary-background-color);
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: var(--primary-orange);
+        border-radius: 10px;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+        cursor: pointer;
+    }
 }

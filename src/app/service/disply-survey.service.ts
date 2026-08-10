@@ -20,9 +20,11 @@ export class DisplySurveyService {
     this.surveys = [
       { id: 1, category: "Team Activities", title: "Das ist der Title", expire: 2, active: true },
       { id: 2, category: "Health & Wellness", title: "Sport ist gesund", expire: 5, active: false },
-      { id: 3, category: "Gaming & Entertainment", title: "Was ist dein Lieblingsessen?", expire: 3, active: true },
+      { id: 3, category: "Gaming & Entertainment", title: "Was ist dein Lieblingsfilm?", expire: 3, active: true },
       { id: 4, category: "Team Activities", title: "Was ist deine Lieblingsparty?", expire: 1, active: true },
       { id: 5, category: "Technology & Innovation", title: "Was ist deine Lieblingsmusik?", expire: 4, active: false },
+      { id: 6, category: "Gaming & Entertainmenn", title: "Was ist das beste Brettspiel aller Zeiten?", expire: 4, active: false },
+      { id: 7, category: "Team Activities", title: "Die Besten Teamspiele aller Zeiten", expire: 2, active: false },
     ];
   }
 

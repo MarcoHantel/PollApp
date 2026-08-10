@@ -1,7 +1,13 @@
 <div class="card_wrapper">
 
-        <p class="survey_card--category">{{ survey.category }}</p>
-        <h3 class="survey_card--title">{{ survey.title }}</h3>
-        <span class="survey_card--expire">Ends in {{ survey.expire }} days</span>
+        <div class="card_wrapper--text">
+                <p class="survey_card--category">{{ survey.category }}</p>
+                <h3 class="survey_card--title survey-title">{{ survey.title }}</h3>
+        </div>
 
+        <div class="card_wrapper--expire displayflex_space--end">
+                <div class="survey_card--expire displayflex_center" ssss>
+                        <span>Ends in {{ survey.expire }} days</span>
+                </div>
+        </div>
 </div>

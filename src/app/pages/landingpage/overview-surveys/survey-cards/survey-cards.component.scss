@@ -4,36 +4,68 @@
     width: 513px;
     height: 127px;
 
-    font-family: 'Mulish', sans-serif;
-
     border: none;
     border-radius: 5px 50px 5px 5px;
 
+    >.card_wrapper--text {
 
-    >.survey_card--category {
-        color: var(--secondary-orange);
-        font-weight: '500';
-        font-size: 16px;
-        font-style: medium;
-    }
-
-    >.survey_card--title {
-        font-weight: '700';
-        font-size: 24px;
-        font-style: bold;
-        color: var(--white);
-    }
-
-    >.survey_card--expire {
-        background-color: var(--secondary-orange);
-        width: 89px;
-        height: 21px;
-        padding: 3px 6px;
-
-        color: var(--primary-background-color);
+        font-family: 'Mulish', sans-serif;
 
         border: none;
-        border-radius: 0 5px 0px 0px;
+        border-radius: 5px 50px 5px 5px;
+
+
+        >.survey_card--category {
+            color: var(--secondary-orange);
+            font-weight: '500';
+            font-size: 16px;
+            font-style: medium;
+
+            margin: 0px;
+            padding: 5px 10px;
+        }
+
+        >.survey_card--title {
+            font-weight: '700';
+            font-size: 24px;
+            font-style: bold;
+            color: var(--white);
+
+            margin: 0px;
+            padding: 5px 10px;
+        }
+
+
     }
 
+
+
+    .card_wrapper--expire {
+
+        font-family: 'Mulish', sans-serif;
+        font-size: 12px;
+        padding: 15px 15px;
+
+
+        >.survey_card--expire {
+            background-color: var(--secondary-orange);
+            width: 89px;
+            height: 21px;
+            padding: 3px 6px;
+            text-align: center;
+
+            color: var(--primary-background-color);
+
+            border: none;
+            border-radius: 0 14px 0px 0px;
+        }
+    }
+}
+
+// survey-cards.component.scss
+.survey-title {  // ← deine Title CSS Klasse
+    white-space: nowrap;      // ← kein Zeilenumbruch
+    overflow: hidden;         // ← überstehender Text wird versteckt
+    text-overflow: ellipsis;  // ← ... am Ende
+    max-width: 100%;          // ← Breite des Containers
 }
