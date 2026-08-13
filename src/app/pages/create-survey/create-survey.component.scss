@@ -1,0 +1,31 @@
+.create_survey--wrapper {
+    background-color: var(--white);
+    width: 100vh;
+    height: 100%;
+
+    
+}
+
+.create_survey--top {
+
+    background-color: var(--primary-background-color);
+
+    >.survey_top--text {
+        background-color: var(--light-purple);
+
+        >span {
+            font-family: 'Mulish', sans-serif;
+            font-size: 12px;
+            background-color: var(--secondary-orange);
+            width: 59px;
+            height: 26px;
+            padding: 3px 12px 3px 8px;
+            text-align: center;
+
+            color: var(--primary-background-color);
+
+            border: none;
+            border-radius: 0 14px 0px 0px;
+        }
+    }
+}

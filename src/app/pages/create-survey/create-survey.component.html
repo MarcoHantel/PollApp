@@ -1,1 +1,22 @@
-<p>create-survey works!</p>
+<div class="create_survey--wrapper">
+    <div class="create_survey--top">
+
+        <div class="survey_top--text">
+            <span>Darft</span>
+            <h1>create new survey</h1>
+            <a>Cancle X</a>
+        </div>
+
+        <div class="create_survey--card">
+
+            <label for="surveyName">Survey name</label>
+            <input id="surveyName" type="text" [formControl]="surveyName"><img (click)=" deleteInput()" src="/images/delete.svg">
+
+            <h1>{{surveyName.value}}</h1> <!--so greife ich auf den value aus der form zu-->
+            <h1>{{surveyName.valid}}</h1>
+        </div>
+    </div>
+
+
+    <button (click)="updateInput()" [disabled]="!surveyName.valid">Publish</button> <!-- Button ist disabled, wenn Name nicht eingegeben-->
+</div>
