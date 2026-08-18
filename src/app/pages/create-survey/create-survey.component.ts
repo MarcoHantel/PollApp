@@ -54,8 +54,7 @@ export class CreateSurveyComponent {
   }
 
   // setzt meinen Wert wieder aud 'leer' click auf löschen
-  deleteInput() {
-    this.surveyName.setValue('');
+  deleteInput(control: FormControl) {
+    control.setValue(''); // ← nur das angeklickte Feld leeren ✅
   }
-
 }

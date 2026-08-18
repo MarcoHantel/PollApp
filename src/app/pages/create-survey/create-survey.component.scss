@@ -2,8 +2,6 @@
     background-color: var(--white);
     width: 100vh;
     height: 100%;
-
-
 }
 
 .create_survey--top {
@@ -25,33 +23,95 @@
             color: var(--primary-background-color);
 
             border: none;
-            border-radius: 0 14px 0px 0px;
+            border-radius: 0px 14px 0px 0px;
         }
+    }
+}
+
+
+.create_survey--card{
+        font-family: 'Mulish', sans-serif;
+        font-size: 16px;
+        color: var(--white);
+        padding: 16px;
+}
+
+.img_waist{
+    width: 26px;
+    height: 26px;
+
+    &:hover{
+        cursor: pointer;
     }
 }
 
 .survey_card--name {
     background-color: red;
+    width: 50%;
+    height: 100%;
+    padding: 8px;
 }
 
-.survey_card--description{
+.margin_spacer{
+    margin: 4px 0px 12px 0px;
+}
+
+.survey_card--description {
     background-color: green;
+    width: 50%;
+    height: 100%;
+    padding: 8px;
 }
 
 input[type="date"] {
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 16px;
 
-  &::-webkit-datetime-edit {
-    color: var(--primary-orange);
+    &::-webkit-datetime-edit {
+        color: var(--primary-background-color);
         font-family: 'Mulish', sans-serif;
         font-size: 16px;
-  }
+    }
 
-  // Auch einzelne Teile individuell stylebar
-  &::-webkit-datetime-edit-month-field,
-  &::-webkit-datetime-edit-day-field,
-  &::-webkit-datetime-edit-year-field {
-        color: var(--primary-orange);
-  }
+    // Auch einzelne Teile individuell stylebar
+    &::-webkit-datetime-edit-month-field,
+    &::-webkit-datetime-edit-day-field,
+    &::-webkit-datetime-edit-year-field {
+        color: var(--primary-background-color);
+    }
+}
+
+// Styling der Felder:
+
+input {
+    border: none;
+    border-radius: 5px 20px 5px 5px;
+    background-color: var(--field-background-light-lilac);
+    padding: 8px 12px;
+
+    // Standard-Browser-Styling kann ich so deaktivieren
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:focus {
+        background-color: var(--field--background-light-orange);
+        outline: none; // entfernt den weiß/schwarzen Fokusring komplett
+    }
+}
+
+input[type="date"] {
+
+    width: 222px;
+    height: 37px;
+
+    &:disabled {
+        background-color: #eee;
+        color: #999;
+        cursor: not-allowed;
+    }
 }

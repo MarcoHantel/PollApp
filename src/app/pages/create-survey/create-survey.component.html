@@ -8,22 +8,31 @@
         </div>
 
         <div class="create_survey--card displayflex_space--between">
-            <div class="survey_card--name">
+            <div class="survey_card--name displayflex_column">
+
                 <label for="surveyName">Survey name</label>
-                <input id="surveyName" type="text" [formControl]="surveyName"><img (click)=" deleteInput()"
-                    src="/images/delete.svg">
+                <div class="displayflex_space--between margin_spacer">
+                    <input id="surveyName" type="text" [formControl]="surveyName">
+                    <img class="img_waist" (click)="deleteInput(surveyName)" src="/images/delete.svg">
+                </div>
 
                 <label for="surveySetEndDate">Set end date</label>
-                <input id="surveySetEndDate" type="date" [formControl]="surveyEndDate"><img (click)=" deleteInput()"
-                    src="/images/delete.svg">
+                <div class="displayflex_space--between margin_spacer">
+                    <input id="surveySetEndDate" type="date" [formControl]="surveyEndDate">
+                    <img class="img_waist" (click)="deleteInput(surveyEndDate)" src="/images/delete.svg">
+                </div>
 
                 <label for="surveyQuestions">{{questions}}. Question</label>
-                <input id="surveyQuestions" type="text" [formControl]="surveyQuestions"><img (click)=" deleteInput()"
-                    src="/images/delete.svg">
+                <div class="displayflex_space--between margin_spacer">
+                    <input id="surveyQuestions" type="text" [formControl]="surveyQuestions">
+                    <img class="img_waist" (click)="deleteInput(surveyQuestions)" src="/images/delete.svg">
+                </div>
 
                 <label for="surveyAnswer">Answers</label>
-                <input id="surveyAnswer" type="text" [formControl]="surveyAnswer"><img (click)=" deleteInput()"
-                    src="/images/delete.svg">
+                <div class="displayflex_space--between margin_spacer">
+                    <input id="surveyAnswer" type="text" [formControl]="surveyAnswer">
+                    <img class="img_waist" (click)="deleteInput(surveyAnswer)" src="/images/delete.svg">
+                </div>
 
                 <input id="surveyAnswer" type="checkbox" [formControl]="surveyAnswer">
 
@@ -33,10 +42,10 @@
 
             </div>
 
-             <div class="survey_card--description">
-                <label for="surveyDescription">Survey name</label>
-                <input id="surveyDescription" type="text" [formControl]="surveyDescription"><img (click)=" deleteInput()"
-                    src="/images/delete.svg">
+            <div class="survey_card--description">
+                <label for="surveyDescription">Survey description</label>
+                <input id="surveyDescription" type="text" [formControl]="surveyDescription"><img
+                    (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
             </div>
 
 
