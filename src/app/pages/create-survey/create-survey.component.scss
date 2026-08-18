@@ -3,7 +3,7 @@
     width: 100vh;
     height: 100%;
 
-    
+
 }
 
 .create_survey--top {
@@ -28,4 +28,30 @@
             border-radius: 0 14px 0px 0px;
         }
     }
+}
+
+.survey_card--name {
+    background-color: red;
+}
+
+.survey_card--description{
+    background-color: green;
+}
+
+input[type="date"] {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+
+  &::-webkit-datetime-edit {
+    color: var(--primary-orange);
+        font-family: 'Mulish', sans-serif;
+        font-size: 16px;
+  }
+
+  // Auch einzelne Teile individuell stylebar
+  &::-webkit-datetime-edit-month-field,
+  &::-webkit-datetime-edit-day-field,
+  &::-webkit-datetime-edit-year-field {
+        color: var(--primary-orange);
+  }
 }

@@ -7,16 +7,45 @@
             <a>Cancle X</a>
         </div>
 
-        <div class="create_survey--card">
+        <div class="create_survey--card displayflex_space--between">
+            <div class="survey_card--name">
+                <label for="surveyName">Survey name</label>
+                <input id="surveyName" type="text" [formControl]="surveyName"><img (click)=" deleteInput()"
+                    src="/images/delete.svg">
 
-            <label for="surveyName">Survey name</label>
-            <input id="surveyName" type="text" [formControl]="surveyName"><img (click)=" deleteInput()" src="/images/delete.svg">
+                <label for="surveySetEndDate">Set end date</label>
+                <input id="surveySetEndDate" type="date" [formControl]="surveyEndDate"><img (click)=" deleteInput()"
+                    src="/images/delete.svg">
 
-            <h1>{{surveyName.value}}</h1> <!--so greife ich auf den value aus der form zu-->
-            <h1>{{surveyName.valid}}</h1>
+                <label for="surveyQuestions">{{questions}}. Question</label>
+                <input id="surveyQuestions" type="text" [formControl]="surveyQuestions"><img (click)=" deleteInput()"
+                    src="/images/delete.svg">
+
+                <label for="surveyAnswer">Answers</label>
+                <input id="surveyAnswer" type="text" [formControl]="surveyAnswer"><img (click)=" deleteInput()"
+                    src="/images/delete.svg">
+
+                <input id="surveyAnswer" type="checkbox" [formControl]="surveyAnswer">
+
+
+                <!-- <h1>{{surveyName.value}}</h1> so greife ich auf den value aus der form zu
+            <h1>{{surveyName.valid}}</h1> -->
+
+            </div>
+
+             <div class="survey_card--description">
+                <label for="surveyDescription">Survey name</label>
+                <input id="surveyDescription" type="text" [formControl]="surveyDescription"><img (click)=" deleteInput()"
+                    src="/images/delete.svg">
+            </div>
+
+
         </div>
+
+
     </div>
 
 
-    <button (click)="updateInput()" [disabled]="!surveyName.valid">Publish</button> <!-- Button ist disabled, wenn Name nicht eingegeben-->
+    <button (click)="updateInput()" [disabled]="!surveyName.valid">Publish</button>
+    <!-- Button ist disabled, wenn Name nicht eingegeben-->
 </div>
