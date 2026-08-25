@@ -4,6 +4,11 @@
     justify-content: center;
 }
 
+.displayflex{
+    display: flex;
+    align-items: center;
+}
+
 .displayflex_space--between{
     display: flex;
     align-items: center;
@@ -25,4 +30,8 @@
 .displayflex_column{
     display: flex;
     flex-direction: column;
+}
+
+.align_start{
+    align-items: start;
 }

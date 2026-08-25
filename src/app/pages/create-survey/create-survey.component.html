@@ -11,50 +11,74 @@
             <div class="survey_card--name displayflex_column">
 
                 <label for="surveyName">Survey name</label>
-                <div class="displayflex_space--between margin_spacer">
+                <div class="margin_spacer displayflex">
                     <input id="surveyName" type="text" [formControl]="surveyName">
                     <img class="img_waist" (click)="deleteInput(surveyName)" src="/images/delete.svg">
                 </div>
 
-                <label for="surveySetEndDate">Set end date</label>
-                <div class="displayflex_space--between margin_spacer">
-                    <input id="surveySetEndDate" type="date" [formControl]="surveyEndDate">
-                    <img class="img_waist" (click)="deleteInput(surveyEndDate)" src="/images/delete.svg">
+                <div class="align_start displayflex_space--between">
+                    <div>
+                        <label for="surveySetEndDate">Set end date (optional)</label>
+                        <div class="displayflex_space--between margin_spacer">
+                            <input id="surveySetEndDate" type="date" [formControl]="surveyEndDate">
+                            <img class="img_waist" (click)="deleteInput(surveyEndDate)" src="/images/delete.svg">
+                        </div>
+                    </div>
+
+                    <!--Dropdown-->
+                    <div class="custom_select">
+                        <div class="custom_select--selected displayflex_space--between"
+                            (click)="dropDown.toggleDropdown()">
+                            {{ dropDown.selected }} <span class="arrow" [class.open]="dropDown.isOpen"></span>
+                        </div>
+                        @if(dropDown.isOpen) {
+                        <ul class="custom_select--options">
+
+                            @for(option of dropDown.categoryOptions; track option.value) {
+
+                            <li class="custom_select--option" (click)="dropDown.selectOption(option)">
+                                <p class="custom_select--option--text"> {{ option.label}}</p>
+                            </li>
+                            }
+                        </ul>
+                        }
+                    </div>
                 </div>
 
+
                 <label for="surveyQuestions">{{questions}}. Question</label>
-                <div class="displayflex_space--between margin_spacer">
+                <div class="margin_spacer displayflex">
                     <input id="surveyQuestions" type="text" [formControl]="surveyQuestions">
                     <img class="img_waist" (click)="deleteInput(surveyQuestions)" src="/images/delete.svg">
                 </div>
 
-                <label for="surveyAnswer">Answers</label>
-                <div class="displayflex_space--between margin_spacer">
-                    <input id="surveyAnswer" type="text" [formControl]="surveyAnswer">
+                <div class="displayflex displayflex_space--between">
+                    <label for="surveyAnswer">Answers</label>
+                    <div class="displayflex">
+                        <input id="surveyAnswer" type="checkbox" [formControl]="surveyAnswer">
+                        <p class="surveyAnswer--text">Allow multiple answers.</p>
+                    </div>
+                </div>
+
+                <div class="margin_spacer displayflex">
+                    A. <input id="surveyAnswer" type="text" [formControl]="surveyAnswer">
                     <img class="img_waist" (click)="deleteInput(surveyAnswer)" src="/images/delete.svg">
                 </div>
 
-                <input id="surveyAnswer" type="checkbox" [formControl]="surveyAnswer">
-
-
-                <!-- <h1>{{surveyName.value}}</h1> so greife ich auf den value aus der form zu
-            <h1>{{surveyName.valid}}</h1> -->
-
             </div>
 
-            <div class="survey_card--description">
-                <label for="surveyDescription">Survey description</label>
-                <input id="surveyDescription" type="text" [formControl]="surveyDescription"><img
-                    (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
-            </div>
 
+            <div class="survey_card--description displayflex_column">
+                <label for="surveyDescription">Describing text (optional)</label>
+                <div class="displayflex">
+                    <input id="surveyDescription" type="text" [formControl]="surveyDescription"><img
+                        (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
+                </div>
+            </div>
 
         </div>
-
-
     </div>
 
-
-    <button (click)="updateInput()" [disabled]="!surveyName.valid">Publish</button>
-    <!-- Button ist disabled, wenn Name nicht eingegeben-->
 </div>
+<button (click)="updateInput()" [disabled]="!surveyName.valid">Publish</button>
+<!-- Button ist disabled, wenn Name nicht eingegeben-->

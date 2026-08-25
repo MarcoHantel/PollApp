@@ -1,13 +1,6 @@
 import { Injectable, Input } from '@angular/core';
 import { Survey } from '../interfaces/survey.model';
 
-// export interface Survey {
-//   id: number;
-//   category: string;
-//   title: string;
-//   expire: number;
-//   active: boolean;
-// }
 
 @Injectable({
   providedIn: 'root'

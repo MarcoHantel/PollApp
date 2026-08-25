@@ -1,5 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { CategoryDropdownService } from '../../service/category-dropdown.service';
+
+
 
 @Component({
   selector: 'app-create-survey',
@@ -8,6 +11,10 @@ import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
   styleUrl: './create-survey.component.scss'
 })
 export class CreateSurveyComponent {
+
+  private dropDownService = inject(CategoryDropdownService)
+  dropDown = this.dropDownService
+
   questions = 1;
 
   // FormControl 

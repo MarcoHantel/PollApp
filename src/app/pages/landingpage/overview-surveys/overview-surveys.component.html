@@ -10,15 +10,15 @@
         <!-- statt <select> ein eigenes Dropdown bauen -->
 
         <div class="custom_select">
-            <div class="custom_select--selected displayflex_space--between" (click)="toggleDropdown()">
-                {{ selected }} <span class="arrow" [class.open]="isOpen"></span>
+            <div class="custom_select--selected displayflex_space--between" (click)="dropDown.toggleDropdown()">
+                {{ dropDown.selected }} <span class="arrow" [class.open]="dropDown.isOpen"></span>
             </div>
-            @if(isOpen) {
+            @if(dropDown.isOpen) {
             <ul class="custom_select--options">
 
-                @for(option of options; track option.value) {
+                @for(option of dropDown.categoryOptions; track option.value) {
 
-                <li class="custom_select--option" (click)="selectOption(option)">
+                <li class="custom_select--option" (click)="dropDown.selectOption(option)">
                     <p class="custom_select--option--text"> {{ option.label}}</p>
                 </li>
                 }

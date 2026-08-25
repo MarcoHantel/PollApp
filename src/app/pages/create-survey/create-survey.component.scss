@@ -1,5 +1,5 @@
 .create_survey--wrapper {
-    background-color: var(--white);
+    // background-color: var(--white);
     width: 100vh;
     height: 100%;
 }
@@ -9,7 +9,7 @@
     background-color: var(--primary-background-color);
 
     >.survey_top--text {
-        background-color: var(--light-purple);
+        // background-color: var(--light-purple);
 
         >span {
             font-family: 'Mulish', sans-serif;
@@ -29,35 +29,47 @@
 }
 
 
-.create_survey--card{
-        font-family: 'Mulish', sans-serif;
-        font-size: 16px;
-        color: var(--white);
-        padding: 16px;
+.create_survey--card {
+    font-family: 'Mulish', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--white);
+    padding: 16px;
+    gap: 64px;
+    background-color: var(--light-purple);
+    border-radius: 5px 80px 5px 5px;
 }
 
-.img_waist{
+.img_waist {
     width: 26px;
     height: 26px;
 
-    &:hover{
+    &:hover {
         cursor: pointer;
     }
 }
 
 .survey_card--name {
-    background-color: red;
+    // background-color: red;
     width: 50%;
     height: 100%;
     padding: 8px;
 }
 
-.margin_spacer{
+.margin_spacer {
     margin: 4px 0px 12px 0px;
+    gap: 8px;
+}
+
+.surveyAnswer--text {
+    margin: 0px;
+    font-weight: 400;
+    font-style: regular;
+
 }
 
 .survey_card--description {
-    background-color: green;
+    // background-color: green;
     width: 50%;
     height: 100%;
     padding: 8px;
@@ -83,11 +95,13 @@ input[type="date"] {
 
 // Styling der Felder:
 
-input {
+input[type="text"] {
+    width: 100%;
+    height: 37px;
     border: none;
     border-radius: 5px 20px 5px 5px;
     background-color: var(--field-background-light-lilac);
-    padding: 8px 12px;
+    padding: 4px 14px;
 
     // Standard-Browser-Styling kann ich so deaktivieren
     appearance: none;
