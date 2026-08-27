@@ -50,7 +50,6 @@
 }
 
 .survey_card--name {
-    // background-color: red;
     width: 50%;
     height: 100%;
     padding: 8px;
@@ -128,4 +127,10 @@ input[type="date"] {
         color: #999;
         cursor: not-allowed;
     }
+}
+
+.disable {
+    opacity: 0.4;
+    cursor: not-allowed !important;
+    pointer-events: none;
 }

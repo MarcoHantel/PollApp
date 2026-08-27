@@ -143,17 +143,15 @@
 // checkbox
 
 input[type="checkbox"] {
-  appearance: none;
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #ccc;
-  border-radius: 4px;
-  cursor: pointer;
+    // appearance: none;
+    // -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
 
-  &:checked {
-    background-color: #007bff;
-    border-color: #007bff;
-    // Häkchen z. B. über background-image (SVG) oder ::after
-  }
+    &:checked {
+        accent-color: var(--secondary-orange);
+    }
 }

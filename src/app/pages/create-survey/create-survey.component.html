@@ -29,7 +29,7 @@
                     <div class="custom_select">
                         <div class="custom_select--selected displayflex_space--between"
                             (click)="dropDown.toggleDropdown()">
-                            {{ dropDown.selected }} <span class="arrow" [class.open]="dropDown.isOpen"></span>
+                            {{ dropDown.choose }} <span class="arrow" [class.open]="dropDown.isOpen"></span>
                         </div>
                         @if(dropDown.isOpen) {
                         <ul class="custom_select--options">
@@ -60,13 +60,21 @@
                     </div>
                 </div>
 
+                @for(answer of answers.controls; track i; let i = $index) {
                 <div class="margin_spacer displayflex">
-                    A. <input id="surveyAnswer" type="text" [formControl]="surveyAnswer">
-                    <img class="img_waist" (click)="deleteInput(surveyAnswer)" src="/images/delete.svg">
+                    {{ getLetter(i) }}.
+                    <input type="text" [formControl]="$any(answer)">
+                    <img class="img_waist" (click)="deleteAnswer(i)" src="/images/delete.svg">
                 </div>
+                }
 
+                @if(canAddAnswer) {
+                <div (click)="addAnswer()" class="displayflex margin_spacer align_center" [class.disable]="!surveyAnswer.value">
+                    <p>add Answer</p>
+                    <img src="/images/add_circle.svg">
+                </div>
+                }
             </div>
-
 
             <div class="survey_card--description displayflex_column">
                 <label for="surveyDescription">Describing text (optional)</label>
@@ -75,10 +83,8 @@
                         (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
                 </div>
             </div>
-
         </div>
-    </div>
 
-</div>
-<button (click)="updateInput()" [disabled]="!surveyName.valid">Publish</button>
-<!-- Button ist disabled, wenn Name nicht eingegeben-->
+    </div>
+    <button (click)="updateInput()" [disabled]="!surveyName.valid">Publish</button>
+    <!-- Button ist disabled, wenn Name nicht eingegeben-->

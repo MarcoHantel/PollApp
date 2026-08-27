@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, ReactiveFormsModule, Validators, FormArray} from '@angular/forms';
 import { CategoryDropdownService } from '../../service/category-dropdown.service';
-
 
 
 @Component({
@@ -14,7 +13,7 @@ export class CreateSurveyComponent {
 
   private dropDownService = inject(CategoryDropdownService)
   dropDown = this.dropDownService
-
+  readonly maxAnswers = 4; // A, B, C, D
   questions = 1;
 
   // FormControl 
@@ -62,6 +61,32 @@ export class CreateSurveyComponent {
 
   // setzt meinen Wert wieder aud 'leer' click auf löschen
   deleteInput(control: FormControl) {
-    control.setValue(''); // ← nur das angeklickte Feld leeren ✅
+    control.setValue(''); // ← nur das angeklickte Feld leeren
   }
+
+
+
+  answers = new FormArray<FormControl<string | null>>([
+    new FormControl('') // Antwort A ist von Anfang an da
+  ]);
+
+  get canAddAnswer(): boolean {
+    return this.answers.length < this.maxAnswers;
+  }
+
+  getLetter(index: number): string {
+    return String.fromCharCode(65 + index); // 65 = 'A'
+  }
+
+  addAnswer() {
+    if (this.canAddAnswer) {
+      this.answers.push(new FormControl(''));
+    }
+  }
+
+  deleteAnswer(index: number) {
+    this.answers.removeAt(index);
+  }
+
 }
+

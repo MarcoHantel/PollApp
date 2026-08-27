@@ -7,6 +7,7 @@ export class CategoryDropdownService {
 
   isOpen = false;
   selected = 'Sort by categories';
+  choose = 'Choose categorie';
 
   categoryOptions = [
     { value: 'all', label: 'All Surveys' },
@@ -20,6 +21,7 @@ export class CategoryDropdownService {
 
   selectOption(option: { value: string; label: string }) {
     this.selected = option.label;
+    this.choose = option.label;
     this.isOpen = false;
   }
 
