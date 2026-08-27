@@ -13,7 +13,7 @@ export class CreateSurveyComponent {
 
   private dropDownService = inject(CategoryDropdownService)
   dropDown = this.dropDownService
-  readonly maxAnswers = 4; // A, B, C, D
+  readonly maxAnswers = 6; // A, B, C, D
   questions = 1;
 
   // FormControl 

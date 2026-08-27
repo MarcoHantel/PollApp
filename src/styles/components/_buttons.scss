@@ -66,6 +66,28 @@
     }
 }
 
+.secondary_button {
+    background-color: var(--light-orange);
+    color: white;
+
+    width: 195px;
+    height: 40px;
+
+    font-family: 'Nokora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+
+    border: none;
+    border-radius: 8px 12px;
+    gap: 8px;
+    padding: 2px 10px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+}
+
 // dropdown
 
 .custom_select {

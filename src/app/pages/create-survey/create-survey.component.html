@@ -7,7 +7,7 @@
             <a>Cancle X</a>
         </div>
 
-        <div class="create_survey--card displayflex_space--between">
+        <div class="create_survey--card displayflex_space--between align_start">
             <div class="survey_card--name displayflex_column">
 
                 <label for="surveyName">Survey name</label>
@@ -46,42 +46,61 @@
                 </div>
 
 
-                <label for="surveyQuestions">{{questions}}. Question</label>
-                <div class="margin_spacer displayflex">
-                    <input id="surveyQuestions" type="text" [formControl]="surveyQuestions">
-                    <img class="img_waist" (click)="deleteInput(surveyQuestions)" src="/images/delete.svg">
-                </div>
-
-                <div class="displayflex displayflex_space--between">
-                    <label for="surveyAnswer">Answers</label>
-                    <div class="displayflex">
-                        <input id="surveyAnswer" type="checkbox" [formControl]="surveyAnswer">
-                        <p class="surveyAnswer--text">Allow multiple answers.</p>
+                <div class="questions">
+                    <label for="surveyQuestions">{{questions}}. Question</label>
+                    <div class="margin_spacer displayflex">
+                        <input id="surveyQuestions" type="text" [formControl]="surveyQuestions">
+                        <img class="img_waist" (click)="deleteInput(surveyQuestions)" src="/images/delete.svg">
                     </div>
-                </div>
 
-                @for(answer of answers.controls; track i; let i = $index) {
-                <div class="margin_spacer displayflex">
-                    {{ getLetter(i) }}.
-                    <input type="text" [formControl]="$any(answer)">
-                    <img class="img_waist" (click)="deleteAnswer(i)" src="/images/delete.svg">
-                </div>
-                }
+                    <div class="displayflex displayflex_space--between">
+                        <label for="surveyAnswer">Answers</label>
+                        <div class="displayflex">
+                            <input id="surveyAnswer" type="checkbox" [formControl]="surveyAnswer">
+                            <p class="surveyAnswer--text">Allow multiple answers.</p>
+                        </div>
+                    </div>
 
-                @if(canAddAnswer) {
-                <div (click)="addAnswer()" class="displayflex margin_spacer align_center" [class.disable]="!surveyAnswer.value">
-                    <p>add Answer</p>
-                    <img src="/images/add_circle.svg">
+                    @for(answer of answers.controls; track i; let i = $index) {
+                    <div class="margin_spacer displayflex">
+                        {{ getLetter(i) }}.
+                        <input type="text" [formControl]="$any(answer)">
+
+                        @if(i > 0) { <!-- ← nur ab dem zweiten Feld anzeigen -->
+                        <img class="img_waist" (click)="deleteAnswer(i)" src="/images/delete.svg">
+                        }
+                    </div>
+                    }
+
+                    <div class="displayflex_space--between">
+                        @if(canAddAnswer) {
+                        <div (click)="addAnswer()" class="displayflex margin_spacer align_center"
+                            [class.disable]="!surveyAnswer.value">
+                            <p>add Answer</p>
+                            <img src="/images/add_circle.svg">
+                        </div>
+                        }
+
+                        @if(canAddAnswer){
+                        <div [class.dpn]="!surveyAnswer.value">
+                            <p>You can add up to 6 answer fields</p>
+                        </div>
+                        }
+
+                    </div>
+
                 </div>
-                }
             </div>
 
-            <div class="survey_card--description displayflex_column">
+            <div class="survey_card--description displayflex_column margin_spacer">
                 <label for="surveyDescription">Describing text (optional)</label>
-                <div class="displayflex">
+                <div class="displayflex margin_spacer">
                     <input id="surveyDescription" type="text" [formControl]="surveyDescription"><img
                         (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
                 </div>
+
+                <button class="secondary_button displayflex">Add next question<img src="/images/add_circle_white.svg"></button>
+
             </div>
         </div>
 

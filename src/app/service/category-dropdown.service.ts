@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class CategoryDropdownService {
 
+  
   isOpen = false;
   selected = 'Sort by categories';
   choose = 'Choose categorie';
