@@ -1,31 +1,37 @@
-.create_survey--wrapper {
-    // background-color: var(--white);
-    width: 100vh;
-    height: 100%;
+.survey_name_wrapper {
+    margin-bottom: 40px;
 }
 
-.create_survey--top {
-
+.create_survey {
     background-color: var(--primary-background-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    min-height: 844px;
+    min-width: 1166px;
 
-    >.survey_top--text {
-        // background-color: var(--light-purple);
+    border-radius: 5px 100px 5px 5px;
 
-        >span {
-            font-family: 'Mulish', sans-serif;
-            font-size: 12px;
-            background-color: var(--secondary-orange);
-            width: 59px;
-            height: 26px;
-            padding: 3px 12px 3px 8px;
-            text-align: center;
+    padding: 32px 16px;
+}
 
-            color: var(--primary-background-color);
 
-            border: none;
-            border-radius: 0px 14px 0px 0px;
-        }
-    }
+.survey_draft {
+    font-family: 'Mulish', sans-serif;
+    font-size: 12px;
+    background-color: var(--secondary-orange);
+    width: 59px;
+    height: 26px;
+    padding: 3px 12px 3px 8px;
+    text-align: center;
+
+    color: var(--primary-background-color);
+
+    border: none;
+    border-radius: 0px 14px 0px 0px;
 }
 
 
@@ -33,6 +39,7 @@
     font-family: 'Mulish', sans-serif;
     font-size: 16px;
     font-weight: 700;
+    width: 1052px;
     color: var(--white);
     padding: 16px;
     gap: 64px;
@@ -68,19 +75,53 @@
 }
 
 .survey_card--description {
-    // background-color: green;
     width: 50%;
     height: 100%;
     padding: 8px;
 }
 
-#surveyDescription{
+#surveyDescription {
     height: 108px;
 }
 
-.questions{
-    margin-top: 32px;
+
+.question_section--wrapper {
+    width: 100%;
 }
+
+.question_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+}
+
+.questions {
+    margin-top: 32px;
+    width: calc(50% - 16px);
+    box-sizing: border-box;
+}
+
+.survey_name_survey_des--wrapper {
+    gap: 64px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 input[type="date"] {
     font-family: 'Mulish', sans-serif;

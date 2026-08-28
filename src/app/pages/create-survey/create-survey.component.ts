@@ -1,11 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { FormControl, ReactiveFormsModule, Validators, FormArray} from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
 import { CategoryDropdownService } from '../../service/category-dropdown.service';
+import { RouterLink } from "@angular/router";
 
 
 @Component({
   selector: 'app-create-survey',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './create-survey.component.html',
   styleUrl: './create-survey.component.scss'
 })
@@ -13,8 +14,10 @@ export class CreateSurveyComponent {
 
   private dropDownService = inject(CategoryDropdownService)
   dropDown = this.dropDownService
+
   readonly maxAnswers = 6; // A, B, C, D
-  questions = 1;
+  readonly maxQuestions = 6; // Anzahl meiner Fragen
+
 
   // FormControl 
   surveyName = new FormControl('', {
@@ -59,34 +62,73 @@ export class CreateSurveyComponent {
     this.surveyDescription.setValue('');
   }
 
-  // setzt meinen Wert wieder aud 'leer' click auf löschen
   deleteInput(control: FormControl) {
-    control.setValue(''); // nur das angeklickte Feld leeren
+    control.setValue(''); // mit setValue löschen bzw neu setzten
   }
 
 
-
-  answers = new FormArray<FormControl<string | null>>([
-    new FormControl('') // die erste Antwort steht fest 
+  // Question part
+  questions = new FormArray([
+    this.createQuestion() // erste Frage steht fest
   ]);
 
-  get canAddAnswer(): boolean {
-    return this.answers.length < this.maxAnswers;
+  createQuestion(): FormGroup {
+    return new FormGroup({
+      questionText: new FormControl(''),
+      allowMultiple: new FormControl(false),
+      answers: new FormArray([
+        new FormControl('') // erste Antwort steht fest
+      ])
+    });
   }
 
-  getLetter(index: number): string {
-    return String.fromCharCode(65 + index); // Nummerncode für Buchstaben 65 = 'A'
+
+
+  // Question hinzufügen
+  addQuestion() {
+    if (this.canAddQuestion) {  // ← fehlt dieser Check?
+      this.questions.push(this.createQuestion());
+    }
+  }
+  get canAddQuestion(): boolean {
+    return this.questions.length < this.maxQuestions;
   }
 
-  addAnswer() {
-    if (this.canAddAnswer) {
-      this.answers.push(new FormControl(''));
+  // Question löschen
+  deleteQuestion(qIndex: number) {
+    if (qIndex > 0) { // erste Frage kann nicht gelöscht werden
+      this.questions.removeAt(qIndex);
     }
   }
 
-  deleteAnswer(index: number) {
-    this.answers.removeAt(index);
+  // Answer hinzufügen
+  addAnswer(qIndex: number) {
+    const answers = this.getAnswers(qIndex);
+    if (answers.length < this.maxAnswers) {
+      answers.push(new FormControl(''));
+    }
   }
 
-}
+  // Answer löschen
+  deleteAnswer(qIndex: number, aIndex: number) {
+    this.getAnswers(qIndex).removeAt(aIndex);
+  }
 
+  // Answers einer Question holen
+  getAnswers(qIndex: number): FormArray {
+    return this.questions.at(qIndex).get('answers') as FormArray;
+  }
+
+  // Checkbox einer Question holen
+  getAllowMultiple(qIndex: number): FormControl {
+    return this.questions.at(qIndex).get('allowMultiple') as FormControl;
+  }
+
+  getLetter(index: number): string {
+    return String.fromCharCode(65 + index);
+  }
+
+  canAddAnswer(qIndex: number): boolean {
+    return this.getAnswers(qIndex).length < this.maxAnswers;
+  }
+}
