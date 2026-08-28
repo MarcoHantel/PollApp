@@ -3,8 +3,11 @@
 
         <div class="survey_top--text">
             <span>Darft</span>
-            <h1>create new survey</h1>
-            <a>Cancle X</a>
+
+            <div class="btn_cancle--wrapper">
+                <h1>create new survey</h1>
+                <a class="secondary_button displayflex btn_cancle">Cancle <img src="/images/add_circle_white.svg"></a>
+            </div>
         </div>
 
         <div class="create_survey--card displayflex_space--between align_start">
@@ -99,7 +102,8 @@
                         (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
                 </div>
 
-                <button class="secondary_button displayflex">Add next question<img src="/images/add_circle_white.svg"></button>
+                <button class="secondary_button displayflex">Add next question<img
+                        src="/images/add_circle_white.svg"></button>
 
             </div>
         </div>

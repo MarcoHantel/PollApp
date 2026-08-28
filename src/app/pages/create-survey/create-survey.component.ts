@@ -61,13 +61,13 @@ export class CreateSurveyComponent {
 
   // setzt meinen Wert wieder aud 'leer' click auf löschen
   deleteInput(control: FormControl) {
-    control.setValue(''); // ← nur das angeklickte Feld leeren
+    control.setValue(''); // nur das angeklickte Feld leeren
   }
 
 
 
   answers = new FormArray<FormControl<string | null>>([
-    new FormControl('') // Antwort A ist von Anfang an da
+    new FormControl('') // die erste Antwort steht fest 
   ]);
 
   get canAddAnswer(): boolean {
@@ -75,7 +75,7 @@ export class CreateSurveyComponent {
   }
 
   getLetter(index: number): string {
-    return String.fromCharCode(65 + index); // 65 = 'A'
+    return String.fromCharCode(65 + index); // Nummerncode für Buchstaben 65 = 'A'
   }
 
   addAnswer() {

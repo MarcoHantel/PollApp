@@ -84,8 +84,29 @@
 
     &:hover {
         cursor: pointer;
+        background-color: var(--light-orange-hover);
     }
 
+    >img {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+.btn_cancle {
+    width: 108px;
+}
+
+.btn_cancle--wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+    margin-bottom: 32px;
+
+    >h1{
+        margin: 0px;
+    }
 }
 
 // dropdown
