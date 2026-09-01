@@ -138,7 +138,9 @@
                 </div>
             </div>
         </div>
-        <button (click)="updateInput()" [disabled]="!surveyName.valid">Publish</button>
+        <div class="btn_publish--wrapper">
+        <button class="btn btn_text displayflex_center" (click)="updateInput()" [disabled]="!surveyName.valid">Publish <img class="button-addon btn_text" src="/images/check.svg"></button>
         <!-- Button ist disabled, wenn Name nicht eingegeben-->
+         </div>
     </div>
 <!-- </div> -->

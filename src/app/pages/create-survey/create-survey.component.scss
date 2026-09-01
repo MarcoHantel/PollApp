@@ -34,7 +34,7 @@
     border-radius: 0px 14px 0px 0px;
 }
 
-.survey_top--text{
+.survey_top--text {
     width: 100%;
     max-width: 1052px;
 }
@@ -109,7 +109,20 @@
     gap: 64px;
 }
 
+.btn_text {
+    font-family: 'Nokora';
+    font-weight: 700;
+    font-style: bold;
+    font-size: 18px;
+}
 
+.btn_publish--wrapper {
+    width: 1084px;
+    align-items: end;
+    display: flex;
+    justify-content: end;
+    margin-top: 32px;
+}
 
 
 
