@@ -3,11 +3,12 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormArray } fr
 import { CategoryDropdownService } from '../../service/category-dropdown.service';
 import { RouterLink } from "@angular/router";
 import { SurveyCreateService } from '../../service/survey-create.service.service';
-import { SurveyCreate } from '../../interfaces/survey-create.model'; // ← Interface
+import { SurveyCreate } from '../../interfaces/survey-create.model'; // Interface
+import { OverlayComponent } from './overlay/overlay.component';
 
 @Component({
   selector: 'app-create-survey',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, OverlayComponent],
   templateUrl: './create-survey.component.html',
   styleUrl: './create-survey.component.scss'
 })
@@ -52,97 +53,95 @@ export class CreateSurveyComponent {
     }
   }
 
-  // setzt meinen Wert wieder aud 'leer' wenn click auf submit 
-  updateInput() {
+updateInput() {
   this.checkEndDate();
 
-  // Survey Objekt zusammenbauen
   const newSurvey: SurveyCreate = {
-    id: Date.now(), // ← einfache ID
+    id: Date.now(),
     name: this.surveyName.value ?? '',
-    category: this.dropDown.choose,  // ← aus Dropdown
+    category: this.dropDown.choose,
     endDate: this.surveyEndDate.value ?? '',
     description: this.surveyDescription.value ?? '',
     active: true,
-    questions: this.questions.value  // ← FormArray Werte
+    questions: this.questions.value
   };
 
-  // ins Signal schreiben
   this.surveyCreateService.addSurvey(newSurvey);
+  this.surveyCreateService.showSuccessOverlay.set(true);
+  console.log('showSuccessOverlay nach set:', this.surveyCreateService.showSuccessOverlay()); // ← ist das true?
 
-  // Felder leeren
   this.surveyName.setValue('');
   this.surveyEndDate.setValue('');
   this.surveyDescription.setValue('');
+} 
+
+deleteInput(control: FormControl) {
+  control.setValue(''); // mit setValue löschen bzw neu setzten
 }
 
-  deleteInput(control: FormControl) {
-    control.setValue(''); // mit setValue löschen bzw neu setzten
+
+// Question part
+questions = new FormArray([
+  this.createQuestion() // erste Frage steht fest
+]);
+
+createQuestion(): FormGroup {
+  return new FormGroup({
+    questionText: new FormControl(''),
+    allowMultiple: new FormControl(false),
+    answers: new FormArray([
+      new FormControl('') // erste Antwort steht fest
+    ])
+  });
+}
+
+
+
+// Question hinzufügen
+addQuestion() {
+  if (this.canAddQuestion) {  // ← fehlt dieser Check?
+    this.questions.push(this.createQuestion());
   }
-
-
-  // Question part
-  questions = new FormArray([
-    this.createQuestion() // erste Frage steht fest
-  ]);
-
-  createQuestion(): FormGroup {
-    return new FormGroup({
-      questionText: new FormControl(''),
-      allowMultiple: new FormControl(false),
-      answers: new FormArray([
-        new FormControl('') // erste Antwort steht fest
-      ])
-    });
-  }
-
-
-
-  // Question hinzufügen
-  addQuestion() {
-    if (this.canAddQuestion) {  // ← fehlt dieser Check?
-      this.questions.push(this.createQuestion());
-    }
-  }
+}
   get canAddQuestion(): boolean {
-    return this.questions.length < this.maxQuestions;
-  }
+  return this.questions.length < this.maxQuestions;
+}
 
-  // Question löschen
-  deleteQuestion(qIndex: number) {
-    if (qIndex > 0) { // erste Frage kann nicht gelöscht werden
-      this.questions.removeAt(qIndex);
-    }
+// Question löschen
+deleteQuestion(qIndex: number) {
+  if (qIndex > 0) { // erste Frage kann nicht gelöscht werden
+    this.questions.removeAt(qIndex);
   }
+}
 
-  // Answer hinzufügen
-  addAnswer(qIndex: number) {
-    const answers = this.getAnswers(qIndex);
-    if (answers.length < this.maxAnswers) {
-      answers.push(new FormControl(''));
-    }
+// Answer hinzufügen
+addAnswer(qIndex: number) {
+  const answers = this.getAnswers(qIndex);
+  if (answers.length < this.maxAnswers) {
+    answers.push(new FormControl(''));
   }
+}
 
-  // Answer löschen
-  deleteAnswer(qIndex: number, aIndex: number) {
-    this.getAnswers(qIndex).removeAt(aIndex);
-  }
+// Answer löschen
+deleteAnswer(qIndex: number, aIndex: number) {
+  this.getAnswers(qIndex).removeAt(aIndex);
+}
 
-  // Answers einer Question holen
-  getAnswers(qIndex: number): FormArray {
-    return this.questions.at(qIndex).get('answers') as FormArray;
-  }
+// Answers einer Question holen
+getAnswers(qIndex: number): FormArray {
+  return this.questions.at(qIndex).get('answers') as FormArray;
+}
 
-  // Checkbox einer Question holen
-  getAllowMultiple(qIndex: number): FormControl {
-    return this.questions.at(qIndex).get('allowMultiple') as FormControl;
-  }
+// Checkbox einer Question holen
+getAllowMultiple(qIndex: number): FormControl {
+  return this.questions.at(qIndex).get('allowMultiple') as FormControl;
+}
 
-  getLetter(index: number): string {
-    return String.fromCharCode(65 + index);
-  }
+getLetter(index: number): string {
+  return String.fromCharCode(65 + index);
+}
 
-  canAddAnswer(qIndex: number): boolean {
-    return this.getAnswers(qIndex).length < this.maxAnswers;
-  }
+canAddAnswer(qIndex: number): boolean {
+  return this.getAnswers(qIndex).length < this.maxAnswers;
+}
 }

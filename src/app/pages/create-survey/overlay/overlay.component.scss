@@ -1,0 +1,14 @@
+
+
+:host {
+    position: fixed;      // ← fixed = über allem
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); // ← dunkler Hintergrund
+    z-index: 1000;        // ← über allem
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -4,8 +4,10 @@ import { SurveyCreate } from '../interfaces/survey-create.model';
 @Injectable({ providedIn: 'root' })
 export class SurveyCreateService {
 
+  showSuccessOverlay = signal(false); // ← hier hinzufügen
+
   selectedStatus = signal<'all' | 'active' | 'past'>('all');
-   selectedCategory = signal('all');
+  selectedCategory = signal('all');
 
   surveys = signal<SurveyCreate[]>([
     { id: 1, name: "Das ist der Title", category: "Team Activities", endDate: "2026-09-10", description: "", active: true, questions: [] },
@@ -28,28 +30,31 @@ export class SurveyCreateService {
   currentSurvey = signal<SurveyCreate | null>(null);
 
 
-setStatus(status: 'all' | 'active' | 'past') {
-  this.selectedStatus.set(status);
-}
-
-filteredSurveys = computed(() => {
-  let result = this.surveys();
-
-  // Kategorie Filter
-  if (this.selectedCategory() !== 'all') {
-    result = result.filter(s => s.category === this.selectedCategory());
+  setStatus(status: 'all' | 'active' | 'past') {
+    this.selectedStatus.set(status);
   }
 
-  // Filter vom Statu
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
+  filteredSurveys = computed(() => {
+    let result = this.surveys();
 
-  if (this.selectedStatus() === 'active') {
-    result = result.filter(s => new Date(s.endDate) >= today); // noch nicht amgelaufen
-  } else if (this.selectedStatus() === 'past') {
-    result = result.filter(s => new Date(s.endDate) < today);  // bereits abgelaufen 
-  }
+    // Kategorie Filter
+    if (this.selectedCategory() !== 'all') {
+      result = result.filter(s => s.category === this.selectedCategory());
+    }
 
-  return result;
-});
+    // Filter vom Statu
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    if (this.selectedStatus() === 'active') {
+      result = result.filter(s => new Date(s.endDate) >= today); // noch nicht amgelaufen
+    } else if (this.selectedStatus() === 'past') {
+      result = result.filter(s => new Date(s.endDate) < today);  // bereits abgelaufen 
+    }
+
+    return result;
+  });
 }
+
+
+
