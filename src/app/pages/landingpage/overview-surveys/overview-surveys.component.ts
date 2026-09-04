@@ -1,9 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { DisplySurveyService } from './../../../service/disply-survey.service';
 import { CategoryDropdownService } from './../../../service/category-dropdown.service';
 import { SurveyCardComponent } from './survey-cards/survey-cards.component';
-
-
+import { SurveyCreateService } from '../../../service/survey-create.service.service';
 
 @Component({
   selector: 'app-overview-surveys',
@@ -12,13 +10,8 @@ import { SurveyCardComponent } from './survey-cards/survey-cards.component';
   styleUrl: './overview-surveys.component.scss'
 })
 export class OverviewSurveysComponent {
+  surveyCreateService = inject(SurveyCreateService);
 
-  private surveyService = inject(DisplySurveyService);
-  currentSurveys = this.surveyService.getEndingSoonSurveys();
-
-  private dropDownService = inject(CategoryDropdownService)
-  dropDown = this.dropDownService
-
-  // in der Komponente die alle anzeigen soll:
-  allSurveys = this.surveyService.getAllSurveys();
+  private dropDownService = inject(CategoryDropdownService);
+  dropDown = this.dropDownService;
 }

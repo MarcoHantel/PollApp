@@ -2,7 +2,8 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormArray } from '@angular/forms';
 import { CategoryDropdownService } from '../../service/category-dropdown.service';
 import { RouterLink } from "@angular/router";
-
+import { SurveyCreateService } from '../../service/survey-create.service.service';
+import { SurveyCreate } from '../../interfaces/survey-create.model'; // ← Interface
 
 @Component({
   selector: 'app-create-survey',
@@ -11,7 +12,7 @@ import { RouterLink } from "@angular/router";
   styleUrl: './create-survey.component.scss'
 })
 export class CreateSurveyComponent {
-
+  surveyCreateService = inject(SurveyCreateService);
   private dropDownService = inject(CategoryDropdownService)
   dropDown = this.dropDownService
 
@@ -53,14 +54,27 @@ export class CreateSurveyComponent {
 
   // setzt meinen Wert wieder aud 'leer' wenn click auf submit 
   updateInput() {
-    this.checkEndDate();
+  this.checkEndDate();
 
-    this.surveyName.setValue('');
-    this.surveyEndDate.setValue('');
-    this.surveyQuestions.setValue('');
-    this.surveyAnswer.setValue('');
-    this.surveyDescription.setValue('');
-  }
+  // Survey Objekt zusammenbauen
+  const newSurvey: SurveyCreate = {
+    id: Date.now(), // ← einfache ID
+    name: this.surveyName.value ?? '',
+    category: this.dropDown.choose,  // ← aus Dropdown
+    endDate: this.surveyEndDate.value ?? '',
+    description: this.surveyDescription.value ?? '',
+    active: true,
+    questions: this.questions.value  // ← FormArray Werte
+  };
+
+  // ins Signal schreiben
+  this.surveyCreateService.addSurvey(newSurvey);
+
+  // Felder leeren
+  this.surveyName.setValue('');
+  this.surveyEndDate.setValue('');
+  this.surveyDescription.setValue('');
+}
 
   deleteInput(control: FormControl) {
     control.setValue(''); // mit setValue löschen bzw neu setzten

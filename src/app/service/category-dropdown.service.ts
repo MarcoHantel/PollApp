@@ -10,15 +10,15 @@ export class CategoryDropdownService {
   selected = 'Sort by categories';
   choose = 'Choose categorie';
 
-  categoryOptions = [
-    { value: 'all', label: 'All Surveys' },
-    { value: 'team', label: 'Team Activities' },
-    { value: 'health', label: 'Health & Wellness' },
-    { value: 'gaming', label: 'Gaming & Entertainment' },
-    { value: 'education', label: 'Education & Learning' },
-    { value: 'lifestyle', label: 'Lifestyle & Preferences' },
-    { value: 'tech', label: 'Technology & Innovation' }
-  ]
+categoryOptions = [
+  { value: 'all', label: 'All Surveys' },
+  { value: 'Team Activities', label: 'Team Activities' },       
+  { value: 'Health & Wellness', label: 'Health & Wellness' },
+  { value: 'Gaming & Entertainment', label: 'Gaming & Entertainment' },
+  { value: 'Education & Learning', label: 'Education & Learning' },
+  { value: 'Lifestyle & Preferences', label: 'Lifestyle & Preferences' },
+  { value: 'Technology & Innovation', label: 'Technology & Innovation' }
+]
 
   selectOption(option: { value: string; label: string }) {
     this.selected = option.label;

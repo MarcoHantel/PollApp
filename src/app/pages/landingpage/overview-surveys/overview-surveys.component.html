@@ -2,8 +2,14 @@
 
     <div class="overview_surveys--head displayflex_space--between">
         <div class="button_wrapper displayflex_space--between">
-            <button class="btn_select btn_active">Active survey</button>
-            <button class="btn_select btn_past">Past survey</button>
+            <button class="btn_select btn_active" (click)="surveyCreateService.setStatus('active')"
+                [class.btn_active--selected]="surveyCreateService.selectedStatus() === 'active'">
+                Active survey
+            </button>
+            <button class="btn_select btn_past" (click)="surveyCreateService.setStatus('past')"
+                [class.btn_past--selected]="surveyCreateService.selectedStatus() === 'past'">
+                Past survey
+            </button>
         </div>
 
 
@@ -18,8 +24,9 @@
 
                 @for(option of dropDown.categoryOptions; track option.value) {
 
-                <li class="custom_select--option" (click)="dropDown.selectOption(option)">
-                    <p class="custom_select--option--text"> {{ option.label}}</p>
+                <li class="custom_select--option"
+                    (click)="dropDown.selectOption(option); surveyCreateService.setCategory(option.value)">
+                    <p class="custom_select--option--text">{{ option.label }}</p>
                 </li>
                 }
             </ul>
@@ -29,10 +36,9 @@
     </div>
 
     <div class="all_cards_wrapper">
-    <!-- Aller cards Anzeigen die es gibt  -->
-       @for(allSurveys of allSurveys; track allSurveys.id) {
-        <app-survey-cards [survey]="allSurveys"></app-survey-cards>
-    }
+        @for(survey of surveyCreateService.filteredSurveys(); track survey.id) {
+        <app-survey-cards [survey]="survey"></app-survey-cards>
+        }
     </div>
 
 </div>

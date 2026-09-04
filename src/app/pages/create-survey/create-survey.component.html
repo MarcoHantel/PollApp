@@ -1,146 +1,145 @@
 <!-- <div class="create_survey--wrapper"> -->
-    <div class="create_survey">
+<div class="create_survey">
 
-        <div class="survey_top--text">
-            <span class="survey_draft">Darft</span>
+    <div class="survey_top--text">
+        <span class="survey_draft">Darft</span>
 
-            <div class="btn_cancle--wrapper">
-                <h1>create new survey</h1>
-                <a routerLink="" class="secondary_button displayflex btn_cancle">Cancle <img
-                        src="/images/close.svg"></a>
-            </div>
+        <div class="btn_cancle--wrapper">
+            <h1>create new survey</h1>
+            <a routerLink="" class="secondary_button displayflex btn_cancle">Cancle <img src="/images/close.svg"></a>
         </div>
-        <div class="create_survey--top">
+    </div>
+    <div class="create_survey--top">
 
-            <div class="create_survey--card ">
+        <div class="create_survey--card ">
 
-                <div class="survey_name_survey_des--wrapper displayflex align_start">
-                    <div class="survey_card--name displayflex_column">
+            <div class="survey_name_survey_des--wrapper displayflex align_start">
+                <div class="survey_card--name displayflex_column">
 
-                        <div class="survey_name_wrapper">
-                            <label for="surveyName">Survey name</label>
-                            <div class="margin_spacer displayflex">
-                                <input id="surveyName" type="text" [formControl]="surveyName">
-                                <img class="img_waist" (click)="deleteInput(surveyName)" src="/images/delete.svg">
+                    <div class="survey_name_wrapper">
+                        <label for="surveyName">Survey name</label>
+                        <div class="margin_spacer displayflex">
+                            <input id="surveyName" type="text" [formControl]="surveyName">
+                            <img class="img_waist" (click)="deleteInput(surveyName)" src="/images/delete.svg">
+                        </div>
+
+                        <div class="align_start displayflex_space--between">
+                            <div>
+                                <label for="surveySetEndDate">Set end date (optional)</label>
+                                <div class="displayflex_space--between margin_spacer">
+                                    <input id="surveySetEndDate" type="date" [formControl]="surveyEndDate">
+                                    <img class="img_waist" (click)="deleteInput(surveyEndDate)"
+                                        src="/images/delete.svg">
+                                </div>
                             </div>
 
-                            <div class="align_start displayflex_space--between">
-                                <div>
-                                    <label for="surveySetEndDate">Set end date (optional)</label>
-                                    <div class="displayflex_space--between margin_spacer">
-                                        <input id="surveySetEndDate" type="date" [formControl]="surveyEndDate">
-                                        <img class="img_waist" (click)="deleteInput(surveyEndDate)"
-                                            src="/images/delete.svg">
-                                    </div>
+                            <!--Dropdown-->
+                            <div class="custom_select">
+                                <div class="custom_select--selected displayflex_space--between"
+                                    (click)="dropDown.toggleDropdown()">
+                                    {{ dropDown.choose }} <span class="arrow" [class.open]="dropDown.isOpen"></span>
                                 </div>
-
-                                <!--Dropdown-->
-                                <div class="custom_select">
-                                    <div class="custom_select--selected displayflex_space--between"
-                                        (click)="dropDown.toggleDropdown()">
-                                        {{ dropDown.choose }} <span class="arrow" [class.open]="dropDown.isOpen"></span>
-                                    </div>
-                                    @if(dropDown.isOpen) {
-                                    <ul class="custom_select--options">
-
-                                        @for(option of dropDown.categoryOptions; track option.value) {
-
-                                        <li class="custom_select--option" (click)="dropDown.selectOption(option)">
-                                            <p class="custom_select--option--text"> {{ option.label}}</p>
-                                        </li>
-                                        }
-                                    </ul>
+                                @if(dropDown.isOpen) {
+                                <ul class="custom_select--options">
+                                    @for(option of dropDown.categoryOptions; track option.value) {
+                                    <li class="custom_select--option"
+                                        (click)="dropDown.selectOption(option); surveyCreateService.setCategory(option.value)">
+                                        <p class="custom_select--option--text">{{ option.label }}</p>
+                                    </li>
                                     }
-                                </div>
+                                </ul>
+                                }
                             </div>
                         </div>
-
-                        <!-- Beschreibung Umfrage -->
                     </div>
 
-                    <div class="survey_card--description displayflex_column margin_spacer">
-                        <label for="surveyDescription">Describing text (optional)</label>
-                        <div class="displayflex margin_spacer">
-                            <input id="surveyDescription" type="text" [formControl]="surveyDescription"><img
-                                (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
-                        </div>
-
-                        <!-- Add Next Question Button -->
-                        <button class="secondary_button displayflex" (click)="addQuestion()">
-                            Add next question
-                            <img src="/images/add_circle_white.svg">
-                        </button>
-
-                    </div>
+                    <!-- Beschreibung Umfrage -->
                 </div>
 
+                <div class="survey_card--description displayflex_column margin_spacer">
+                    <label for="surveyDescription">Describing text (optional)</label>
+                    <div class="displayflex margin_spacer">
+                        <input id="surveyDescription" type="text" [formControl]="surveyDescription"><img
+                            (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
+                    </div>
 
-                <div class="question_section--wrapper">
+                    <!-- Add Next Question Button -->
+                    <button class="secondary_button displayflex" (click)="addQuestion()">
+                        Add next question
+                        <img src="/images/add_circle_white.svg">
+                    </button>
 
-                    <div class="question_wrapper">
-                        @for(question of questions.controls; track qi; let qi = $index) {
-                        <div class="questions">
+                </div>
+            </div>
 
-                            <!-- Question Header -->
-                            <div class="displayflex displayflex_space--between">
-                                <label>{{ qi + 1 }}. Question</label>
-                                @if(qi > 0) {
-                                <img class="img_waist" (click)="deleteQuestion(qi)" src="/images/delete.svg">
-                                }
+
+            <div class="question_section--wrapper">
+
+                <div class="question_wrapper">
+                    @for(question of questions.controls; track qi; let qi = $index) {
+                    <div class="questions">
+
+                        <!-- Question Header -->
+                        <div class="displayflex displayflex_space--between">
+                            <label>{{ qi + 1 }}. Question</label>
+                            @if(qi > 0) {
+                            <img class="img_waist" (click)="deleteQuestion(qi)" src="/images/delete.svg">
+                            }
+                        </div>
+
+                        <!-- Question Input -->
+                        <div class="margin_spacer displayflex">
+                            <input type="text" [formControl]="$any(question.get('questionText'))">
+                        </div>
+
+                        <!-- Answers Header -->
+                        <div class="displayflex displayflex_space--between">
+                            <label>Answers</label>
+                            <div class="displayflex">
+                                <input type="checkbox" [formControl]="$any(question.get('allowMultiple'))">
+                                <p class="surveyAnswer--text">Allow multiple answers.</p>
                             </div>
+                        </div>
 
-                            <!-- Question Input -->
-                            <div class="margin_spacer displayflex">
-                                <input type="text" [formControl]="$any(question.get('questionText'))">
-                            </div>
+                        <!-- Answer Felder -->
+                        @for(answer of getAnswers(qi).controls; track ai; let ai = $index) {
+                        <div class="margin_spacer displayflex">
+                            {{ getLetter(ai) }}.
+                            <input type="text" [formControl]="$any(answer)">
+                            @if(ai > 0) {
+                            <img class="img_waist" (click)="deleteAnswer(qi, ai)" src="/images/delete.svg">
+                            }
+                        </div>
+                        }
 
-                            <!-- Answers Header -->
-                            <div class="displayflex displayflex_space--between">
-                                <label>Answers</label>
-                                <div class="displayflex">
-                                    <input type="checkbox" [formControl]="$any(question.get('allowMultiple'))">
-                                    <p class="surveyAnswer--text">Allow multiple answers.</p>
-                                </div>
-                            </div>
-
-                            <!-- Answer Felder -->
-                            @for(answer of getAnswers(qi).controls; track ai; let ai = $index) {
-                            <div class="margin_spacer displayflex">
-                                {{ getLetter(ai) }}.
-                                <input type="text" [formControl]="$any(answer)">
-                                @if(ai > 0) {
-                                <img class="img_waist" (click)="deleteAnswer(qi, ai)" src="/images/delete.svg">
-                                }
+                        <!-- Add Answer Button -->
+                        <div class="displayflex_space--between">
+                            @if(canAddAnswer(qi)) {
+                            <div (click)="addAnswer(qi)" class="displayflex margin_spacer align_center"
+                                [class.disable]="!getAllowMultiple(qi).value">
+                                <p>add Answer</p>
+                                <img src="/images/add_circle.svg">
                             </div>
                             }
 
-                            <!-- Add Answer Button -->
-                            <div class="displayflex_space--between">
-                                @if(canAddAnswer(qi)) {
-                                <div (click)="addAnswer(qi)" class="displayflex margin_spacer align_center"
-                                    [class.disable]="!getAllowMultiple(qi).value">
-                                    <p>add Answer</p>
-                                    <img src="/images/add_circle.svg">
-                                </div>
-                                }
-
-                                <!-- Text wenn Limit erreicht -->
-                                @if(!canAddAnswer(qi)){
-                                <div>
-                                    <p>You can add up to 6 answer fields!</p>
-                                </div>
-                                }
-
+                            <!-- Text wenn Limit erreicht -->
+                            @if(!canAddAnswer(qi)){
+                            <div>
+                                <p>You can add up to 6 answer fields!</p>
                             </div>
+                            }
+
                         </div>
-                        }
                     </div>
+                    }
                 </div>
             </div>
         </div>
-        <div class="btn_publish--wrapper">
-        <button class="btn btn_text displayflex_center" (click)="updateInput()" [disabled]="!surveyName.valid">Publish <img class="button-addon btn_text" src="/images/check.svg"></button>
-        <!-- Button ist disabled, wenn Name nicht eingegeben-->
-         </div>
     </div>
+    <div class="btn_publish--wrapper">
+        <button class="btn btn_text displayflex_center" (click)="updateInput()" [disabled]="!surveyName.valid">Publish
+            <img class="button-addon btn_text" src="/images/check.svg"></button>
+        <!-- Button ist disabled, wenn Name nicht eingegeben-->
+    </div>
+</div>
 <!-- </div> -->
