@@ -104,12 +104,12 @@
     gap: 32px;
     margin-bottom: 32px;
 
-    >h1{
+    >h1 {
         margin: 0px;
     }
 }
 
-.btn_publish{
+.btn_publish {
     width: 99px;
     height: 48px;
 
@@ -208,5 +208,17 @@ input[type="checkbox"] {
 
     &:checked {
         accent-color: var(--secondary-orange);
+    }
+}
+
+// published button
+
+.close_button {
+    font-family: 'Nokora', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+
+    &:hover{
+        cursor: pointer;
     }
 }
