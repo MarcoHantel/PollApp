@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { DisplySurveyService } from './../../../service/disply-survey.service';
+import { SurveyCreateService } from '../../../service/survey-create.service.service';
 import { SurveyCardComponent } from './survey-card/survey-card.component';
 
 @Component({
@@ -9,7 +9,7 @@ import { SurveyCardComponent } from './survey-card/survey-card.component';
   styleUrl: './your-survey.component.scss'
 })
 export class YourSurveyComponent {
-  private surveyService = inject(DisplySurveyService);
+  private surveyService = inject(SurveyCreateService);
 
   currentSurveys = this.surveyService.getEndingSoonSurveys();
 }

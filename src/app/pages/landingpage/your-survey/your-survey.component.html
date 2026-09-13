@@ -4,9 +4,9 @@
     <p class="basic_text--big">Ending soon surveys</p>
 
     <div class="card_wrapper">
-        @for (item of currentSurveys; track item.title) {
+        @for (item of currentSurveys; track $index) {
         <!-- Die Karte wird hier eingefügt Loop -->
-        <app-survey-card class="survey_card" [survey]="item" />
+        <app-survey-card class="survey_card" [survey]="$any(item)" />
 
         } @empty {
         <p>No surveys available!</p>

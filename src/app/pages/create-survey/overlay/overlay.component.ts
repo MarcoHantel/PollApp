@@ -13,7 +13,6 @@ export class OverlayComponent {
   router = inject(Router);
 
   closeOverlay() {
-    this.surveyCreateService.showSuccessOverlay.set(false); // ← Overlay schließen
-    this.router.navigate(['']); // hier dann die gwünschte Route angeben, z.B. zur Startseite oder zu einer anderen Seite
-  }
+    this.surveyCreateService.showSuccessOverlay.set(false); // Overlay schließen
+    this.router.navigate(['survey-details']);  }
 }

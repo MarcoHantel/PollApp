@@ -116,8 +116,7 @@
                         <!-- Add Answer Button -->
                         <div class="displayflex_space--between">
                             @if(canAddAnswer(qi)) {
-                            <div (click)="addAnswer(qi)" class="displayflex margin_spacer align_center"
-                                [class.disable]="!getAllowMultiple(qi).value">
+                            <div (click)="addAnswer(qi)" class="displayflex margin_spacer align_center">
                                 <p>add Answer</p>
                                 <img src="/images/add_circle.svg">
                             </div>

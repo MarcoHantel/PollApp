@@ -1,0 +1,31 @@
+<div class="detail_wrapper">
+
+    <div class="vote_section">
+
+        <span>Published</span>
+        <div class="vote_section--infos">
+            <p>Ends in {{ surveyCreateService.surveys()[0].endDate }}</p>
+            <p>Category: {{ surveyCreateService.surveys()[0].category }}</p>
+        </div>
+        <h1>{{ surveyCreateService.surveys()[0].name }}</h1>
+        <p>{{ surveyCreateService.surveys()[0].description }}</p>
+
+        <h3>{{ surveyCreateService.surveys()[0].questions[0].questionText }}</h3>
+
+        @if(surveyCreateService.surveys()[0].questions[0].allowMultiple){
+        <span>More than one answers are possible</span>
+        }
+
+        @for(question of surveyCreateService.surveys()[0].questions; track $index) {
+        <p>{{ question.questionText }}</p>
+
+        @for(answer of question.answers; track $index) {
+        <p>{{ answer.text }}</p>
+        }
+        }
+
+    </div>
+
+    <div class="survey-info"></div>
+
+</div>
