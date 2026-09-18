@@ -2,12 +2,14 @@
 
     <div class="vote_section">
 
-        <span>Published</span>
-        <div class="vote_section--infos">
+        <span class="published">Published</span>
+
+        <div class="vote_section--infos displayflex_space--between">
             <p>Ends in {{ surveyCreateService.surveys()[0].endDate }}</p>
             <p>Category: {{ surveyCreateService.surveys()[0].category }}</p>
         </div>
-        <h1>{{ surveyCreateService.surveys()[0].name }}</h1>
+
+        <h1 class="h1_margin">{{ surveyCreateService.surveys()[0].name }}</h1>
         <p>{{ surveyCreateService.surveys()[0].description }}</p>
 
         <h3>{{ surveyCreateService.surveys()[0].questions[0].questionText }}</h3>
@@ -20,7 +22,14 @@
         <p>{{ question.questionText }}</p>
 
         @for(answer of question.answers; track $index) {
-        <p>{{ answer.text }}</p>
+        <div class="displayflex">
+
+            <input type="checkbox">
+            <label>
+                <p>{{ answer.text }}</p>
+            </label>
+        </div>
+
         }
         }
 

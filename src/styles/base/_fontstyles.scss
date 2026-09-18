@@ -21,6 +21,10 @@ h1 {
     color: var(--primary-orange);
 }
 
+.h1_margin {
+    margin: 0;
+}
+
 h2 {
     font-family: 'Nerko-One', sans-serif;
     font-size: clamp(36px, 4vw, 72px);
