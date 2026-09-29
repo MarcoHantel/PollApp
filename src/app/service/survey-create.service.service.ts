@@ -19,222 +19,233 @@ export class SurveyCreateService {
 
     {
       id: 1,
-      name: "Das ist der Title",
+      name: "Let’s Plan the Next Team Event Together",
       category: "Team Activities",
       endDate: "2026-09-10",
-      description: "Dies ist die Beschreibung.",
+      description: "We want to create team activities that everyone will enjoy share your preferences and ideas in our survey to help us plan better experiences together",
       active: true,
       questions: [
         {
-          questionText: "Was ist dein Lieblingsfilm?",
+          questionText: "Which date would work best for you?",
           allowMultiple: true,        // ← fehlt bei dir!
           answers: [                   // ← fehlt bei dir!
-            { text: "Inception" },
-            { text: "The Matrix" },
+            { text: "19.09.2025, Friday" },
+            { text: "20.09.2025, Saturday" },
+            { text: "21.09.2025, Sunday" },
           ]
         },
         {
-          questionText: "Was ist dein Lieblingsessen?",
+          questionText: "Choose the activities you prefer",
           allowMultiple: true,
           answers: [
-            { text: "Pizza" },
-            { text: "Sushi" },
-            { text: "Burger" },
+            { text: "Outdoor adventure like kayaking" },
+            { text: "Office Costume Party" },
+            { text: "Bowling, mini-golf, volleyball" },
+          ]
+        },
+        {
+          questionText: "What’s most important to you in a team event?",
+          allowMultiple: true,
+          answers: [
+            { text: "Team bonding" },
+            { text: "Food and drinks " },
+            { text: "Trying something new" },
+            { text: "Keeping it low-key and stress-free" },
           ]
         }
       ]
     },
 
 
-{ 
-  id: 2, 
-  name: "Sport ist gesund", 
-  category: "Health & Wellness", 
-  endDate: "2026-11-05", 
-  description: "Wie sportlich bist du im Alltag?", 
-  active: false, 
-  questions: [
     {
-      questionText: "Wie oft machst du Sport pro Woche?",
-      allowMultiple: false,
-      answers: [
-        { text: "Nie" },
-        { text: "1-2 mal" },
-        { text: "3-4 mal" },
-        { text: "Täglich" },
-      ]
-    }
-  ] 
-},
-{ 
-  id: 3, 
-  name: "Was ist dein Lieblingsfilm?", 
-  category: "Gaming & Entertainment", 
-  endDate: "2026-09-01", 
-  description: "Teile deinen Lieblingsfilm mit uns!", 
-  active: true, 
-  questions: [
-    {
-      questionText: "Welches Genre magst du am liebsten?",
-      allowMultiple: false,
-      answers: [
-        { text: "Action" },
-        { text: "Komödie" },
-        { text: "Horror" },
-        { text: "Drama" },
+      id: 2,
+      name: "Sport ist gesund",
+      category: "Health & Wellness",
+      endDate: "2026-11-05",
+      description: "Wie sportlich bist du im Alltag?",
+      active: false,
+      questions: [
+        {
+          questionText: "Wie oft machst du Sport pro Woche?",
+          allowMultiple: false,
+          answers: [
+            { text: "Nie" },
+            { text: "1-2 mal" },
+            { text: "3-4 mal" },
+            { text: "Täglich" },
+          ]
+        }
       ]
     },
     {
-      questionText: "Wie oft gehst du ins Kino?",
-      allowMultiple: false,
-      answers: [
-        { text: "Nie" },
-        { text: "Selten" },
-        { text: "Monatlich" },
-        { text: "Wöchentlich" },
+      id: 3,
+      name: "Was ist dein Lieblingsfilm?",
+      category: "Gaming & Entertainment",
+      endDate: "2026-09-01",
+      description: "Teile deinen Lieblingsfilm mit uns!",
+      active: true,
+      questions: [
+        {
+          questionText: "Welches Genre magst du am liebsten?",
+          allowMultiple: false,
+          answers: [
+            { text: "Action" },
+            { text: "Komödie" },
+            { text: "Horror" },
+            { text: "Drama" },
+          ]
+        },
+        {
+          questionText: "Wie oft gehst du ins Kino?",
+          allowMultiple: false,
+          answers: [
+            { text: "Nie" },
+            { text: "Selten" },
+            { text: "Monatlich" },
+            { text: "Wöchentlich" },
+          ]
+        },
+        {
+          questionText: "Welche Streaming Dienste nutzt du?",
+          allowMultiple: true,
+          answers: [
+            { text: "Netflix" },
+            { text: "Disney+" },
+            { text: "Amazon Prime" },
+            { text: "Apple TV+" },
+          ]
+        }
       ]
     },
     {
-      questionText: "Welche Streaming Dienste nutzt du?",
-      allowMultiple: true,
-      answers: [
-        { text: "Netflix" },
-        { text: "Disney+" },
-        { text: "Amazon Prime" },
-        { text: "Apple TV+" },
-      ]
-    }
-  ] 
-},
-{ 
-  id: 4, 
-  name: "Was ist deine Lieblingsparty?", 
-  category: "Team Activities", 
-  endDate: "2026-10-01", 
-  description: "Lass uns die beste Party planen!", 
-  active: true, 
-  questions: [
-    {
-      questionText: "Welche Musik soll auf der Party laufen?",
-      allowMultiple: true,
-      answers: [
-        { text: "Pop" },
-        { text: "Hip-Hop" },
-        { text: "Rock" },
-        { text: "Electronic" },
-      ]
-    }
-  ] 
-},
-{ 
-  id: 5, 
-  name: "Was ist deine Lieblingsmusik?", 
-  category: "Technology & Innovation", 
-  endDate: "2026-09-04", 
-  description: "Teile deine Musikvorlieben!", 
-  active: false, 
-  questions: [
-    {
-      questionText: "Welches Genre hörst du am liebsten?",
-      allowMultiple: false,
-      answers: [
-        { text: "Pop" },
-        { text: "Rock" },
-        { text: "Classical" },
-        { text: "Jazz" },
+      id: 4,
+      name: "Was ist deine Lieblingsparty?",
+      category: "Team Activities",
+      endDate: "2026-10-01",
+      description: "Lass uns die beste Party planen!",
+      active: true,
+      questions: [
+        {
+          questionText: "Welche Musik soll auf der Party laufen?",
+          allowMultiple: true,
+          answers: [
+            { text: "Pop" },
+            { text: "Hip-Hop" },
+            { text: "Rock" },
+            { text: "Electronic" },
+          ]
+        }
       ]
     },
     {
-      questionText: "Welchen Streaming Dienst nutzt du für Musik?",
-      allowMultiple: false,
-      answers: [
-        { text: "Spotify" },
-        { text: "Apple Music" },
-        { text: "YouTube Music" },
-        { text: "Tidal" },
+      id: 5,
+      name: "Was ist deine Lieblingsmusik?",
+      category: "Technology & Innovation",
+      endDate: "2026-09-04",
+      description: "Teile deine Musikvorlieben!",
+      active: false,
+      questions: [
+        {
+          questionText: "Welches Genre hörst du am liebsten?",
+          allowMultiple: false,
+          answers: [
+            { text: "Pop" },
+            { text: "Rock" },
+            { text: "Classical" },
+            { text: "Jazz" },
+          ]
+        },
+        {
+          questionText: "Welchen Streaming Dienst nutzt du für Musik?",
+          allowMultiple: false,
+          answers: [
+            { text: "Spotify" },
+            { text: "Apple Music" },
+            { text: "YouTube Music" },
+            { text: "Tidal" },
+          ]
+        },
+        {
+          questionText: "Wie hörst du Musik am liebsten?",
+          allowMultiple: false,
+          answers: [
+            { text: "Kopfhörer" },
+            { text: "Lautsprecher" },
+            { text: "Im Auto" },
+            { text: "Live Konzerte" },
+          ]
+        }
       ]
     },
     {
-      questionText: "Wie hörst du Musik am liebsten?",
-      allowMultiple: false,
-      answers: [
-        { text: "Kopfhörer" },
-        { text: "Lautsprecher" },
-        { text: "Im Auto" },
-        { text: "Live Konzerte" },
-      ]
-    }
-  ] 
-},
-{ 
-  id: 6, 
-  name: "Was ist das beste Brettspiel aller Zeiten?", 
-  category: "Gaming & Entertainment", 
-  endDate: "2026-11-04", 
-  description: "Welches Brettspiel begeistert dich?", 
-  active: false, 
-  questions: [
-    {
-      questionText: "Welche Art von Brettspielen magst du?",
-      allowMultiple: true,
-      answers: [
-        { text: "Strategie" },
-        { text: "Kooperativ" },
-        { text: "Familienspiele" },
-        { text: "Partyspiele" },
-      ]
-    },
-    {
-      questionText: "Wie lange darf ein Spiel dauern?",
-      allowMultiple: false,
-      answers: [
-        { text: "Unter 30 Minuten" },
-        { text: "30-60 Minuten" },
-        { text: "1-2 Stunden" },
-        { text: "Über 2 Stunden" },
-      ]
-    }
-  ] 
-},
-{ 
-  id: 7, 
-  name: "Die Besten Teamspiele aller Zeiten", 
-  category: "Team Activities", 
-  endDate: "2026-09-03", 
-  description: "Welche Teamspiele begeistern euch?", 
-  active: false, 
-  questions: [
-    {
-      questionText: "Wie viele Spieler soll das Spiel haben?",
-      allowMultiple: false,
-      answers: [
-        { text: "2-4 Spieler" },
-        { text: "5-8 Spieler" },
-        { text: "9+ Spieler" },
+      id: 6,
+      name: "Was ist das beste Brettspiel aller Zeiten?",
+      category: "Gaming & Entertainment",
+      endDate: "2026-11-04",
+      description: "Welches Brettspiel begeistert dich?",
+      active: false,
+      questions: [
+        {
+          questionText: "Welche Art von Brettspielen magst du?",
+          allowMultiple: true,
+          answers: [
+            { text: "Strategie" },
+            { text: "Kooperativ" },
+            { text: "Familienspiele" },
+            { text: "Partyspiele" },
+          ]
+        },
+        {
+          questionText: "Wie lange darf ein Spiel dauern?",
+          allowMultiple: false,
+          answers: [
+            { text: "Unter 30 Minuten" },
+            { text: "30-60 Minuten" },
+            { text: "1-2 Stunden" },
+            { text: "Über 2 Stunden" },
+          ]
+        }
       ]
     },
     {
-      questionText: "Welche Teamspiele magst du?",
-      allowMultiple: true,
-      answers: [
-        { text: "Werwolf" },
-        { text: "Codenames" },
-        { text: "Pictionary" },
-        { text: "Escape Room" },
+      id: 7,
+      name: "Die Besten Teamspiele aller Zeiten",
+      category: "Team Activities",
+      endDate: "2026-09-03",
+      description: "Welche Teamspiele begeistern euch?",
+      active: false,
+      questions: [
+        {
+          questionText: "Wie viele Spieler soll das Spiel haben?",
+          allowMultiple: false,
+          answers: [
+            { text: "2-4 Spieler" },
+            { text: "5-8 Spieler" },
+            { text: "9+ Spieler" },
+          ]
+        },
+        {
+          questionText: "Welche Teamspiele magst du?",
+          allowMultiple: true,
+          answers: [
+            { text: "Werwolf" },
+            { text: "Codenames" },
+            { text: "Pictionary" },
+            { text: "Escape Room" },
+          ]
+        },
+        {
+          questionText: "Wo spielt ihr am liebsten?",
+          allowMultiple: false,
+          answers: [
+            { text: "Zuhause" },
+            { text: "Im Büro" },
+            { text: "Im Freien" },
+            { text: "Im Restaurant" },
+          ]
+        }
       ]
-    },
-    {
-      questionText: "Wo spielt ihr am liebsten?",
-      allowMultiple: false,
-      answers: [
-        { text: "Zuhause" },
-        { text: "Im Büro" },
-        { text: "Im Freien" },
-        { text: "Im Restaurant" },
-      ]
-    }
-  ] 
-},]);
+    },]);
 
   // Survey hinzufügen
   addSurvey(survey: SurveyCreate) {
