@@ -32,6 +32,11 @@
     flex-direction: column;
 }
 
+.displayflex_baseline {
+    display: flex;
+    align-items: baseline;
+}
+
 .align_start {
     align-items: start;
 }

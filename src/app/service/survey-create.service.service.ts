@@ -14,6 +14,37 @@ export class SurveyCreateService {
   // aktuelle Survey in Bearbeitung
   currentSurvey = signal<SurveyCreate | null>(null);
 
+  // pro Frage die ausgewählten Antworten speichern
+selectedAnswers = signal<{ [questionIndex: number]: number[] }>({});
+
+toggleAnswer(questionIndex: number, answerIndex: number, allowMultiple: boolean) {
+  this.selectedAnswers.update(current => {
+    const selected = current[questionIndex] ?? [];
+
+    if (allowMultiple) {
+      // mehrere erlaubt → toggle
+      const alreadySelected = selected.includes(answerIndex);
+      return {
+        ...current,
+        [questionIndex]: alreadySelected
+          ? selected.filter(i => i !== answerIndex)  // ← abwählen
+          : [...selected, answerIndex]                // ← hinzufügen
+      };
+    } else {
+      // nur eine erlaubt → immer ersetzen
+      return {
+        ...current,
+        [questionIndex]: [answerIndex]  // ← nur diese eine
+      };
+    }
+  });
+}
+
+// prüfen ob eine Antwort ausgewählt ist
+isSelected(questionIndex: number, answerIndex: number): boolean {
+  return (this.selectedAnswers()[questionIndex] ?? []).includes(answerIndex);
+}
+
   // alle Surveys mit Testdaten
   surveys = signal<SurveyCreate[]>([
 
@@ -27,7 +58,7 @@ export class SurveyCreateService {
       questions: [
         {
           questionText: "Which date would work best for you?",
-          allowMultiple: true,        // ← fehlt bei dir!
+          allowMultiple: false,        // ← fehlt bei dir!
           answers: [                   // ← fehlt bei dir!
             { text: "19.09.2025, Friday" },
             { text: "20.09.2025, Saturday" },
@@ -51,6 +82,16 @@ export class SurveyCreateService {
             { text: "Food and drinks " },
             { text: "Trying something new" },
             { text: "Keeping it low-key and stress-free" },
+          ]
+        },
+                {
+          questionText: "How important is a Team Building activity to you?",
+          allowMultiple: false,
+          answers: [
+            { text: "Very important" },
+            { text: "Somewhat important" },
+            { text: "Not very important" },
+            { text: "Not important at all" },
           ]
         }
       ]

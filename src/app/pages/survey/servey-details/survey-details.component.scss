@@ -1,12 +1,20 @@
 :host {
     max-width: 1059px;
     width: 100%;
-    height: 855px;
+    min-height: 855px;
     background-color: var(--white);
     display: flex;
 
     color: var(--primary-background-color);
     font-family: 'Mulish', sans-serif;
+}
+
+span {
+    margin-bottom: 20px;
+}
+
+h3{
+    margin-bottom: 4px;
 }
 
 .vote_section {
@@ -31,10 +39,20 @@
     font-size: 16px;
 }
 
-.vote_section--questions{
+.vote_section--questions {
     background-color: aqua;
+    display: grid; // aufteilung in 2 spalten
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
 }
 
-.question_wrapper{
+.question_wrapper {
     background-color: green;
+}
+
+
+@media (max-width: 700px) {
+    .question_wrapper {
+        grid-template-columns: 1fr;
+    }
 }
