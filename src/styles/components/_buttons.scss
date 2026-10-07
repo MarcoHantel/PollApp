@@ -121,6 +121,26 @@
     background-color: var(--secondary-orange);
 }
 
+.btn_complete {
+    width: 127px;
+    height: 21px;
+
+    border: none;
+    border-radius: 10px;
+    padding: 8px 12px;
+
+    background-color: var(--light-orange);
+
+    font-family: 'Nokora', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--light-orange-hover);
+    }
+}
+
 // dropdown
 
 .custom_select {

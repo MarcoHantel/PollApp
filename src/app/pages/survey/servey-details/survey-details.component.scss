@@ -9,12 +9,19 @@
     font-family: 'Mulish', sans-serif;
 }
 
+.detail_wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 40px;
+}
+
 span {
     margin-bottom: 20px;
 }
 
-h3{
-    margin-bottom: 4px;
+h3 {
+    margin: 8px 0px;
 }
 
 .vote_section {
@@ -50,9 +57,26 @@ h3{
     background-color: green;
 }
 
+.checkbox_text {
+    margin: 8px;
+}
+
+.button_wrapper {
+    width: 100%;
+    padding: 8px;
+}
+
 
 @media (max-width: 700px) {
     .question_wrapper {
         grid-template-columns: 1fr;
     }
+}
+
+// result section
+
+.result_section {
+    width: 315px;
+    min-height: 761px;
+    background-color: blue;
 }
