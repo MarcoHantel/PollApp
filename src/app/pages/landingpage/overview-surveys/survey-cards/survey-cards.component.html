@@ -1,4 +1,4 @@
-<div class="card_wrapper">
+<div class="card_wrapper" [routerLink]="['/survey-details', survey.id]">
 
         <div class="card_wrapper--text">
                 <p class="survey_card--category">{{ survey.category }}</p>
@@ -14,3 +14,4 @@
                 </div>
         </div>
 </div>
+

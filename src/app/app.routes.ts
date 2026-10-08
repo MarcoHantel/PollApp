@@ -9,6 +9,6 @@ export const routes: Routes = [
 
     { path:'create-survey', component: CreateSurveyComponent},
 
-    { path: 'survey-details', component: SurveyDetailsComponent }
+    { path: 'survey-details/:id', component: SurveyDetailsComponent },
 
 ];

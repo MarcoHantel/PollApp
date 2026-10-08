@@ -1,27 +1,22 @@
+@if(survey()) {
+
 <div class="detail_wrapper">
-
-
 
     <div class="vote_section">
 
         <span class="published">Published</span>
 
         <div class="vote_section--infos displayflex_space--between">
-            <p>Ends in {{ surveyCreateService.surveys()[0].endDate }}</p>
-            <p>Category: {{ surveyCreateService.surveys()[0].category }}</p>
+            <p>Ends in {{ survey()!.endDate }}</p>
+            <p>Category: {{ survey()!.category }}</p>
         </div>
 
-
-        <h1 class="h1_margin">{{ surveyCreateService.surveys()[0].name }}</h1>
-        <p>{{ surveyCreateService.surveys()[0].description }}</p>
-
+        <h1 class="h1_margin">{{ survey()!.name }}</h1>
+        <p>{{ survey()!.description }}</p>
 
         <div class="vote_section--questions">
-
-            @for(question of surveyCreateService.surveys()[0].questions; track $index; let i = $index) {
+            @for(question of survey()!.questions; track $index; let i = $index) {
             <div class="question_wrapper">
-
-
 
                 <h3>{{ i + 1 }}. {{ question.questionText }}</h3>
 
@@ -31,9 +26,7 @@
 
                 @for(answer of question.answers; track $index; let ai = $index) {
                 <div class="displayflex" (click)="surveyCreateService.toggleAnswer(i, ai, question.allowMultiple)">
-
                     <input type="checkbox" [checked]="surveyCreateService.isSelected(i, ai)" readonly>
-                    <!-- ← readonly damit Angular den State kontrolliert -->
                     <label>
                         <p>{{ getLetter(ai) }}. {{ answer.text }}</p>
                     </label>
@@ -41,21 +34,19 @@
                 }
             </div>
             }
-
         </div>
+
         <div routerLink="/" class="button_wrapper displayflex_space--end">
             <div class="btn_complete">
                 <a>Complete survey</a>
             </div>
         </div>
-
     </div>
 
     <div class="survey-info"></div>
 
     <div class="result_section">
-
-        @for(question of surveyCreateService.surveys()[0].questions; track $index; let i = $index) {
+        @for(question of survey()!.questions; track $index; let i = $index) {
         <div class="question_wrapper">
 
             <h3>{{ i + 1 }}. {{ question.questionText }}</h3>
@@ -65,8 +56,7 @@
             }
 
             @for(answer of question.answers; track $index; let ai = $index) {
-            <div class="displayflex" (click)="surveyCreateService.toggleAnswer(i, ai, question.allowMultiple)">
-
+            <div class="displayflex">
                 <label>
                     <p>{{ getLetter(ai) }}. {{ answer.text }}</p>
                 </label>
@@ -74,7 +64,9 @@
             }
         </div>
         }
-
     </div>
-
 </div>
+
+} @else {
+  <p>Survey nicht gefunden</p>
+}

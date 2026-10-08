@@ -14,5 +14,5 @@ export class OverlayComponent {
 
   closeOverlay() {
     this.surveyCreateService.showSuccessOverlay.set(false); // Overlay schließen
-    this.router.navigate(['survey-details']);  }
+    this.router.navigate(['survey-details/:id']);  }
 }
