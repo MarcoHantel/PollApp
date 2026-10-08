@@ -25,13 +25,18 @@
                 }
 
                 @for(answer of question.answers; track $index; let ai = $index) {
-                <div class="displayflex" (click)="surveyCreateService.toggleAnswer(i, ai, question.allowMultiple)">
-                    <input type="checkbox" [checked]="surveyCreateService.isSelected(i, ai)" readonly>
+                <div class="displayflex"
+                    (click)="isSurveyActive() && surveyCreateService.toggleAnswer(i, ai, question.allowMultiple)">
+
+                    <input type="checkbox" [checked]="surveyCreateService.isSelected(i, ai)"
+                        [disabled]="!isSurveyActive()"
+                    readonly>
                     <label>
                         <p>{{ getLetter(ai) }}. {{ answer.text }}</p>
                     </label>
                 </div>
                 }
+
             </div>
             }
         </div>
@@ -68,5 +73,5 @@
 </div>
 
 } @else {
-  <p>Survey nicht gefunden</p>
+<p>Survey nicht gefunden</p>
 }

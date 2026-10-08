@@ -18,6 +18,13 @@ export class SurveyDetailsComponent {
   // aktuelles Survey basierend auf ID
   survey = signal<SurveyCreate | null>(null);
 
+  isSurveyActive(): boolean {
+  if (!this.survey()) return false;
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  return new Date(this.survey()!.endDate) >= today;
+}
+
   constructor() {
     // ID aus der URL holen
     const id = Number(this.route.snapshot.paramMap.get('id'));

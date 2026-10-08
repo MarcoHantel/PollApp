@@ -14,6 +14,7 @@
     justify-content: space-between;
     gap: 32px;
     padding: 40px;
+
 }
 
 span {
@@ -47,14 +48,14 @@ h3 {
 }
 
 .vote_section--questions {
-    background-color: aqua;
+
     display: grid; // aufteilung in 2 spalten
     grid-template-columns: repeat(2, 1fr);
     gap: 32px;
 }
 
 .question_wrapper {
-    background-color: green;
+
 }
 
 .checkbox_text {
@@ -78,5 +79,5 @@ h3 {
 .result_section {
     width: 315px;
     min-height: 761px;
-    background-color: blue;
+
 }
