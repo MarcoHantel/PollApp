@@ -1,6 +1,7 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, computed } from '@angular/core';
 import { SurveyCreateService } from '../../../service/survey-create.service.service';
 import { SurveyCardComponent } from './survey-card/survey-card.component';
+
 
 @Component({
   selector: 'app-your-survey',
@@ -9,7 +10,8 @@ import { SurveyCardComponent } from './survey-card/survey-card.component';
   styleUrl: './your-survey.component.scss'
 })
 export class YourSurveyComponent {
-  private surveyService = inject(SurveyCreateService);
+  
+ private surveyService = inject(SurveyCreateService);
 
-  currentSurveys = this.surveyService.getEndingSoonSurveys();
+  currentSurveys = computed(() => this.surveyService.getEndingSoonSurveys());
 }

@@ -16,6 +16,5 @@ export interface SurveyCreate {
   category: string;
   endDate: string;
   description: string;
-  active: boolean;
   questions: Question[];
 }

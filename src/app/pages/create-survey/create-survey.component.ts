@@ -62,7 +62,6 @@ updateInput() {
     category: this.dropDown.choose,
     endDate: this.surveyEndDate.value ?? '',
     description: this.surveyDescription.value ?? '',
-    active: true,
     questions: this.questions.value
   };
 
