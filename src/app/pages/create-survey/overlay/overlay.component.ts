@@ -13,6 +13,14 @@ export class OverlayComponent {
   router = inject(Router);
 
   closeOverlay() {
-    this.surveyCreateService.showSuccessOverlay.set(false); // Overlay schließen
-    this.router.navigate(['survey-details/:id']);  }
+    this.surveyCreateService.showSuccessOverlay.set(false);
+
+    const id = this.surveyCreateService.lastCreatedSurveyId();
+
+    if (id) {
+      this.router.navigate(['survey-details', id]); // ← echte ID!
+    } else {
+      this.router.navigate(['']); // ← Fallback zur Startseite
+    }
+  }
 }

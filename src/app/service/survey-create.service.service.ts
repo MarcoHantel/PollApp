@@ -9,7 +9,7 @@ export class SurveyCreateService {
 
   // Overlay
   showSuccessOverlay = signal(false);
-
+  lastCreatedSurveyId = signal<number | null>(null); // ← neu
   // Filter Signals
   selectedStatus = signal<'all' | 'active' | 'past'>('all');
   selectedCategory = signal('all');
@@ -72,6 +72,10 @@ export class SurveyCreateService {
 
   async addSurvey(survey: SurveyCreate) {
 
+
+
+
+
     // 1. Survey speichern
     const { data: surveyData, error: surveyError } = await this.supabaseService.supabase
       .from('surveys')
@@ -82,14 +86,15 @@ export class SurveyCreateService {
         description: survey.description,
       })
       .select()
-      .single(); // ← gibt ein einzelnes Objekt zurück
+      .single();
 
     if (surveyError) {
       console.error('Survey Fehler:', surveyError);
       return;
     }
 
-    const surveyId = surveyData.id; // ← ID der neuen Survey
+    const surveyId = surveyData.id;
+    this.lastCreatedSurveyId.set(surveyId); // ← ID speichern!
     console.log('Survey gespeichert:', surveyId);
 
     // 2. Questions speichern
