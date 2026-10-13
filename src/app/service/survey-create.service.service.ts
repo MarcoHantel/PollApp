@@ -70,9 +70,68 @@ export class SurveyCreateService {
     }
   }
 
-  // Survey hinzufügen
-  addSurvey(survey: SurveyCreate) {
-    this.surveys.update(list => [...list, survey]);
+  async addSurvey(survey: SurveyCreate) {
+
+    // 1. Survey speichern
+    const { data: surveyData, error: surveyError } = await this.supabaseService.supabase
+      .from('surveys')
+      .insert({
+        name: survey.name,
+        category: survey.category,
+        endDate: survey.endDate,
+        description: survey.description,
+      })
+      .select()
+      .single(); // ← gibt ein einzelnes Objekt zurück
+
+    if (surveyError) {
+      console.error('Survey Fehler:', surveyError);
+      return;
+    }
+
+    const surveyId = surveyData.id; // ← ID der neuen Survey
+    console.log('Survey gespeichert:', surveyId);
+
+    // 2. Questions speichern
+    for (const question of survey.questions) {
+      const { data: questionData, error: questionError } = await this.supabaseService.supabase
+        .from('questions')
+        .insert({
+          survey_id: surveyId,
+          questionText: question.questionText,
+          allowMultiple: question.allowMultiple,
+        })
+        .select()
+        .single();
+
+      if (questionError) {
+        console.error('Question Fehler:', questionError);
+        return;
+      }
+
+      const questionId = questionData.id; // ← ID der neuen Question
+
+      // answers mit leerem text überspringen!
+      const answersToInsert = question.answers
+        .filter((a: any) => a !== null && a !== '' && a !== undefined) // ← leere filtern
+        .map((a: any) => ({
+          question_id: questionId,
+          text: typeof a === 'string' ? a : a.text // ← FormArray gibt strings zurück!
+        }));
+
+      const { error: answerError } = await this.supabaseService.supabase
+        .from('answers')
+        .insert(answersToInsert);
+
+      if (answerError) {
+        console.error('Answer Fehler:', answerError);
+        return;
+      }
+    }
+
+    // 4. Surveys neu laden damit UI updated
+    await this.loadSurveys();
+    console.log('Alles gespeichert! ✅');
   }
 
   // Kategorie Filter setzen
@@ -108,11 +167,11 @@ export class SurveyCreateService {
     today.setHours(0, 0, 0, 0);
 
 
-if (this.selectedStatus() === 'active') {
-  result = result.filter(s => new Date(s.endDate) >= today); // ← bereits so ✅
-} else if (this.selectedStatus() === 'past') {
-  result = result.filter(s => new Date(s.endDate) < today);  // ← bereits so ✅
-}
+    if (this.selectedStatus() === 'active') {
+      result = result.filter(s => new Date(s.endDate) >= today); // ← bereits so ✅
+    } else if (this.selectedStatus() === 'past') {
+      result = result.filter(s => new Date(s.endDate) < today);  // ← bereits so ✅
+    }
 
     return result;
   });

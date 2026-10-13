@@ -5,12 +5,11 @@
 
     <div class="card_wrapper">
         @for (item of currentSurveys(); track $index) {
-        <!-- Die Karte wird hier eingefügt Loop -->
+
         <app-survey-card class="survey_card" [survey]="$any(item)" />
 
         } @empty {
         <p>No surveys available!</p>
         }
     </div>
-
 </div>

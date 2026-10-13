@@ -19,21 +19,25 @@ export class SurveyDetailsComponent {
   survey = signal<SurveyCreate | null>(null);
 
   isSurveyActive(): boolean {
-  if (!this.survey()) return false;
-  const today = new Date();
-  today.setHours(0, 0, 0, 0);
-  return new Date(this.survey()!.endDate) >= today;
-}
+    if (!this.survey()) return false;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return new Date(this.survey()!.endDate) >= today;
+  }
 
   constructor() {
-    // ID aus der URL holen
-    const id = Number(this.route.snapshot.paramMap.get('id'));
     
-    // Survey mit dieser ID finden
-    const found = this.surveyCreateService.surveys().find(s => s.id === id);
-    if (found) {
-      this.survey.set(found);
-    }
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    console.log('ID aus URL:', id);
+
+    // erst laden, dann suchen
+    this.surveyCreateService.loadSurveys().then(() => {
+      const found = this.surveyCreateService.surveys().find(s => s.id === id);
+      console.log('Gefunden:', found);
+      if (found) {
+        this.survey.set(found);
+      }
+    });
   }
 
   getLetter(index: number): string {

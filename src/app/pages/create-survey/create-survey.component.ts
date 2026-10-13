@@ -53,7 +53,28 @@ export class CreateSurveyComponent {
     }
   }
 
-updateInput() {
+// updateInput() {
+//   this.checkEndDate();
+
+//   const newSurvey: SurveyCreate = {
+//     id: Date.now(),
+//     name: this.surveyName.value ?? '',
+//     category: this.dropDown.choose,
+//     endDate: this.surveyEndDate.value ?? '',
+//     description: this.surveyDescription.value ?? '',
+//     questions: this.questions.value
+//   };
+
+//   this.surveyCreateService.addSurvey(newSurvey);
+//   this.surveyCreateService.showSuccessOverlay.set(true);
+//   console.log('showSuccessOverlay nach set:', this.surveyCreateService.showSuccessOverlay()); // ← ist das true?
+
+//   this.surveyName.setValue('');
+//   this.surveyEndDate.setValue('');
+//   this.surveyDescription.setValue('');
+// } 
+
+async updateInput() {  // ← async hinzufügen!
   this.checkEndDate();
 
   const newSurvey: SurveyCreate = {
@@ -65,14 +86,13 @@ updateInput() {
     questions: this.questions.value
   };
 
-  this.surveyCreateService.addSurvey(newSurvey);
+  await this.surveyCreateService.addSurvey(newSurvey); // ← await hinzufügen!
   this.surveyCreateService.showSuccessOverlay.set(true);
-  console.log('showSuccessOverlay nach set:', this.surveyCreateService.showSuccessOverlay()); // ← ist das true?
 
   this.surveyName.setValue('');
   this.surveyEndDate.setValue('');
   this.surveyDescription.setValue('');
-} 
+}
 
 deleteInput(control: FormControl) {
   control.setValue(''); // mit setValue löschen bzw neu setzten
