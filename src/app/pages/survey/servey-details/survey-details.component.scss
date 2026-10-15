@@ -67,6 +67,54 @@ h3 {
     padding: 8px;
 }
 
+// Balken
+
+.result_title {
+    margin-bottom: 16px;
+
+    .result_live {
+        color: var(--primary-orange);
+    }
+}
+
+.result_question {
+    margin-bottom: 24px;
+}
+
+.result_row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 8px 0;
+}
+
+.result_letter {
+    width: 16px;
+    font-size: 14px;
+}
+
+.result_bar {
+    flex: 1;
+    height: 12px;
+    background-color: #ececec;
+    border-radius: 6px;
+    overflow: hidden;
+
+    &--fill {
+        height: 100%;
+        background-color: var(--primary-orange);
+        border-radius: 6px;
+        transition: width 0.4s ease; // Balken bewegt sich
+    }
+}
+
+.result_percent {
+    width: 40px;
+    text-align: right;
+    font-size: 14px;
+    color: var(--primary-orange);
+}
+
 
 @media (max-width: 700px) {
     .question_wrapper {

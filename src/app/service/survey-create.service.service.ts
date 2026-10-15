@@ -1,21 +1,30 @@
-import { Injectable, signal, computed, inject } from '@angular/core'; // ← inject hinzufügen
-import { SurveyCreate } from '../interfaces/survey-create.model';
-import { SupabaseService } from './supabase.service'; // ← hinzufügen
+import { Injectable, signal, computed, inject } from '@angular/core';
+import { SurveyCreate, Question } from '../interfaces/survey-create.model';
+import { SupabaseService } from './supabase.service';
+import { RealtimeChannel } from '@supabase/supabase-js';
 
 @Injectable({ providedIn: 'root' })
 export class SurveyCreateService {
 
-  private supabaseService = inject(SupabaseService); // ← hinzufügen
+  private supabaseService = inject(SupabaseService);
 
   // Overlay
   showSuccessOverlay = signal(false);
-  lastCreatedSurveyId = signal<number | null>(null); // ← neu
+  lastCreatedSurveyId = signal<number | null>(null);
+
   // Filter Signals
   selectedStatus = signal<'all' | 'active' | 'past'>('all');
   selectedCategory = signal('all');
 
-  // aktuelle Survey in Bearbeitung
+  // Survey in Bearbeitung
   currentSurvey = signal<SurveyCreate | null>(null);
+
+  // wird von Supabase befüllt
+  surveys = signal<SurveyCreate[]>([]);
+
+
+
+  // AUSWAHL DER ANTWORTEN (Checkboxen)
 
   // pro Frage die ausgewählten Antworten speichern
   selectedAnswers = signal<{ [questionIndex: number]: number[] }>({});
@@ -44,10 +53,111 @@ export class SurveyCreateService {
     return (this.selectedAnswers()[questionIndex] ?? []).includes(answerIndex);
   }
 
-  // leeres Signal – wird von Supabase befüllt
-  surveys = signal<SurveyCreate[]>([]);  // ← Testdaten weg!
+  // hat der User überhaupt etwas ausgewählt  
+  hasSelection(): boolean {
+    return Object.values(this.selectedAnswers()).some(list => list.length > 0);
+  }
 
-  // Supabase laden
+
+
+  // LIVE AUSWERTUNG (Votes)                        
+
+
+  // Anzahl Stimmen pro Antwort: { answerId: anzahl }
+  voteCounts = signal<Record<number, number>>({});
+  private votesChannel: RealtimeChannel | null = null;
+
+  //  Bestehende Stimmen einmalig laden
+  async loadVotes(surveyId: number) {
+    const { data, error } = await this.supabaseService.supabase
+      .from('votes')
+      .select('answer_id')
+      .eq('survey_id', surveyId);
+
+    if (error) {
+      console.error('Votes Fehler:', error);
+      return;
+    }
+
+    const counts: Record<number, number> = {};
+    for (const vote of data) {
+      counts[vote.answer_id] = (counts[vote.answer_id] ?? 0) + 1;
+    }
+    this.voteCounts.set(counts);
+  }
+
+  //  Live zuhören, wenn neue Stimmen reinkommen
+  subscribeToVotes(surveyId: number) {
+    this.unsubscribeVotes(); // alten Channel vorher schließen
+
+    this.votesChannel = this.supabaseService.supabase
+      .channel('votes-' + surveyId)
+      .on(
+        'postgres_changes',
+        { event: 'INSERT', schema: 'public', table: 'votes', filter: `survey_id=eq.${surveyId}` },
+        (payload) => {
+          const answerId = (payload.new as any).answer_id;
+          this.voteCounts.update(counts => ({
+            ...counts,
+            [answerId]: (counts[answerId] ?? 0) + 1
+          }));
+        }
+      )
+      .subscribe();
+  }
+
+  //  Channel schließen (beim Verlassen der Seite)
+  unsubscribeVotes() {
+    if (this.votesChannel) {
+      this.supabaseService.supabase.removeChannel(this.votesChannel);
+      this.votesChannel = null;
+    }
+  }
+
+  //  Prozent einer Antwort innerhalb ihrer Frage berechnen
+  getPercent(question: Question, answerId?: number): number {
+    if (!answerId) return 0;
+    const counts = this.voteCounts();
+
+    const total = question.answers.reduce((sum, a) => sum + (counts[a.id!] ?? 0), 0);
+    if (total === 0) return 0;
+
+    return Math.round(((counts[answerId] ?? 0) / total) * 100);
+  }
+
+  //  Ausgewählte Antworten als Stimmen speichern
+  async submitVotes(survey: SurveyCreate): Promise<boolean> {
+    const selected = this.selectedAnswers();
+    const rows: { survey_id: number; question_id: number; answer_id: number }[] = [];
+
+    survey.questions.forEach((question, qi) => {
+      (selected[qi] ?? []).forEach(ai => {
+        rows.push({
+          survey_id: survey.id,
+          question_id: question.id!,
+          answer_id: question.answers[ai].id!
+        });
+      });
+    });
+
+    if (rows.length === 0) return false; // nichts ausgewählt
+
+    const { error } = await this.supabaseService.supabase.from('votes').insert(rows);
+
+    if (error) {
+      console.error('Vote Fehler:', error);
+      return false;
+    }
+
+    this.selectedAnswers.set({}); // Auswahl zurücksetzen
+    return true;
+  }
+
+
+
+  // SURVEYS LADEN & SPEICHERN
+
+
   async loadSurveys() {
     const { data, error } = await this.supabaseService.supabase
       .from('surveys')
@@ -57,7 +167,7 @@ export class SurveyCreateService {
           *,
           answers (*)
         )
-      `)
+      `);
 
     if (error) {
       console.error('Fehler:', error);
@@ -65,18 +175,13 @@ export class SurveyCreateService {
     }
 
     if (data) {
-      console.log('Surveys von Supabase:', data);
       this.surveys.set(data);
     }
   }
 
   async addSurvey(survey: SurveyCreate) {
 
-
-
-
-
-    // 1. Survey speichern
+    // Survey speichern
     const { data: surveyData, error: surveyError } = await this.supabaseService.supabase
       .from('surveys')
       .insert({
@@ -94,10 +199,9 @@ export class SurveyCreateService {
     }
 
     const surveyId = surveyData.id;
-    this.lastCreatedSurveyId.set(surveyId); // ← ID speichern!
-    console.log('Survey gespeichert:', surveyId);
+    this.lastCreatedSurveyId.set(surveyId);
 
-    // 2. Questions speichern
+    // Questions speichern
     for (const question of survey.questions) {
       const { data: questionData, error: questionError } = await this.supabaseService.supabase
         .from('questions')
@@ -114,14 +218,14 @@ export class SurveyCreateService {
         return;
       }
 
-      const questionId = questionData.id; // ← ID der neuen Question
+      const questionId = questionData.id;
 
-      // answers mit leerem text überspringen!
+      // leere Antworten überspringen
       const answersToInsert = question.answers
-        .filter((a: any) => a !== null && a !== '' && a !== undefined) // ← leere filtern
+        .filter((a: any) => a !== null && a !== '' && a !== undefined)
         .map((a: any) => ({
           question_id: questionId,
-          text: typeof a === 'string' ? a : a.text // ← FormArray gibt strings zurück!
+          text: typeof a === 'string' ? a : a.text // FormArray gibt strings zurück
         }));
 
       const { error: answerError } = await this.supabaseService.supabase
@@ -134,22 +238,24 @@ export class SurveyCreateService {
       }
     }
 
-    // 4. Surveys neu laden damit UI updated
+    // Surveys neu laden damit UI updated
     await this.loadSurveys();
-    console.log('Alles gespeichert! ✅');
   }
 
-  // Kategorie Filter setzen
+
+
+  // FILTER
+
+
   setCategory(category: string) {
     this.selectedCategory.set(category);
   }
 
-  // Status Filter setzen
   setStatus(status: 'all' | 'active' | 'past') {
     this.selectedStatus.set(status);
   }
 
-  // die 3 Surveys die am frühesten ablaufen
+  // die Surveys die am frühesten ablaufen
   getEndingSoonSurveys(limit: number = 3): SurveyCreate[] {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -160,7 +266,6 @@ export class SurveyCreateService {
       .slice(0, limit);
   }
 
-  // gefilterte Surveys – reagiert automatisch auf Änderungen
   filteredSurveys = computed(() => {
     let result = this.surveys();
 
@@ -171,11 +276,10 @@ export class SurveyCreateService {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-
     if (this.selectedStatus() === 'active') {
-      result = result.filter(s => new Date(s.endDate) >= today); // ← bereits so ✅
+      result = result.filter(s => new Date(s.endDate) >= today);
     } else if (this.selectedStatus() === 'past') {
-      result = result.filter(s => new Date(s.endDate) < today);  // ← bereits so ✅
+      result = result.filter(s => new Date(s.endDate) < today);
     }
 
     return result;

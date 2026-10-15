@@ -53,28 +53,7 @@ export class CreateSurveyComponent {
     }
   }
 
-// updateInput() {
-//   this.checkEndDate();
-
-//   const newSurvey: SurveyCreate = {
-//     id: Date.now(),
-//     name: this.surveyName.value ?? '',
-//     category: this.dropDown.choose,
-//     endDate: this.surveyEndDate.value ?? '',
-//     description: this.surveyDescription.value ?? '',
-//     questions: this.questions.value
-//   };
-
-//   this.surveyCreateService.addSurvey(newSurvey);
-//   this.surveyCreateService.showSuccessOverlay.set(true);
-//   console.log('showSuccessOverlay nach set:', this.surveyCreateService.showSuccessOverlay()); // ← ist das true?
-
-//   this.surveyName.setValue('');
-//   this.surveyEndDate.setValue('');
-//   this.surveyDescription.setValue('');
-// } 
-
-async updateInput() {  // ← async hinzufügen!
+async updateInput() {  // async hinzufügen!
   this.checkEndDate();
 
   const newSurvey: SurveyCreate = {
@@ -118,7 +97,7 @@ createQuestion(): FormGroup {
 
 // Question hinzufügen
 addQuestion() {
-  if (this.canAddQuestion) {  // ← fehlt dieser Check?
+  if (this.canAddQuestion) {  
     this.questions.push(this.createQuestion());
   }
 }
