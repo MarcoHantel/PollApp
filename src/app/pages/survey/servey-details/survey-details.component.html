@@ -31,7 +31,7 @@
                     <input type="checkbox" [checked]="surveyCreateService.isSelected(i, ai)"
                         [disabled]="!isSurveyActive()" readonly>
                     <label>
-                        <p>{{ getLetter(ai) }}. {{ answer.text }}</p>
+                        <p class="checkbox_text">{{ getLetter(ai) }}. {{ answer.text }}</p>
                     </label>
                 </div>
                 }

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet, Router, NavigationEnd } from '@angular/router';
-import { FooterComponent } from './shared/footer/footer.component';
+
 import { HeaderComponent } from './shared/header/header.component';
 import { OverlayComponent } from './pages/create-survey/overlay/overlay.component'; 
 import { SurveyCreateService } from './service/survey-create.service.service';
@@ -8,7 +8,7 @@ import { SurveyCreateService } from './service/survey-create.service.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FooterComponent, HeaderComponent, OverlayComponent],
+  imports: [RouterOutlet, HeaderComponent, OverlayComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
