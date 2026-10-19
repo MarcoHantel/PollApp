@@ -1,7 +1,7 @@
 <div class="survey_card" [routerLink]="['/survey-details', survey.id]">
     <div class="survey_card--wrapper">
         <p class="survey_card--category">{{ survey.category }}</p>
-        <h3 class="survey_card--title">{{ survey.name }}</h3>  <!-- title → name -->
+        <h3 class="survey_card--title">{{ survey.name }}</h3> 
         
         @if(getDaysLeft() > 0) {
             <span class="survey_card--expire">Ends in {{ getDaysLeft() }} days</span>

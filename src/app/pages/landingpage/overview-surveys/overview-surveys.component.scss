@@ -1,80 +1,92 @@
+@use "../../../../styles/abstracts/breakpoints" as *;
+
 .overview_surveys--container {
-    width: 1082px;
+    width: 100%;
+    max-width: 1082px;
     min-height: 522px;
     background-color: var(--primary-background-color);
 
-
     >.overview_surveys--head {
-        background-color: var(--primary-background-color);
         width: 100%;
         margin-bottom: 32px;
+        flex-wrap: wrap; 
+        gap: 16px;
     }
 }
-
-
-.button_wrapper {
-    gap: 24px;
-}
-
 
 .custom_select {
     position: relative;
     width: 246px;
     height: 32px;
 
-    font-family: 'Mulish', sans-serif;
-
-    &--selected {
-        background-color: var(--primary-background-color);
-        color: var(--white);
-        padding: 4px 6px;
-        cursor: pointer;
-        font-size: 18px;
-
-        border: none;
-        border-radius: 4px;
-
-        &:hover {
-            background-color: rgba(142, 112, 153, 0.16);
-
-            .arrow {
-                border-top: 12px solid var(--primary-orange);
-            }
-        }
-    }
-
-    &--options {
-        position: absolute;
-        top: 100%;
-        left: 0;
+    @include below(480px) {
         width: 100%;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        z-index: 10;
-        background-color: var(--white);
-
-        border-radius: 6px;
-
-    }
-
-    &--option {
-        cursor: pointer;
-        font-size: 14px;
-        color: var(--primary-background-color);
-
-        &--text {
-            padding: 8px 12px;
-            margin: 0;
-            display: inline-block;
-
-            &:hover {
-                background-color: var(--super-light-lilac);
-                border-radius: 6px;
-            }
-        }
     }
 }
+
+.button_wrapper {
+    gap: 24px;
+}
+
+
+// .custom_select {
+//     position: relative;
+//     width: 246px;
+//     height: 32px;
+
+//     font-family: 'Mulish', sans-serif;
+
+//     &--selected {
+//         background-color: var(--primary-background-color);
+//         color: var(--white);
+//         padding: 4px 6px;
+//         cursor: pointer;
+//         font-size: 18px;
+
+//         border: none;
+//         border-radius: 4px;
+
+//         &:hover {
+//             background-color: rgba(142, 112, 153, 0.16);
+
+//             .arrow {
+//                 border-top: 12px solid var(--primary-orange);
+//             }
+//         }
+//     }
+
+//     &--options {
+//         position: absolute;
+//         top: 100%;
+//         left: 0;
+//         width: 100%;
+//         list-style: none;
+//         margin: 0;
+//         padding: 0;
+//         z-index: 10;
+//         background-color: var(--white);
+
+//         border-radius: 6px;
+
+//     }
+
+//     &--option {
+//         cursor: pointer;
+//         font-size: 14px;
+//         color: var(--primary-background-color);
+
+//         &--text {
+//             padding: 8px 12px;
+//             margin: 0;
+//             display: inline-block;
+
+//             &:hover {
+//                 background-color: var(--super-light-lilac);
+//                 border-radius: 6px;
+//             }
+//         }
+//     }
+// }
 
 .arrow {
     border-left: 10px solid transparent;
@@ -90,17 +102,22 @@
 }
 
 .all_cards_wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr)); 
     gap: 16px;
     max-height: 413px;
     overflow-y: auto;
     overflow-x: hidden;
 
-    app-survey-cards {
-        width: calc(50% - 8px);
+    @include below(768px) {
+        grid-template-columns: 1fr; 
     }
+
+    app-survey-cards {
+        display: block; 
+        min-width: 0;
+    }
+
 
     &::-webkit-scrollbar {
         width: 8px;
@@ -118,4 +135,5 @@
     &::-webkit-scrollbar-thumb:hover {
         cursor: pointer;
     }
+
 }

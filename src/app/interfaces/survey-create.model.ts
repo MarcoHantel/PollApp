@@ -1,5 +1,4 @@
 
-// survey-create.model.ts - alles in einer Datei
 export interface Answer {
   id?: number; 
   text: string;

@@ -22,7 +22,7 @@ export class AppComponent {
       if (event instanceof NavigationEnd) {
         document.body.style.backgroundColor = event.url.includes('create-survey')
           ? 'white'
-          : '';  // farbwechsel hintergrund wenn componente geändert wird
+          : '';  
       }
     });
   }

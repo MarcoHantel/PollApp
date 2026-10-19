@@ -18,9 +18,9 @@ export class OverlayComponent {
     const id = this.surveyCreateService.lastCreatedSurveyId();
 
     if (id) {
-      this.router.navigate(['survey-details', id]); // ID!
+      this.router.navigate(['survey-details', id]); 
     } else {
-      this.router.navigate(['']); // ← Fallback zur Startseite
+      this.router.navigate(['']); 
     }
   }
 }

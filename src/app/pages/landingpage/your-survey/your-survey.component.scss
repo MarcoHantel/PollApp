@@ -1,19 +1,36 @@
+// .your_survey--container {
+//     width: 1042px;
+//     min-height: 522px;
+// }
+
+// .card_wrapper{
+//     display: flex;
+//     flex-direction: row;
+//     justify-content: space-between;
+// }
+
+// .position_center {
+//     text-align: center;
+// }
+
+// .styling_h2 {
+//     margin-bottom: 20px;
+// }
+@use "../../../../styles/abstracts/breakpoints" as *;
+
+
 .your_survey--container {
-    width: 1042px;
-    // max-width: 1042px;
+    width: 100%;
+    max-width: 1042px;
     min-height: 522px;
 }
 
-.card_wrapper{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
+.card_wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
 
-.position_center {
-    text-align: center;
-}
-
-.styling_h2 {
-    margin-bottom: 20px;
+    @include below(768px) {
+        grid-template-columns: 1fr;
+    }
 }

@@ -1,10 +1,7 @@
-<!-- <div class="create_survey--wrapper"> -->
-
 <div class="create_survey">
 
     <div class="survey_top--text">
-        <span class="survey_draft">Darft</span>
-
+        <span class="survey_draft">Draft</span>
         <div class="btn_cancle--wrapper">
             <h1>create new survey</h1>
             <a routerLink="" class="secondary_button displayflex btn_cancle">Cancle <img src="/images/close.svg"></a>
@@ -34,7 +31,6 @@
                                 </div>
                             </div>
 
-                            <!--Dropdown-->
                             <div class="custom_select">
                                 <div class="custom_select--selected displayflex_space--between"
                                     (click)="dropDown.toggleDropdown()">
@@ -54,9 +50,7 @@
                         </div>
                     </div>
 
-                    <!-- Beschreibung Umfrage -->
                 </div>
-
                 <div class="survey_card--description displayflex_column margin_spacer">
                     <label for="surveyDescription">Describing text (optional)</label>
                     <div class="displayflex margin_spacer">
@@ -64,7 +58,6 @@
                             (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
                     </div>
 
-                    <!-- Add Next Question Button -->
                     <button class="secondary_button displayflex" (click)="addQuestion()">
                         Add next question
                         <img src="/images/add_circle_white.svg">
@@ -80,7 +73,6 @@
                     @for(question of questions.controls; track qi; let qi = $index) {
                     <div class="questions">
 
-                        <!-- Question Header -->
                         <div class="displayflex displayflex_space--between">
                             <label>{{ qi + 1 }}. Question</label>
                             @if(qi > 0) {
@@ -88,12 +80,10 @@
                             }
                         </div>
 
-                        <!-- Question Input -->
                         <div class="margin_spacer displayflex">
                             <input type="text" [formControl]="$any(question.get('questionText'))">
                         </div>
 
-                        <!-- Answers Header -->
                         <div class="displayflex displayflex_space--between">
                             <label>Answers</label>
                             <div class="displayflex">
@@ -102,7 +92,7 @@
                             </div>
                         </div>
 
-                        <!-- Answer Felder -->
+
                         @for(answer of getAnswers(qi).controls; track ai; let ai = $index) {
                         <div class="margin_spacer displayflex">
                             {{ getLetter(ai) }}.
@@ -113,7 +103,6 @@
                         </div>
                         }
 
-                        <!-- Add Answer Button -->
                         <div class="displayflex_space--between">
                             @if(canAddAnswer(qi)) {
                             <div (click)="addAnswer(qi)" class="displayflex margin_spacer align_center">
@@ -122,7 +111,6 @@
                             </div>
                             }
 
-                            <!-- Text wenn Limit erreicht -->
                             @if(!canAddAnswer(qi)){
                             <div>
                                 <p>You can add up to 6 answer fields!</p>
@@ -139,6 +127,5 @@
     <div class="btn_publish--wrapper">
         <button class="btn btn_text displayflex_center" (click)="updateInput()" [disabled]="!surveyName.valid">Publish
             <img class="button-addon btn_text" src="/images/check.svg"></button>
-        <!-- Button ist disabled, wenn Name nicht eingegeben-->
     </div>
 </div>

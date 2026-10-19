@@ -1,8 +1,15 @@
+@use "../../../../../styles/abstracts/breakpoints" as *;
+
+:host {
+    display: block;
+}
+
 .card_wrapper {
 
     background-color: var(--light-purple);
-    width: 513px;
-    height: 127px;
+    width: 100%;            
+    min-height: 127px;      
+    box-sizing: border-box;
     cursor: pointer;
 
     border: none;
@@ -38,7 +45,6 @@
 
 
     }
-
 
     .card_wrapper--expire {
 
