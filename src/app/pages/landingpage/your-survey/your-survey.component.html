@@ -3,7 +3,7 @@
     <h2 class="styling_h2 position_center">Your surveys</h2>
     <p class="basic_text--big">Ending soon surveys</p>
 
-    <div class="card_wrapper">
+    <div class="card_wrapper--endingsoon">
         @for (item of currentSurveys(); track $index) {
 
         <app-survey-card class="survey_card" [survey]="$any(item)" />

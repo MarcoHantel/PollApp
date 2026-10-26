@@ -1,7 +1,44 @@
+@use "../../../../styles/abstracts/breakpoints" as *;
+
+
+:host {
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
+
 .new_survey--container {
     width: 100%;
     max-width: 1218px;
     min-height: 420px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+
+        .new_survey--text {
+            display: contents;
+        }
+
+
+        .headline_styling {
+            order: 1;
+        }
+        .new_survey--image {
+            order: 2;
+        }
+        .basic_text {
+            order: 3;
+            width: 100%;
+        }
+        .new_survey--text>a {
+            order: 4;
+        }
+    }
+
+
+
 }
 
 .new_survey--text {
@@ -11,6 +48,10 @@
 
     >.headline_styling {
         margin: 0px;
+    }
+
+    @media (max-width: 768px) {
+        min-height: auto;
     }
 }
 
@@ -28,14 +69,22 @@
             opacity: 1;
         }
     }
+
+
+    @media (max-width: 1140px) {
+        width: min(420px, 100%);
+        height: auto;
+        aspect-ratio: 1 / 1;
+        margin-inline: auto;
+    }
+
 }
 
 .survey_image {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 420px;
-    height: 420px;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     transition: opacity 0.3s ease;
 }
 
@@ -47,3 +96,8 @@
     opacity: 0;
 }
 
+// @media (max-width: 1140px) {
+//     .new_survey--container {
+//         align-items: baseline;
+//     }
+// }

@@ -1,36 +1,36 @@
-// .your_survey--container {
-//     width: 1042px;
-//     min-height: 522px;
-// }
 
-// .card_wrapper{
-//     display: flex;
-//     flex-direction: row;
-//     justify-content: space-between;
-// }
-
-// .position_center {
-//     text-align: center;
-// }
-
-// .styling_h2 {
-//     margin-bottom: 20px;
-// }
 @use "../../../../styles/abstracts/breakpoints" as *;
+
 
 
 .your_survey--container {
     width: 100%;
     max-width: 1042px;
     min-height: 522px;
+        min-width: 0;
 }
 
-.card_wrapper {
+.card_wrapper--endingsoon {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
 
-    @include below(768px) {
-        grid-template-columns: 1fr;
+    @media (max-width: 768px) {
+        display: flex; // statt Grid: eine Zeile
+        overflow-x: auto; // seitlich scrollbar/wischbar
+        scroll-snap-type: x mandatory; // Karten rasten ein
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: 12px; // Platz für die Scrollbar
+        scrollbar-width: none; // Firefox: Scrollbar ausblenden (optional)
+
+        &::-webkit-scrollbar {
+            display: none; // Chrome/Safari: Scrollbar ausblenden (optional)
+        }
+
+        >* {
+            flex: 0 0 85%; // jede Karte ist 85% breit, die nächste schaut raus
+            scroll-snap-align: center; // rastet mittig ein
+        }
     }
+
 }

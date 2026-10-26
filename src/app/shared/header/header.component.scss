@@ -1,7 +1,11 @@
 header {
-    margin: 32px 0px 48px 0px;
+    width: 100%;
+    max-width: 1218px;
+    margin: 32px auto 48px;   
+    padding: 0 16px;          
+    box-sizing: border-box;
 
-    >.header_image {
+    > .header_image {
         width: 119px;
         height: 46px;
 
@@ -9,5 +13,4 @@ header {
             cursor: pointer;
         }
     }
-
 }

@@ -13,14 +13,14 @@
     align-items: center;
     justify-content: center;
 
-    &:hover{
+    &:hover {
         background-color: var(--super-light-lilac);
         cursor: pointer;
     }
 
-    >.survey_card--wrapper{
+    >.survey_card--wrapper {
         width: 233px;
-        height: 210px ;
+        height: 210px;
         padding: 18px;
     }
 
@@ -62,5 +62,10 @@
         font-weight: 500;
         color: var(--primary-purple);
         background-color: var(--secondary-orange);
+    }
+
+    @media (max-width: 1140px) {
+        width: min(321px, 100%);
+        height: min(310px, 100%);
     }
 }
