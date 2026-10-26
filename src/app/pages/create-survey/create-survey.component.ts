@@ -3,7 +3,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormArray } fr
 import { CategoryDropdownService } from '../../service/category-dropdown.service';
 import { RouterLink } from "@angular/router";
 import { SurveyCreateService } from '../../service/survey-create.service.service';
-import { SurveyCreate } from '../../interfaces/survey-create.model'; // Interface
+import { SurveyCreate } from '../../interfaces/survey-create.model'; 
 import { OverlayComponent } from './overlay/overlay.component';
 
 @Component({
@@ -20,8 +20,6 @@ export class CreateSurveyComponent {
   readonly maxAnswers = 6; // A, B, C, D
   readonly maxQuestions = 6; // Anzahl meiner Fragen
 
-
-  // FormControl 
   surveyName = new FormControl('', {
     validators: [Validators.required, Validators.minLength(4)]
   });
@@ -40,106 +38,95 @@ export class CreateSurveyComponent {
     validators: [Validators.required, Validators.maxLength(500)]
   });
 
-  // check ob Enddatum da, wenn nicht nehme das heutige + 24 Stunden
+
   checkEndDate() {
     if (!this.surveyEndDate.value) {
 
       const defaultDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
-      const formatted = defaultDate.toISOString().split('T')[0]; // Datum in das Format YYYY-MM-DD umwandeln (was input type="date" braucht)
-      this.surveyEndDate.setValue(formatted);       // ← ins FormControl setzen!
-
-      console.log(formatted);
-      // Keine else notwendig wenn Datum vom User eigeben wurde.
+      const formatted = defaultDate.toISOString().split('T')[0]; 
+      this.surveyEndDate.setValue(formatted);     
     }
   }
 
-async updateInput() {  // async hinzufügen!
-  this.checkEndDate();
+  async updateInput() {  
 
-  const newSurvey: SurveyCreate = {
-    id: Date.now(),
-    name: this.surveyName.value ?? '',
-    category: this.dropDown.choose,
-    endDate: this.surveyEndDate.value ?? '',
-    description: this.surveyDescription.value ?? '',
-    questions: this.questions.value
-  };
+    this.checkEndDate();
 
-  await this.surveyCreateService.addSurvey(newSurvey); // ← await hinzufügen!
-  this.surveyCreateService.showSuccessOverlay.set(true);
+    const newSurvey: SurveyCreate = {
+      id: Date.now(),
+      name: this.surveyName.value ?? '',
+      category: this.dropDown.choose,
+      endDate: this.surveyEndDate.value ?? '',
+      description: this.surveyDescription.value ?? '',
+      questions: this.questions.value
+    };
 
-  this.surveyName.setValue('');
-  this.surveyEndDate.setValue('');
-  this.surveyDescription.setValue('');
-}
+    await this.surveyCreateService.addSurvey(newSurvey); 
+    this.surveyCreateService.showSuccessOverlay.set(true);
 
-deleteInput(control: FormControl) {
-  control.setValue(''); // mit setValue löschen bzw neu setzten
-}
-
-
-// Question part
-questions = new FormArray([
-  this.createQuestion() // erste Frage steht fest
-]);
-
-createQuestion(): FormGroup {
-  return new FormGroup({
-    questionText: new FormControl(''),
-    allowMultiple: new FormControl(false),
-    answers: new FormArray([
-      new FormControl('') // erste Antwort steht fest
-    ])
-  });
-}
-
-
-
-// Question hinzufügen
-addQuestion() {
-  if (this.canAddQuestion) {  
-    this.questions.push(this.createQuestion());
+    this.surveyName.setValue('');
+    this.surveyEndDate.setValue('');
+    this.surveyDescription.setValue('');
   }
-}
+
+  deleteInput(control: FormControl) {
+    control.setValue(''); 
+  }
+
+
+  questions = new FormArray([
+    this.createQuestion() 
+  ]);
+
+  createQuestion(): FormGroup {
+    return new FormGroup({
+      questionText: new FormControl(''),
+      allowMultiple: new FormControl(false),
+      answers: new FormArray([
+        new FormControl('') 
+      ])
+    });
+  }
+
+  addQuestion() {
+    if (this.canAddQuestion) {
+      this.questions.push(this.createQuestion());
+    }
+  }
   get canAddQuestion(): boolean {
-  return this.questions.length < this.maxQuestions;
-}
-
-// Question löschen
-deleteQuestion(qIndex: number) {
-  if (qIndex > 0) { // erste Frage kann nicht gelöscht werden
-    this.questions.removeAt(qIndex);
+    return this.questions.length < this.maxQuestions;
   }
-}
 
-// Answer hinzufügen
-addAnswer(qIndex: number) {
-  const answers = this.getAnswers(qIndex);
-  if (answers.length < this.maxAnswers) {
-    answers.push(new FormControl(''));
+  deleteQuestion(qIndex: number) {
+    if (qIndex > 0) { 
+      this.questions.removeAt(qIndex);
+    }
   }
-}
 
-// Answer löschen
-deleteAnswer(qIndex: number, aIndex: number) {
-  this.getAnswers(qIndex).removeAt(aIndex);
-}
+  addAnswer(qIndex: number) {
+    const answers = this.getAnswers(qIndex);
+    if (answers.length < this.maxAnswers) {
+      answers.push(new FormControl(''));
+    }
+  }
 
-// Answers einer Question holen
-getAnswers(qIndex: number): FormArray {
-  return this.questions.at(qIndex).get('answers') as FormArray;
-}
+  deleteAnswer(qIndex: number, aIndex: number) {
+    this.getAnswers(qIndex).removeAt(aIndex);
+  }
 
-// Checkbox einer Question holen
-getAllowMultiple(qIndex: number): FormControl {
-  return this.questions.at(qIndex).get('allowMultiple') as FormControl;
-}
+  getAnswers(qIndex: number): FormArray {
+    return this.questions.at(qIndex).get('answers') as FormArray;
+  }
 
-getLetter(index: number): string {
-  return String.fromCharCode(65 + index);
-}
+  getAllowMultiple(qIndex: number): FormControl {
+    return this.questions.at(qIndex).get('allowMultiple') as FormControl;
+  }
 
-canAddAnswer(qIndex: number): boolean {
-  return this.getAnswers(qIndex).length < this.maxAnswers;
-}
+  getLetter(index: number): string {
+    return String.fromCharCode(65 + index);
+  }
+
+  canAddAnswer(qIndex: number): boolean {
+    return this.getAnswers(qIndex).length < this.maxAnswers;
+  }
 }

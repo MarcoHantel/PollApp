@@ -7,26 +7,18 @@ import { RealtimeChannel } from '@supabase/supabase-js';
 export class SurveyCreateService {
 
   private supabaseService = inject(SupabaseService);
-
-  // Overlay
+  
   showSuccessOverlay = signal(false);
   lastCreatedSurveyId = signal<number | null>(null);
 
-  // Filter Signals
   selectedStatus = signal<'all' | 'active' | 'past'>('all');
   selectedCategory = signal('all');
 
-  // Survey in Bearbeitung
   currentSurvey = signal<SurveyCreate | null>(null);
 
-  // wird von Supabase befüllt
   surveys = signal<SurveyCreate[]>([]);
 
-
-
   // AUSWAHL DER ANTWORTEN (Checkboxen)
-
-  // pro Frage die ausgewählten Antworten speichern
   selectedAnswers = signal<{ [questionIndex: number]: number[] }>({});
 
   toggleAnswer(questionIndex: number, answerIndex: number, allowMultiple: boolean) {
@@ -53,21 +45,15 @@ export class SurveyCreateService {
     return (this.selectedAnswers()[questionIndex] ?? []).includes(answerIndex);
   }
 
-  // hat der User überhaupt etwas ausgewählt  
   hasSelection(): boolean {
     return Object.values(this.selectedAnswers()).some(list => list.length > 0);
   }
 
 
-
   // LIVE AUSWERTUNG (Votes)                        
-
-
-  // Anzahl Stimmen pro Antwort: { answerId: anzahl }
   voteCounts = signal<Record<number, number>>({});
   private votesChannel: RealtimeChannel | null = null;
 
-  //  Bestehende Stimmen einmalig laden
   async loadVotes(surveyId: number) {
     const { data, error } = await this.supabaseService.supabase
       .from('votes')
@@ -86,9 +72,8 @@ export class SurveyCreateService {
     this.voteCounts.set(counts);
   }
 
-  //  Live zuhören, wenn neue Stimmen reinkommen
   subscribeToVotes(surveyId: number) {
-    this.unsubscribeVotes(); // alten Channel vorher schließen
+    this.unsubscribeVotes(); 
 
     this.votesChannel = this.supabaseService.supabase
       .channel('votes-' + surveyId)
@@ -106,7 +91,6 @@ export class SurveyCreateService {
       .subscribe();
   }
 
-  //  Channel schließen (beim Verlassen der Seite)
   unsubscribeVotes() {
     if (this.votesChannel) {
       this.supabaseService.supabase.removeChannel(this.votesChannel);
@@ -114,7 +98,6 @@ export class SurveyCreateService {
     }
   }
 
-  //  Prozent einer Antwort innerhalb ihrer Frage berechnen
   getPercent(question: Question, answerId?: number): number {
     if (!answerId) return 0;
     const counts = this.voteCounts();
@@ -125,7 +108,7 @@ export class SurveyCreateService {
     return Math.round(((counts[answerId] ?? 0) / total) * 100);
   }
 
-  //  Ausgewählte Antworten als Stimmen speichern
+
   async submitVotes(survey: SurveyCreate): Promise<boolean> {
     const selected = this.selectedAnswers();
     const rows: { survey_id: number; question_id: number; answer_id: number }[] = [];
@@ -140,7 +123,8 @@ export class SurveyCreateService {
       });
     });
 
-    if (rows.length === 0) return false; // nichts ausgewählt
+
+    if (rows.length === 0) return false; 
 
     const { error } = await this.supabaseService.supabase.from('votes').insert(rows);
 
@@ -149,14 +133,13 @@ export class SurveyCreateService {
       return false;
     }
 
-    this.selectedAnswers.set({}); // Auswahl zurücksetzen
+    this.selectedAnswers.set({}); 
     return true;
   }
 
 
 
   // SURVEYS LADEN & SPEICHERN
-
 
   async loadSurveys() {
     const { data, error } = await this.supabaseService.supabase
@@ -201,7 +184,6 @@ export class SurveyCreateService {
     const surveyId = surveyData.id;
     this.lastCreatedSurveyId.set(surveyId);
 
-    // Questions speichern
     for (const question of survey.questions) {
       const { data: questionData, error: questionError } = await this.supabaseService.supabase
         .from('questions')
@@ -220,12 +202,11 @@ export class SurveyCreateService {
 
       const questionId = questionData.id;
 
-      // leere Antworten überspringen
       const answersToInsert = question.answers
         .filter((a: any) => a !== null && a !== '' && a !== undefined)
         .map((a: any) => ({
           question_id: questionId,
-          text: typeof a === 'string' ? a : a.text // FormArray gibt strings zurück
+          text: typeof a === 'string' ? a : a.text 
         }));
 
       const { error: answerError } = await this.supabaseService.supabase
@@ -238,15 +219,12 @@ export class SurveyCreateService {
       }
     }
 
-    // Surveys neu laden damit UI updated
     await this.loadSurveys();
   }
 
 
 
   // FILTER
-
-
   setCategory(category: string) {
     this.selectedCategory.set(category);
   }
@@ -255,7 +233,6 @@ export class SurveyCreateService {
     this.selectedStatus.set(status);
   }
 
-  // die Surveys die am frühesten ablaufen
   getEndingSoonSurveys(limit: number = 3): SurveyCreate[] {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
