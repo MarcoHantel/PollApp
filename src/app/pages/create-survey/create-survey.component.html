@@ -4,7 +4,7 @@
         <span class="survey_draft">Draft</span>
         <div class="btn_cancle--wrapper">
             <h1>create new survey</h1>
-            <a routerLink="" class="secondary_button displayflex btn_cancle">Cancle <img src="/images/close.svg"></a>
+            <a routerLink="" class="secondary_button displayflex btn_cancle">Cancle <img src="images/close.svg"></a>
         </div>
     </div>
     <div class="create_survey--top">
@@ -15,7 +15,7 @@
                         <label for="surveyName">Survey name</label>
                         <div class="margin_spacer displayflex">
                             <input id="surveyName" type="text" [formControl]="surveyName">
-                            <img class="img_waist" (click)="deleteInput(surveyName)" src="/images/delete.svg">
+                            <img class="img_waist" (click)="deleteInput(surveyName)" src="images/delete.svg">
                         </div>
 
                         <div class="date_category_row align_start displayflex_space--between">
@@ -24,7 +24,7 @@
                                 <div class="displayflex_space--between margin_spacer">
                                     <input id="surveySetEndDate" type="date" [formControl]="surveyEndDate">
                                     <img class="img_waist" (click)="deleteInput(surveyEndDate)"
-                                        src="/images/delete.svg">
+                                        src="images/delete.svg">
                                 </div>
                             </div>
                             <div class="custom_select">
@@ -51,11 +51,11 @@
                     <label for="surveyDescription">Describing text (optional)</label>
                     <div class="displayflex margin_spacer">
                         <textarea id="surveyDescription" [formControl]="surveyDescription" maxlength="500"></textarea>
-                        <img class="img_waist" (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
+                        <img class="img_waist" (click)="deleteInput(surveyDescription)" src="images/delete.svg">
                     </div>
                     <button class="secondary_button displayflex" (click)="addQuestion()">
                         Add next question
-                        <img src="/images/add_circle_white.svg">
+                        <img src="images/add_circle_white.svg">
                     </button>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                         <div class="displayflex displayflex_space--between">
                             <label>{{ qi + 1 }}. Question</label>
                             @if(qi > 0) {
-                            <img class="img_waist" (click)="deleteQuestion(qi)" src="/images/delete.svg">
+                            <img class="img_waist" (click)="deleteQuestion(qi)" src="images/delete.svg">
                             }
                         </div>
 
@@ -90,7 +90,7 @@
                             {{ getLetter(ai) }}.
                             <input class="font_styling" type="text" [formControl]="$any(answer)">
                             @if(ai > 0) {
-                            <img class="img_waist" (click)="deleteAnswer(qi, ai)" src="/images/delete.svg">
+                            <img class="img_waist" (click)="deleteAnswer(qi, ai)" src="images/delete.svg">
                             }
                         </div>
                         }
@@ -99,7 +99,7 @@
                             @if(canAddAnswer(qi)) {
                             <div (click)="addAnswer(qi)" class="displayflex margin_spacer align_center">
                                 <p>add Answer</p>
-                                <img src="/images/add_circle.svg">
+                                <img src="images/add_circle.svg">
                             </div>
                             }
 
@@ -118,6 +118,6 @@
     </div>
     <div class="btn_publish--wrapper">
         <button class="btn btn_text displayflex_center" (click)="updateInput()" [disabled]="!surveyName.valid">Publish
-            <img class="button-addon btn_text" src="/images/check.svg"></button>
+            <img class="button-addon btn_text" src="images/check.svg"></button>
     </div>
 </div>
