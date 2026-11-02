@@ -6,11 +6,6 @@
 Create and share surveys in minutes – from team events to workplace culture.
 Collect opinions, engage your audience and watch the results come in live.
  
-![Angular](https://img.shields.io/badge/Angular-19-DD0031?style=for-the-badge&logo=angular&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
-![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=for-the-badge&logo=sass&logoColor=white)
-![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
- 
 <img width="820" height="420" alt="landingpage" src="https://github.com/user-attachments/assets/85b8ccb4-4c71-4db1-bc0f-599549197ade" />
 </div>
 ---
