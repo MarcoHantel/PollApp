@@ -1,3 +1,4 @@
+
 @if(survey()) {
 
 <div class="detail_wrapper">
@@ -40,11 +41,9 @@
             }
         </div>
 
-        <!-- routerLink weg, stattdessen completeSurvey() -->
         <div class="button_wrapper displayflex_space--end">
-            <div class="btn_complete"
-                 (click)="completeSurvey()"
-                 [class.disable]="!isSurveyActive() || !surveyCreateService.hasSelection()">
+            <div class="btn_complete" (click)="completeSurvey()"
+                [class.disable]="!isSurveyActive() || !surveyCreateService.hasSelection()">
                 <a>Complete survey</a>
             </div>
         </div>
@@ -52,7 +51,6 @@
 
     <div class="survey-info"></div>
 
-    <!-- Live Auswertung mit Balken -->
     <div class="result_section">
         <h2 class="result_title">Survey results <span class="result_live">LIVE</span></h2>
 

@@ -1,9 +1,13 @@
 header {
     width: 100%;
     max-width: 1218px;
-    margin: 32px auto 48px;   
-    padding: 0 16px;          
+    margin: 32px auto 48px;
+    padding: 0 16px;
     box-sizing: border-box;
+
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
 
     > .header_image {
         width: 119px;
