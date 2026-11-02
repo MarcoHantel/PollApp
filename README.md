@@ -1,5 +1,5 @@
 <div align="center">
-# 🗳️ PollApp
+🗳️ PollApp
  
 **Collect Feedback, Unlock Ideas**
  
