@@ -4,11 +4,7 @@ import { CreateSurveyComponent } from './pages/create-survey/create-survey.compo
 import { SurveyDetailsComponent } from './pages/survey/servey-details/survey-details.component';
 
 export const routes: Routes = [
-
     { path:'', component: LandingpageComponent },
-
     { path:'create-survey', component: CreateSurveyComponent},
-
     { path: 'survey-details/:id', component: SurveyDetailsComponent },
-
 ];

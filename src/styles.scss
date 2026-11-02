@@ -4,6 +4,12 @@
 @use "styles/base/displayflex";
 @use "styles/components/buttons";
 
+app-root,
+app-landingpage {
+    display: block;
+    width: 100%;
+    min-width: 0;
+}
 
 .dpn {
     display: none;
@@ -11,13 +17,6 @@
 
 a {
     text-decoration: none;
-}
-
-app-root,
-app-landingpage {
-    display: block;
-    width: 100%;
-    min-width: 0;
 }
 
 @media (max-width: 768px) {

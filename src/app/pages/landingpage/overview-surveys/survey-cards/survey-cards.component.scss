@@ -5,30 +5,24 @@
 }
 
 .card_wrapper {
-
     background-color: var(--light-purple);
     width: 100%;            
     min-height: 127px;      
     box-sizing: border-box;
     cursor: pointer;
-
     border: none;
     border-radius: 5px 50px 5px 5px;
 
     >.card_wrapper--text {
-
         font-family: 'Mulish', sans-serif;
-
         border: none;
         border-radius: 5px 50px 5px 5px;
-
 
         >.survey_card--category {
             color: var(--secondary-orange);
             font-weight: '500';
             font-size: 16px;
             font-style: medium;
-
             margin: 0px;
             padding: 5px 10px;
         }
@@ -38,20 +32,15 @@
             font-size: 24px;
             font-style: bold;
             color: var(--white);
-
             margin: 0px;
             padding: 5px 10px;
         }
-
-
     }
 
     .card_wrapper--expire {
-
         font-family: 'Mulish', sans-serif;
         font-size: 12px;
         padding: 15px 15px;
-
 
         >.survey_card--expire {
             background-color: var(--secondary-orange);
@@ -59,15 +48,12 @@
             height: 21px;
             padding: 3px 6px;
             text-align: center;
-
             color: var(--primary-background-color);
-
             border: none;
             border-radius: 0 14px 0px 0px;
         }
     }
 }
-
 
 .survey-title { 
     white-space: nowrap;      

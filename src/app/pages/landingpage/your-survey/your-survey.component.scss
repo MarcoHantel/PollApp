@@ -1,13 +1,11 @@
 
 @use "../../../../styles/abstracts/breakpoints" as *;
 
-
-
 .your_survey--container {
     width: 100%;
     max-width: 1042px;
     min-height: 522px;
-        min-width: 0;
+    min-width: 0;
 }
 
 .card_wrapper--endingsoon {
@@ -16,21 +14,20 @@
     gap: 16px;
 
     @media (max-width: 768px) {
-        display: flex; // statt Grid: eine Zeile
-        overflow-x: auto; // seitlich scrollbar/wischbar
-        scroll-snap-type: x mandatory; // Karten rasten ein
+        display: flex; 
+        overflow-x: auto; 
+        scroll-snap-type: x mandatory; 
         -webkit-overflow-scrolling: touch;
-        padding-bottom: 12px; // Platz für die Scrollbar
-        scrollbar-width: none; // Firefox: Scrollbar ausblenden (optional)
+        padding-bottom: 12px; 
+        scrollbar-width: none; 
 
         &::-webkit-scrollbar {
-            display: none; // Chrome/Safari: Scrollbar ausblenden (optional)
+            display: none;
         }
 
         >* {
-            flex: 0 0 85%; // jede Karte ist 85% breit, die nächste schaut raus
-            scroll-snap-align: center; // rastet mittig ein
+            flex: 0 0 85%; 
+            scroll-snap-align: center;
         }
     }
-
 }

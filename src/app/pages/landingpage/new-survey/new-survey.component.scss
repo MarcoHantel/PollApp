@@ -20,8 +20,6 @@
         .new_survey--text {
             display: contents;
         }
-
-
         .headline_styling {
             order: 1;
         }
@@ -36,9 +34,6 @@
             order: 4;
         }
     }
-
-
-
 }
 
 .new_survey--text {
@@ -70,14 +65,12 @@
         }
     }
 
-
     @media (max-width: 1140px) {
         width: min(420px, 100%);
         height: auto;
         aspect-ratio: 1 / 1;
         margin-inline: auto;
     }
-
 }
 
 .survey_image {
@@ -95,9 +88,3 @@
 .survey_image--hover {
     opacity: 0;
 }
-
-// @media (max-width: 1140px) {
-//     .new_survey--container {
-//         align-items: baseline;
-//     }
-// }

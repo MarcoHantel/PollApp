@@ -1,13 +1,12 @@
 @use "../../../styles/abstracts/colours";
 @use "../../../styles/abstracts/breakpoints" as *;
 
-
 app-new-survey,
 app-your-survey,
 app-overview-surveys {
     display: block;
     width: 100%;
-    min-width: 0;   // wichtig: erlaubt dem Host, schmaler als sein Inhalt zu werden
+    min-width: 0; 
 }
 
 .landingpage_main--container {

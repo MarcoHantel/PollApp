@@ -1,9 +1,8 @@
-// landingpage.component.ts
-import { Component, inject } from '@angular/core'; // ← inject hinzufügen
+import { Component, inject } from '@angular/core';
 import { NewSurveyComponent } from './new-survey/new-survey.component';
 import { YourSurveyComponent } from './your-survey/your-survey.component';
 import { OverviewSurveysComponent } from './overview-surveys/overview-surveys.component';
-import { SurveyCreateService } from '../../service/survey-create.service.service'; // ← hinzufügen
+import { SurveyCreateService } from '../../service/survey-create.service.service';
 
 @Component({
   selector: 'app-landingpage',
@@ -12,9 +11,9 @@ import { SurveyCreateService } from '../../service/survey-create.service.service
   styleUrl: './landingpage.component.scss'
 })
 export class LandingpageComponent {
-  surveyCreateService = inject(SurveyCreateService); // ← hinzufügen
+  surveyCreateService = inject(SurveyCreateService);
 
   constructor() {
-    this.surveyCreateService.loadSurveys(); // ← Daten laden
+    this.surveyCreateService.loadSurveys();
   }
 }

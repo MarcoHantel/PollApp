@@ -10,15 +10,11 @@ export class SurveyCreateService {
   
   showSuccessOverlay = signal(false);
   lastCreatedSurveyId = signal<number | null>(null);
-
   selectedStatus = signal<'all' | 'active' | 'past'>('all');
   selectedCategory = signal('all');
-
   currentSurvey = signal<SurveyCreate | null>(null);
-
   surveys = signal<SurveyCreate[]>([]);
 
-  // AUSWAHL DER ANTWORTEN (Checkboxen)
   selectedAnswers = signal<{ [questionIndex: number]: number[] }>({});
 
   toggleAnswer(questionIndex: number, answerIndex: number, allowMultiple: boolean) {
@@ -48,9 +44,7 @@ export class SurveyCreateService {
   hasSelection(): boolean {
     return Object.values(this.selectedAnswers()).some(list => list.length > 0);
   }
-
-
-  // LIVE AUSWERTUNG (Votes)                        
+                     
   voteCounts = signal<Record<number, number>>({});
   private votesChannel: RealtimeChannel | null = null;
 
@@ -74,7 +68,6 @@ export class SurveyCreateService {
 
   subscribeToVotes(surveyId: number) {
     this.unsubscribeVotes(); 
-
     this.votesChannel = this.supabaseService.supabase
       .channel('votes-' + surveyId)
       .on(
@@ -101,7 +94,6 @@ export class SurveyCreateService {
   getPercent(question: Question, answerId?: number): number {
     if (!answerId) return 0;
     const counts = this.voteCounts();
-
     const total = question.answers.reduce((sum, a) => sum + (counts[a.id!] ?? 0), 0);
     if (total === 0) return 0;
 
@@ -127,19 +119,13 @@ export class SurveyCreateService {
     if (rows.length === 0) return false; 
 
     const { error } = await this.supabaseService.supabase.from('votes').insert(rows);
-
     if (error) {
       console.error('Vote Fehler:', error);
       return false;
     }
-
     this.selectedAnswers.set({}); 
     return true;
   }
-
-
-
-  // SURVEYS LADEN & SPEICHERN
 
   async loadSurveys() {
     const { data, error } = await this.supabaseService.supabase
@@ -164,7 +150,6 @@ export class SurveyCreateService {
 
   async addSurvey(survey: SurveyCreate) {
 
-    // Survey speichern
     const { data: surveyData, error: surveyError } = await this.supabaseService.supabase
       .from('surveys')
       .insert({
@@ -218,13 +203,9 @@ export class SurveyCreateService {
         return;
       }
     }
-
     await this.loadSurveys();
   }
 
-
-
-  // FILTER
   setCategory(category: string) {
     this.selectedCategory.set(category);
   }

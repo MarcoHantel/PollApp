@@ -10,8 +10,7 @@ import { SurveyCardComponent } from './survey-card/survey-card.component';
   styleUrl: './your-survey.component.scss'
 })
 export class YourSurveyComponent {
-  
- private surveyService = inject(SurveyCreateService);
 
+  private surveyService = inject(SurveyCreateService);
   currentSurveys = computed(() => this.surveyService.getEndingSoonSurveys());
 }

@@ -18,6 +18,6 @@ export class SurveyCardComponent {
     today.setHours(0, 0, 0, 0); 
 
     const diff = endDate.getTime() - today.getTime();
-    return Math.ceil(diff / (1000 * 60 * 60 * 24)); // Millisekunden in Tage umrechnen
+    return Math.ceil(diff / (1000 * 60 * 60 * 24)); 
   }
 }

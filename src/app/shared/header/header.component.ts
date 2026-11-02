@@ -9,7 +9,6 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
     private router = inject(Router);
-
     get isDetailPage(): boolean {
         return this.router.url.startsWith('/survey-details');
     }

@@ -1,8 +1,6 @@
 <div class="overview_surveys--container">
 
     <div class="overview_surveys--head displayflex_space--between">
-
-        
         <div class="button_wrapper displayflex_space--between">
             <button class="btn_select btn_active" (click)="surveyCreateService.setStatus('active')"
                 [class.btn_active--selected]="surveyCreateService.selectedStatus() === 'active'">
@@ -14,7 +12,6 @@
             </button>
         </div>
 
-
         <div class="custom_select">
             <div class="custom_select--selected displayflex_space--between" (click)="dropDown.toggleDropdown()">
                 {{ dropDown.selected }} <span class="arrow" [class.open]="dropDown.isOpen"></span>
@@ -23,7 +20,6 @@
             <ul class="custom_select--options">
 
                 @for(option of dropDown.categoryOptions; track option.value) {
-
                 <li class="custom_select--option"
                     (click)="dropDown.selectOption(option); surveyCreateService.setCategory(option.value)">
                     <p class="custom_select--option--text">{{ option.label }}</p>
@@ -32,7 +28,6 @@
             </ul>
             }
         </div>
-
     </div>
 
     <div class="all_cards_wrapper">
@@ -42,4 +37,3 @@
     </div>
 
 </div>
-

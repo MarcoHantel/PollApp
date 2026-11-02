@@ -14,7 +14,6 @@ export class OverlayComponent {
 
   closeOverlay() {
     this.surveyCreateService.showSuccessOverlay.set(false);
-
     const id = this.surveyCreateService.lastCreatedSurveyId();
 
     if (id) {

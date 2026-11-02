@@ -8,15 +8,12 @@
 .btn {
     width: 138px;
     height: 48px;
-
     border: none;
     border-radius: 10px;
     padding: 12px 16px;
     box-sizing: border-box;
-
     background-color: var(--secondary-orange);
-
-    white-space: nowrap; // verhindert Zeilenumbruch komplett
+    white-space: nowrap; 
     transition: width 0.3s ease, padding 0.3s ease, background-color 0.3s ease;
 
     &:hover {
@@ -25,7 +22,7 @@
         text-align: start;
 
         >.button-addon {
-            width: 24px; // Zielbreite Icons anpassen
+            width: 24px; 
             height: 24px;
             opacity: 1;
             padding-left: 16px;
@@ -36,17 +33,13 @@
 .btn_select {
     width: 119px;
     height: 25px;
-
     border: none;
     border-radius: 20px;
-
     padding: 2px 10px;
     gap: 10px;
-
     font-family: 'Nokora', sans-serif;
     font-size: 16px;
     font-weight: 400;
-
     color: var(--primary-background-color);
 }
 
@@ -69,14 +62,11 @@
 .secondary_button {
     background-color: var(--light-orange);
     color: white;
-
     width: 195px;
     height: 40px;
-
     font-family: 'Nokora', sans-serif;
     font-size: 16px;
     font-weight: 700;
-
     border: none;
     border-radius: 8px 12px;
     gap: 8px;
@@ -112,25 +102,20 @@
 .btn_publish {
     width: 99px;
     height: 48px;
-
     border: none;
     border-radius: 10px;
     padding: 12px 16px;
     box-sizing: border-box;
-
     background-color: var(--secondary-orange);
 }
 
 .btn_complete {
     width: 127px;
     height: 21px;
-
     border: none;
     border-radius: 10px;
     padding: 8px 12px;
-
     background-color: var(--light-orange);
-
     font-family: 'Nokora', sans-serif;
     font-size: 16px;
     font-weight: 700;
@@ -141,13 +126,10 @@
     }
 }
 
-// dropdown
-
 .custom_select {
     position: relative;
     width: 246px;
     height: 32px;
-
     font-family: 'Mulish', sans-serif;
 
     &--selected {
@@ -156,7 +138,6 @@
         padding: 4px 6px;
         cursor: pointer;
         font-size: 18px;
-
         border: none;
         border-radius: 4px;
 
@@ -179,7 +160,6 @@
         padding: 0;
         z-index: 10;
         background-color: var(--white);
-
         border-radius: 6px;
 
     }
@@ -207,7 +187,6 @@
     border-right: 10px solid transparent;
     border-top: 12px solid var(--white);
     border-radius: 3px;
-
     transition: transform 0.2s ease;
 
     &.open {
@@ -215,11 +194,7 @@
     }
 }
 
-// checkbox
-
 input[type="checkbox"] {
-    // appearance: none;
-    // -webkit-appearance: none;
     width: 20px;
     height: 20px;
     border: 2px solid #ccc;
@@ -230,8 +205,6 @@ input[type="checkbox"] {
         accent-color: var(--secondary-orange);
     }
 }
-
-// published button
 
 .close_button {
     font-family: 'Nokora', sans-serif;

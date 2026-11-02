@@ -8,12 +8,9 @@
         </div>
     </div>
     <div class="create_survey--top">
-
         <div class="create_survey--card ">
-
             <div class="survey_name_survey_des--wrapper displayflex align_start">
                 <div class="survey_card--name displayflex_column">
-
                     <div class="survey_name_wrapper">
                         <label for="surveyName">Survey name</label>
                         <div class="margin_spacer displayflex">
@@ -30,7 +27,6 @@
                                         src="/images/delete.svg">
                                 </div>
                             </div>
-
                             <div class="custom_select">
                                 <div class="custom_select--selected displayflex_space--between"
                                     (click)="dropDown.toggleDropdown()">
@@ -54,18 +50,15 @@
                 <div class="survey_card--description displayflex_column margin_spacer">
                     <label for="surveyDescription">Describing text (optional)</label>
                     <div class="displayflex margin_spacer">
-                        <input id="surveyDescription" type="text" [formControl]="surveyDescription"><img
-                            (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
+                        <textarea id="surveyDescription" [formControl]="surveyDescription" maxlength="500"></textarea>
+                        <img class="img_waist" (click)="deleteInput(surveyDescription)" src="/images/delete.svg">
                     </div>
-
                     <button class="secondary_button displayflex" (click)="addQuestion()">
                         Add next question
                         <img src="/images/add_circle_white.svg">
                     </button>
-
                 </div>
             </div>
-
 
             <div class="question_section--wrapper">
 
@@ -81,7 +74,7 @@
                         </div>
 
                         <div class="margin_spacer displayflex">
-                            <input type="text" [formControl]="$any(question.get('questionText'))">
+                            <input class="font_styling" type="text" [formControl]="$any(question.get('questionText'))">
                         </div>
 
                         <div class="displayflex displayflex_space--between">
@@ -92,11 +85,10 @@
                             </div>
                         </div>
 
-
                         @for(answer of getAnswers(qi).controls; track ai; let ai = $index) {
                         <div class="margin_spacer displayflex">
                             {{ getLetter(ai) }}.
-                            <input type="text" [formControl]="$any(answer)">
+                            <input class="font_styling" type="text" [formControl]="$any(answer)">
                             @if(ai > 0) {
                             <img class="img_waist" (click)="deleteAnswer(qi, ai)" src="/images/delete.svg">
                             }

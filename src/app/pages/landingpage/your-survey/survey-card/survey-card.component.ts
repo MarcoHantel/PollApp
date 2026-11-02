@@ -1,15 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { SurveyCreate } from '../../../../interfaces/survey-create.model'; // ← Pfad anpassen!
+import { SurveyCreate } from '../../../../interfaces/survey-create.model'; 
 
 @Component({
   selector: 'app-survey-card',
-  imports: [RouterLink], // ← hinzufügen
+  imports: [RouterLink], 
   templateUrl: './survey-card.component.html',
   styleUrl: './survey-card.component.scss'
 })
 export class SurveyCardComponent {
-  @Input({ required: true }) survey!: SurveyCreate; // ← neues Interface
+  @Input({ required: true }) survey!: SurveyCreate;
 
   getDaysLeft(): number {
     const endDate = new Date(this.survey.endDate);

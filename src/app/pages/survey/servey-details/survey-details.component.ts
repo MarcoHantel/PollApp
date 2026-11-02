@@ -14,7 +14,6 @@ export class SurveyDetailsComponent implements OnDestroy {
   surveyCreateService = inject(SurveyCreateService);
   route = inject(ActivatedRoute);
   router = inject(Router);                                     
-
   survey = signal<SurveyCreate | null>(null);
 
   constructor() {
@@ -41,7 +40,6 @@ export class SurveyDetailsComponent implements OnDestroy {
     today.setHours(0, 0, 0, 0);
     return new Date(this.survey()!.endDate) >= today;
   }
-
 
   async completeSurvey() {
     if (!this.survey() || !this.isSurveyActive()) return;

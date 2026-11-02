@@ -23,7 +23,6 @@
     @media (max-width: 768px) {
         gap: 16px;
         padding: 20px;
-
     }
 }
 
@@ -52,7 +51,6 @@ h3 {
     font-weight: 500;
     color: var(--primary-purple);
     background-color: var(--secondary-orange);
-
     font-style: semi-bold;
     font-size: 16px;
 }
@@ -82,8 +80,6 @@ h3 {
     margin-top: 16px;
 }
 
-// Balken
-
 .result_title {
     margin-bottom: 16px;
 
@@ -94,7 +90,6 @@ h3 {
     @media (max-width: 1100px) {
         width: 80%;
     }
-
 }
 
 .result_question {
@@ -124,7 +119,7 @@ h3 {
         height: 100%;
         background-color: var(--primary-orange);
         border-radius: 6px;
-        transition: width 0.4s ease; // Balken bewegt sich
+        transition: width 0.4s ease;
     }
 }
 
@@ -142,10 +137,7 @@ h3 {
     }
 }
 
-// result section
-
 .result_section {
     width: 315px;
     min-height: 761px;
-
 }

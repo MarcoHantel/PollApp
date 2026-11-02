@@ -17,8 +17,8 @@ export class CreateSurveyComponent {
   private dropDownService = inject(CategoryDropdownService)
   dropDown = this.dropDownService
 
-  readonly maxAnswers = 6; // A, B, C, D
-  readonly maxQuestions = 6; // Anzahl meiner Fragen
+  readonly maxAnswers = 6; 
+  readonly maxQuestions = 6; 
 
   surveyName = new FormControl('', {
     validators: [Validators.required, Validators.minLength(4)]
@@ -72,7 +72,6 @@ export class CreateSurveyComponent {
   deleteInput(control: FormControl) {
     control.setValue(''); 
   }
-
 
   questions = new FormArray([
     this.createQuestion() 
