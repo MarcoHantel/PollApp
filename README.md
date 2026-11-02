@@ -38,11 +38,13 @@ Collect opinions, engage your audience and watch the results come in live.
 Ending-soon highlights, active / past filter and category sorting.
  
 <img width="780" height="779" alt="survey-overview" src="https://github.com/user-attachments/assets/e9a63718-3bf0-4753-a081-f9781842b3ee" />
+
 ### Create a new survey
  
 Add a name, category, end date, description and any number of questions and answers.
  
 <img width="816" height="680" alt="create-survey" src="https://github.com/user-attachments/assets/aafc331e-aa85-4f4a-b20c-59d1fa90f64c" />
+
 ### Vote & live results
  
 Answer the questions and follow the results live.
@@ -122,6 +124,6 @@ src/
 ---
  
 <div align="center">
-Made with ☕ and Angular at the [Developer Akademie München](https://developerakademie.com/) by [Marco Hantel](https://github.com/MarcoHantel)
+Made with :hearts: and Angular at the [Developer Akademie München](https://developerakademie.com/) by [Marco Hantel](https://github.com/MarcoHantel)
  
 </div>
