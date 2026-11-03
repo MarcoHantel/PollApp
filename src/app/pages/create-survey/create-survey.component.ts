@@ -3,8 +3,9 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators, FormArray } fr
 import { CategoryDropdownService } from '../../service/category-dropdown.service';
 import { RouterLink } from "@angular/router";
 import { SurveyCreateService } from '../../service/survey-create.service.service';
-import { SurveyCreate } from '../../interfaces/survey-create.model'; 
+import { SurveyCreate } from '../../interfaces/survey-create.model';
 import { OverlayComponent } from './overlay/overlay.component';
+import { AbstractControl, ValidationErrors } from '@angular/forms';
 
 @Component({
   selector: 'app-create-survey',
@@ -17,14 +18,32 @@ export class CreateSurveyComponent {
   private dropDownService = inject(CategoryDropdownService)
   dropDown = this.dropDownService
 
-  readonly maxAnswers = 6; 
-  readonly maxQuestions = 6; 
+  readonly maxAnswers = 6;
+  readonly maxQuestions = 6;
+  readonly minAnswers = 2;
+
 
   surveyName = new FormControl('', {
     validators: [Validators.required, Validators.minLength(4)]
   });
 
-  surveyEndDate = new FormControl('');
+  private formatDate(date: Date): string {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+  }
+
+  readonly today = this.formatDate(new Date());
+
+  private notInPast = (control: AbstractControl): ValidationErrors | null => {
+    if (!control.value) return null;
+    return control.value < this.today ? { pastDate: true } : null;
+  };
+
+  surveyEndDate = new FormControl('', {
+    validators: [this.notInPast]
+  });
 
   surveyQuestions = new FormControl('', {
     validators: [Validators.required, Validators.minLength(6)]
@@ -38,17 +57,14 @@ export class CreateSurveyComponent {
     validators: [Validators.required, Validators.maxLength(500)]
   });
 
-
   checkEndDate() {
     if (!this.surveyEndDate.value) {
-
-      const defaultDate = new Date(Date.now() + 24 * 60 * 60 * 1000);
-      const formatted = defaultDate.toISOString().split('T')[0]; 
-      this.surveyEndDate.setValue(formatted);     
+      const tomorrow = new Date(Date.now() + 24 * 60 * 60 * 1000);
+      this.surveyEndDate.setValue(this.formatDate(tomorrow));
     }
   }
 
-  async updateInput() {  
+  async updateInput() {
 
     this.checkEndDate();
 
@@ -61,7 +77,8 @@ export class CreateSurveyComponent {
       questions: this.questions.value
     };
 
-    await this.surveyCreateService.addSurvey(newSurvey); 
+    await this.surveyCreateService.addSurvey(newSurvey);
+    this.surveyCreateService.closeCreateSurvey();
     this.surveyCreateService.showSuccessOverlay.set(true);
 
     this.surveyName.setValue('');
@@ -70,11 +87,11 @@ export class CreateSurveyComponent {
   }
 
   deleteInput(control: FormControl) {
-    control.setValue(''); 
+    control.setValue('');
   }
 
   questions = new FormArray([
-    this.createQuestion() 
+    this.createQuestion()
   ]);
 
   createQuestion(): FormGroup {
@@ -82,7 +99,8 @@ export class CreateSurveyComponent {
       questionText: new FormControl(''),
       allowMultiple: new FormControl(false),
       answers: new FormArray([
-        new FormControl('') 
+        new FormControl(''),
+        new FormControl('')
       ])
     });
   }
@@ -97,8 +115,10 @@ export class CreateSurveyComponent {
   }
 
   deleteQuestion(qIndex: number) {
-    if (qIndex > 0) { 
+    if (this.questions.length > 1) {
       this.questions.removeAt(qIndex);
+    } else {
+      this.questions.setControl(0, this.createQuestion());
     }
   }
 
@@ -109,9 +129,9 @@ export class CreateSurveyComponent {
     }
   }
 
-  deleteAnswer(qIndex: number, aIndex: number) {
-    this.getAnswers(qIndex).removeAt(aIndex);
-  }
+deleteAnswer(qIndex: number, aIndex: number) {
+  this.getAnswers(qIndex).removeAt(aIndex);
+}
 
   getAnswers(qIndex: number): FormArray {
     return this.questions.at(qIndex).get('answers') as FormArray;

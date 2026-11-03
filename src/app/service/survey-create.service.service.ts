@@ -7,13 +7,22 @@ import { RealtimeChannel } from '@supabase/supabase-js';
 export class SurveyCreateService {
 
   private supabaseService = inject(SupabaseService);
-  
+
   showSuccessOverlay = signal(false);
   lastCreatedSurveyId = signal<number | null>(null);
   selectedStatus = signal<'all' | 'active' | 'past'>('all');
   selectedCategory = signal('all');
   currentSurvey = signal<SurveyCreate | null>(null);
   surveys = signal<SurveyCreate[]>([]);
+  showCreateSurvey = signal(false);   
+
+  openCreateSurvey() {                
+    this.showCreateSurvey.set(true);
+  }
+
+  closeCreateSurvey() {               
+    this.showCreateSurvey.set(false);
+  }
 
   selectedAnswers = signal<{ [questionIndex: number]: number[] }>({});
 
@@ -44,7 +53,7 @@ export class SurveyCreateService {
   hasSelection(): boolean {
     return Object.values(this.selectedAnswers()).some(list => list.length > 0);
   }
-                     
+
   voteCounts = signal<Record<number, number>>({});
   private votesChannel: RealtimeChannel | null = null;
 
@@ -67,7 +76,7 @@ export class SurveyCreateService {
   }
 
   subscribeToVotes(surveyId: number) {
-    this.unsubscribeVotes(); 
+    this.unsubscribeVotes();
     this.votesChannel = this.supabaseService.supabase
       .channel('votes-' + surveyId)
       .on(
@@ -116,14 +125,14 @@ export class SurveyCreateService {
     });
 
 
-    if (rows.length === 0) return false; 
+    if (rows.length === 0) return false;
 
     const { error } = await this.supabaseService.supabase.from('votes').insert(rows);
     if (error) {
       console.error('Vote Fehler:', error);
       return false;
     }
-    this.selectedAnswers.set({}); 
+    this.selectedAnswers.set({});
     return true;
   }
 
@@ -191,7 +200,7 @@ export class SurveyCreateService {
         .filter((a: any) => a !== null && a !== '' && a !== undefined)
         .map((a: any) => ({
           question_id: questionId,
-          text: typeof a === 'string' ? a : a.text 
+          text: typeof a === 'string' ? a : a.text
         }));
 
       const { error: answerError } = await this.supabaseService.supabase

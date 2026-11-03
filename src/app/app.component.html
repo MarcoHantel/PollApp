@@ -1,5 +1,14 @@
 <app-header></app-header>
 <router-outlet />
+
+@if(surveyCreateService.showCreateSurvey()) {
+<div class="modal_backdrop">
+    <div class="modal_content">
+        <app-create-survey></app-create-survey>
+    </div>
+</div>
+}
+
 @if(surveyCreateService.showSuccessOverlay()) {
     <app-overlay></app-overlay>
 }

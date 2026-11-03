@@ -4,7 +4,9 @@
         <span class="survey_draft">Draft</span>
         <div class="btn_cancle--wrapper">
             <h1>create new survey</h1>
-            <a routerLink="" class="secondary_button displayflex btn_cancle">Cancle <img src="images/close.svg"></a>
+            <a class="secondary_button displayflex btn_cancle" (click)="surveyCreateService.closeCreateSurvey()">
+                Cancle <img src="images/close.svg">
+            </a>
         </div>
     </div>
     <div class="create_survey--top">
@@ -22,9 +24,12 @@
                             <div>
                                 <label for="surveySetEndDate">Set end date (optional)</label>
                                 <div class="displayflex_space--between margin_spacer">
-                                    <input id="surveySetEndDate" type="date" [formControl]="surveyEndDate">
-                                    <img class="img_waist" (click)="deleteInput(surveyEndDate)"
-                                        src="images/delete.svg">
+                                    <input id="surveySetEndDate" type="date" [formControl]="surveyEndDate"
+                                        [min]="today">
+                                    <img class="img_waist" (click)="deleteInput(surveyEndDate)" src="images/delete.svg">
+                                    @if(surveyEndDate.hasError('pastDate')) {
+                                    <p class="error_text">The end date cannot be in the past</p>
+                                    }
                                 </div>
                             </div>
                             <div class="custom_select">
@@ -68,9 +73,7 @@
 
                         <div class="displayflex displayflex_space--between">
                             <label>{{ qi + 1 }}. Question</label>
-                            @if(qi > 0) {
                             <img class="img_waist" (click)="deleteQuestion(qi)" src="images/delete.svg">
-                            }
                         </div>
 
                         <div class="margin_spacer displayflex">
@@ -85,15 +88,15 @@
                             </div>
                         </div>
 
+
                         @for(answer of getAnswers(qi).controls; track ai; let ai = $index) {
                         <div class="margin_spacer displayflex">
                             {{ getLetter(ai) }}.
                             <input class="font_styling" type="text" [formControl]="$any(answer)">
-                            @if(ai > 0) {
                             <img class="img_waist" (click)="deleteAnswer(qi, ai)" src="images/delete.svg">
-                            }
                         </div>
                         }
+
 
                         <div class="displayflex_space--between">
                             @if(canAddAnswer(qi)) {
@@ -117,7 +120,10 @@
         </div>
     </div>
     <div class="btn_publish--wrapper">
-        <button class="btn btn_text displayflex_center" (click)="updateInput()" [disabled]="!surveyName.valid">Publish
-            <img class="button-addon btn_text" src="images/check.svg"></button>
+        <button class="btn btn_text displayflex_center" (click)="updateInput()"
+            [disabled]="!surveyName.valid || surveyEndDate.invalid">
+            Publish
+            <img class="button-addon btn_text" src="images/check.svg">
+        </button>
     </div>
 </div>

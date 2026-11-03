@@ -39,13 +39,14 @@
 
     .card_wrapper--expire {
         font-family: 'Mulish', sans-serif;
-        font-size: 16px;
+        font-weight: '500';
+        font-size: 14px;
         padding: 15px 15px;
 
         >.survey_card--expire {
             background-color: var(--secondary-orange);
-            width: 89px;
-            height: 21px;
+            min-width: 102px;
+            height: 24px;
             padding: 3px 6px;
             text-align: center;
             color: var(--primary-background-color);

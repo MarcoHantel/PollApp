@@ -1,15 +1,12 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { SurveyCreateService } from '../../../service/survey-create.service.service'; 
 
 @Component({
   selector: 'app-new-survey',
-  imports: [
-    RouterLink,
-    RouterOutlet
-  ],
+  imports: [],
   templateUrl: './new-survey.component.html',
   styleUrl: './new-survey.component.scss'
 })
 export class NewSurveyComponent {
-
+surveyCreateService = inject(SurveyCreateService);  
 }
