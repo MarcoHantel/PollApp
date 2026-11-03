@@ -12,12 +12,12 @@ app-overview-surveys {
 .landingpage_main--container {
     width: 100%;
     max-width: 1218px;
-     margin-inline: auto; 
+    margin-inline: auto;
     box-sizing: border-box;
     padding: 0 16px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;   
     gap: 90px;
 
     @include below(768px) {

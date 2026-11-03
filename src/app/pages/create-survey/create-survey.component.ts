@@ -23,10 +23,6 @@ export class CreateSurveyComponent {
   readonly minAnswers = 2;
 
 
-  surveyName = new FormControl('', {
-    validators: [Validators.required, Validators.minLength(4)]
-  });
-
   private formatDate(date: Date): string {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -41,20 +37,24 @@ export class CreateSurveyComponent {
     return control.value < this.today ? { pastDate: true } : null;
   };
 
+surveyName = new FormControl('', {
+  validators: [Validators.required, Validators.minLength(4), Validators.pattern(/\S/)]
+});
+
   surveyEndDate = new FormControl('', {
     validators: [this.notInPast]
   });
 
   surveyQuestions = new FormControl('', {
-    validators: [Validators.required, Validators.minLength(6)]
+    validators: [Validators.required, Validators.minLength(6), Validators.pattern(/\S/)]
   });
 
   surveyAnswer = new FormControl('', {
-    validators: [Validators.required]
+    validators: [Validators.required, Validators.minLength(2), Validators.pattern(/\S/)]
   });
 
   surveyDescription = new FormControl('', {
-    validators: [Validators.required, Validators.maxLength(500)]
+    validators: [Validators.required, Validators.minLength(10), Validators.maxLength(500), Validators.pattern(/\S/)]
   });
 
   checkEndDate() {
@@ -130,7 +130,13 @@ export class CreateSurveyComponent {
   }
 
 deleteAnswer(qIndex: number, aIndex: number) {
-  this.getAnswers(qIndex).removeAt(aIndex);
+  const answers = this.getAnswers(qIndex);
+
+  if (answers.length > 1) {
+    answers.removeAt(aIndex);         
+  } else {
+    answers.at(aIndex).setValue('');   
+  }
 }
 
   getAnswers(qIndex: number): FormArray {

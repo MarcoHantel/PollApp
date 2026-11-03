@@ -17,6 +17,8 @@ export class SurveyDetailsComponent implements OnDestroy {
   survey = signal<SurveyCreate | null>(null);
 
   constructor() {
+    document.body.style.backgroundColor = 'white';
+
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     this.surveyCreateService.loadSurveys().then(() => {
@@ -30,6 +32,7 @@ export class SurveyDetailsComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
+    document.body.style.backgroundColor = '';
     this.surveyCreateService.unsubscribeVotes();
     this.surveyCreateService.selectedAnswers.set({});
   }

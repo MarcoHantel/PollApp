@@ -14,13 +14,13 @@ export class SurveyCreateService {
   selectedCategory = signal('all');
   currentSurvey = signal<SurveyCreate | null>(null);
   surveys = signal<SurveyCreate[]>([]);
-  showCreateSurvey = signal(false);   
+  showCreateSurvey = signal(false);
 
-  openCreateSurvey() {                
+  openCreateSurvey() {
     this.showCreateSurvey.set(true);
   }
 
-  closeCreateSurvey() {               
+  closeCreateSurvey() {
     this.showCreateSurvey.set(false);
   }
 
@@ -29,6 +29,7 @@ export class SurveyCreateService {
   toggleAnswer(questionIndex: number, answerIndex: number, allowMultiple: boolean) {
     this.selectedAnswers.update(current => {
       const selected = current[questionIndex] ?? [];
+      const alreadySelected = selected.includes(answerIndex);
       if (allowMultiple) {
         const alreadySelected = selected.includes(answerIndex);
         return {
@@ -40,7 +41,7 @@ export class SurveyCreateService {
       } else {
         return {
           ...current,
-          [questionIndex]: [answerIndex]
+           [questionIndex]: alreadySelected ? [] : [answerIndex]
         };
       }
     });
@@ -100,41 +101,49 @@ export class SurveyCreateService {
     }
   }
 
-  getPercent(question: Question, answerId?: number): number {
-    if (!answerId) return 0;
-    const counts = this.voteCounts();
-    const total = question.answers.reduce((sum, a) => sum + (counts[a.id!] ?? 0), 0);
+  getPercent(question: Question, qi: number, ai: number): number {
+    const counts = this.voteCounts();                     
+    const selected = this.selectedAnswers()[qi] ?? [];    
+
+    const countOf = (index: number): number => {
+      const id = question.answers[index].id!;
+      return (counts[id] ?? 0) + (selected.includes(index) ? 1 : 0);
+    };
+
+    const total = question.answers.reduce((sum, _, index) => sum + countOf(index), 0);
     if (total === 0) return 0;
 
-    return Math.round(((counts[answerId] ?? 0) / total) * 100);
+    return Math.round((countOf(ai) / total) * 100);
   }
-
 
   async submitVotes(survey: SurveyCreate): Promise<boolean> {
-    const selected = this.selectedAnswers();
-    const rows: { survey_id: number; question_id: number; answer_id: number }[] = [];
+  const selected = this.selectedAnswers();
+  const rows: { survey_id: number; question_id: number; answer_id: number }[] = [];
 
-    survey.questions.forEach((question, qi) => {
-      (selected[qi] ?? []).forEach(ai => {
-        rows.push({
-          survey_id: survey.id,
-          question_id: question.id!,
-          answer_id: question.answers[ai].id!
-        });
+  survey.questions.forEach((question, qi) => {
+    (selected[qi] ?? []).forEach(ai => {
+      rows.push({
+        survey_id: survey.id,
+        question_id: question.id!,
+        answer_id: question.answers[ai].id!
       });
     });
+  });
 
+  if (rows.length === 0) return false;
 
-    if (rows.length === 0) return false;
+  this.selectedAnswers.set({});   
 
-    const { error } = await this.supabaseService.supabase.from('votes').insert(rows);
-    if (error) {
-      console.error('Vote Fehler:', error);
-      return false;
-    }
-    this.selectedAnswers.set({});
-    return true;
+  const { error } = await this.supabaseService.supabase.from('votes').insert(rows);
+
+  if (error) {
+    console.error('Vote Fehler:', error);
+    this.selectedAnswers.set(selected);   
+    return false;
   }
+
+  return true;
+}
 
   async loadSurveys() {
     const { data, error } = await this.supabaseService.supabase

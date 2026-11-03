@@ -9,7 +9,7 @@
 @font-face {
     font-family: 'Mulish';
     font-style: normal;
-    font-weight: 200 1000;  
+    font-weight: 200 1000;
     font-display: swap;
     src: url('../../../public/fonts/mulish-latin-wght-normal.woff2') format('woff2');
 }
@@ -42,6 +42,8 @@ h1 {
     font-family: 'Nerko-One', sans-serif;
     font-size: clamp(48px, 6vw, 100px);
     color: var(--primary-orange);
+    font-weight: 400;
+    line-height: 89px;
 }
 
 .h1_margin {
@@ -53,6 +55,7 @@ h2 {
     font-size: clamp(36px, 4vw, 72px);
     color: var(--primary-orange);
     font-weight: 400;
+    font-style: normal;
 }
 
 .basic_text {
@@ -64,6 +67,7 @@ h2 {
     &--big {
         @extend .basic_text;
         font-size: 32px;
+        font-weight: 500;
     }
 }
 

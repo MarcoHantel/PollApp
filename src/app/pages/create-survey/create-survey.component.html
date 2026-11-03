@@ -58,10 +58,6 @@
                         <textarea id="surveyDescription" [formControl]="surveyDescription" maxlength="500"></textarea>
                         <img class="img_waist" (click)="deleteInput(surveyDescription)" src="images/delete.svg">
                     </div>
-                    <button class="secondary_button displayflex" (click)="addQuestion()">
-                        Add next question
-                        <img src="images/add_circle_white.svg">
-                    </button>
                 </div>
             </div>
 
@@ -115,8 +111,14 @@
                         </div>
                     </div>
                     }
+                    <button class="secondary_button displayflex" (click)="addQuestion()">
+                        Add next question
+                        <img src="images/add_circle_white.svg">
+                    </button>
                 </div>
+
             </div>
+
         </div>
     </div>
     <div class="btn_publish--wrapper">

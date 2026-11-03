@@ -1,7 +1,12 @@
- <header>
-    <img class="header_image" src="images/logo.svg" alt="survey logo image" routerLink="/">
+<header>
+    @if (isDetailPage) {
+    <img id="img_dark" class="header_image" src="images/logo-dark.svg" alt="survey logo image" routerLink="/">
+    } @else {
+    <img id="img_light" class="header_image" src="images/logo.svg" alt="survey logo image" routerLink="/">
+    }
 
     @if (isDetailPage) {
+
     <a routerLink="/create-survey" class="btn btn_text displayflex_center">
         <b>Create survey</b>
         <img class="button-addon" src="images/button_plus.svg">

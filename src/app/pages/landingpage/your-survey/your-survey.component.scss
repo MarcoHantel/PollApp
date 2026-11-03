@@ -1,10 +1,17 @@
-
 @use "../../../../styles/abstracts/breakpoints" as *;
+
+:host {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+}
 
 .your_survey--container {
     width: 100%;
     max-width: 1042px;
     min-height: 522px;
+    margin-inline: auto;
     min-width: 0;
 }
 
@@ -14,19 +21,19 @@
     gap: 16px;
 
     @media (max-width: 768px) {
-        display: flex; 
-        overflow-x: auto; 
-        scroll-snap-type: x mandatory; 
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
         -webkit-overflow-scrolling: touch;
-        padding-bottom: 12px; 
-        scrollbar-width: none; 
+        padding-bottom: 12px;
+        scrollbar-width: none;
 
         &::-webkit-scrollbar {
             display: none;
         }
 
         >* {
-            flex: 0 0 85%; 
+            flex: 0 0 85%;
             scroll-snap-align: center;
         }
     }
