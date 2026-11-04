@@ -22,7 +22,6 @@ export class CreateSurveyComponent {
   readonly maxQuestions = 6;
   readonly minAnswers = 2;
 
-
   private formatDate(date: Date): string {
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -129,13 +128,24 @@ surveyName = new FormControl('', {
     }
   }
 
+// deleteAnswer(qIndex: number, aIndex: number) {
+//   const answers = this.getAnswers(qIndex);
+
+//   if (answers.length > 1) {
+//     answers.removeAt(aIndex);         
+//   } else {
+//     answers.at(aIndex).setValue('');   
+//   }
+// }
+
+
 deleteAnswer(qIndex: number, aIndex: number) {
   const answers = this.getAnswers(qIndex);
 
-  if (answers.length > 1) {
-    answers.removeAt(aIndex);         
+  if (aIndex < this.minAnswers) {
+    answers.at(aIndex).setValue('');   // ← A und B: nur Inhalt leeren
   } else {
-    answers.at(aIndex).setValue('');   
+    answers.removeAt(aIndex);          // ← ab C: Feld komplett entfernen
   }
 }
 

@@ -84,11 +84,21 @@
     }
 }
 
-.btn_cancle {
+.btn_cancel {
     width: 108px;
+    height: 40px;
+    background-color: var(--light-orange);
+    color: white;
+    font-family: "Nokora", sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    gap: 10px;
+    padding: 8px 12px;
 }
 
-.btn_cancle--wrapper {
+.btn_cancel--wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -134,7 +144,6 @@
     font-family: 'Mulish', sans-serif;
 
     &--selected {
-        background-color: var(--primary-background-color);
         color: var(--white);
         padding: 4px 6px;
         cursor: pointer;
