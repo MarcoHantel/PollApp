@@ -44,6 +44,10 @@ h1 {
     color: var(--primary-orange);
     font-weight: 400;
     line-height: 89px;
+
+    @media (max-width: 400px) {
+        line-height: 50px;
+    }
 }
 
 .h1_margin {
