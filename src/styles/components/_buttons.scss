@@ -1,7 +1,6 @@
 .button-addon {
     width: 0;
     opacity: 0;
-    overflow: hidden;
     transition: width 0.3s ease, opacity 0.3s ease;
 }
 
@@ -13,7 +12,7 @@
     padding: 12px 16px;
     box-sizing: border-box;
     background-color: var(--secondary-orange);
-    white-space: nowrap; 
+    white-space: nowrap;
     transition: width 0.3s ease, padding 0.3s ease, background-color 0.3s ease;
 
     &:hover {
@@ -23,11 +22,20 @@
         text-align: start;
 
         >.button-addon {
-            width: 24px; 
+            width: 24px;
             height: 24px;
             opacity: 1;
             padding-left: 16px;
         }
+    }
+
+    &:hover:not(:disabled) {
+        background-color: var(--primary-orange);
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
     }
 }
 
@@ -96,6 +104,11 @@
     border-radius: 10px;
     gap: 10px;
     padding: 8px 12px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: var(--light-orange-hover);
+    }
 }
 
 .btn_cancel--wrapper {
@@ -221,7 +234,7 @@ input[type="checkbox"] {
     font-size: 20px;
     font-weight: 700;
 
-    &:hover{
+    &:hover {
         cursor: pointer;
     }
 }

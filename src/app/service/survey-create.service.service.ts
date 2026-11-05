@@ -41,7 +41,7 @@ export class SurveyCreateService {
       } else {
         return {
           ...current,
-           [questionIndex]: alreadySelected ? [] : [answerIndex]
+          [questionIndex]: alreadySelected ? [] : [answerIndex]
         };
       }
     });
@@ -102,8 +102,8 @@ export class SurveyCreateService {
   }
 
   getPercent(question: Question, qi: number, ai: number): number {
-    const counts = this.voteCounts();                     
-    const selected = this.selectedAnswers()[qi] ?? [];    
+    const counts = this.voteCounts();
+    const selected = this.selectedAnswers()[qi] ?? [];
 
     const countOf = (index: number): number => {
       const id = question.answers[index].id!;
@@ -117,33 +117,33 @@ export class SurveyCreateService {
   }
 
   async submitVotes(survey: SurveyCreate): Promise<boolean> {
-  const selected = this.selectedAnswers();
-  const rows: { survey_id: number; question_id: number; answer_id: number }[] = [];
+    const selected = this.selectedAnswers();
+    const rows: { survey_id: number; question_id: number; answer_id: number }[] = [];
 
-  survey.questions.forEach((question, qi) => {
-    (selected[qi] ?? []).forEach(ai => {
-      rows.push({
-        survey_id: survey.id,
-        question_id: question.id!,
-        answer_id: question.answers[ai].id!
+    survey.questions.forEach((question, qi) => {
+      (selected[qi] ?? []).forEach(ai => {
+        rows.push({
+          survey_id: survey.id,
+          question_id: question.id!,
+          answer_id: question.answers[ai].id!
+        });
       });
     });
-  });
 
-  if (rows.length === 0) return false;
+    if (rows.length === 0) return false;
 
-  this.selectedAnswers.set({});   
+    this.selectedAnswers.set({});
 
-  const { error } = await this.supabaseService.supabase.from('votes').insert(rows);
+    const { error } = await this.supabaseService.supabase.from('votes').insert(rows);
 
-  if (error) {
-    console.error('Vote Fehler:', error);
-    this.selectedAnswers.set(selected);   
-    return false;
+    if (error) {
+      console.error('Vote Fehler:', error);
+      this.selectedAnswers.set(selected);
+      return false;
+    }
+
+    return true;
   }
-
-  return true;
-}
 
   async loadSurveys() {
     const { data, error } = await this.supabaseService.supabase
@@ -260,4 +260,9 @@ export class SurveyCreateService {
 
     return result;
   });
+
+
+  hasVotes = computed(() =>
+    Object.values(this.voteCounts()).some(count => count > 0)
+  );
 }

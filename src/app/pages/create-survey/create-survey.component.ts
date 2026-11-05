@@ -18,6 +18,13 @@ export class CreateSurveyComponent {
   private dropDownService = inject(CategoryDropdownService)
   dropDown = this.dropDownService
 
+  canPublish(): boolean {
+  return this.surveyName.valid
+    && this.surveyEndDate.valid
+    && this.questions.valid
+    && this.dropDown.choose !== 'Choose categorie';
+}
+
   readonly maxAnswers = 6;
   readonly maxQuestions = 6;
   readonly minAnswers = 2;
@@ -128,24 +135,13 @@ surveyName = new FormControl('', {
     }
   }
 
-// deleteAnswer(qIndex: number, aIndex: number) {
-//   const answers = this.getAnswers(qIndex);
-
-//   if (answers.length > 1) {
-//     answers.removeAt(aIndex);         
-//   } else {
-//     answers.at(aIndex).setValue('');   
-//   }
-// }
-
-
 deleteAnswer(qIndex: number, aIndex: number) {
   const answers = this.getAnswers(qIndex);
 
   if (aIndex < this.minAnswers) {
-    answers.at(aIndex).setValue('');   // ← A und B: nur Inhalt leeren
+    answers.at(aIndex).setValue('');  
   } else {
-    answers.removeAt(aIndex);          // ← ab C: Feld komplett entfernen
+    answers.removeAt(aIndex);       
   }
 }
 

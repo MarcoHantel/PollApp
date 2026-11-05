@@ -121,11 +121,8 @@
 
         </div>
     </div>
-    <div class="btn_publish--wrapper">
-        <button class="btn btn_text displayflex_center" (click)="updateInput()"
-            [disabled]="!surveyName.valid || surveyEndDate.invalid">
-            Publish
-            <img class="button-addon btn_text" src="images/check.svg">
-        </button>
-    </div>
+<div class="btn_publish--wrapper">
+        <button class="btn btn_text displayflex_center" (click)="updateInput()" [disabled]="!canPublish()">Publish
+        <img class="button-addon btn_text" src="images/check.svg"></button>
+</div>
 </div>

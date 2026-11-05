@@ -12,7 +12,7 @@ import { RouterLink } from '@angular/router';
 export class SurveyCardComponent {
   @Input({ required: true }) survey!: SurveyCreate;
 
-  getDaysLeft(): number {
+    getDaysLeft(): number {
     const endDate = new Date(this.survey.endDate);
     const today = new Date();
     today.setHours(0, 0, 0, 0); 

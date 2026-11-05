@@ -7,9 +7,9 @@
 
     @if (isDetailPage) {
 
-    <a routerLink="/create-survey" class="btn btn_text displayflex_center">
+    <button class="btn btn_text displayflex_center" (click)="surveyCreateService.openCreateSurvey()">
         <b>Create survey</b>
         <img class="button-addon" src="images/button_plus.svg">
-    </a>
+    </button>
     }
 </header>

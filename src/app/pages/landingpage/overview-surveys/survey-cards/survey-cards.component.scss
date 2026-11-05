@@ -2,12 +2,24 @@
 
 :host {
     display: block;
+    height: 100%;
+}
+
+app-survey-cards {
+    width: calc(50% - 8px); 
 }
 
 .card_wrapper {
+
+    height: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
     background-color: var(--light-purple);
-    width: 100%;            
-    min-height: 127px;      
+    width: 100%;
+    min-height: 127px;
     box-sizing: border-box;
     cursor: pointer;
     border: none;
@@ -56,9 +68,23 @@
     }
 }
 
-.survey-title { 
-    white-space: nowrap;      
-    overflow: hidden;         
-    text-overflow: ellipsis;  
-    max-width: 100%;          
+.survey-title {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+
+.all_cards_wrapper {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    max-height: 413px;
+    overflow-y: auto;
+}
+
+
+@media (max-width: 600px) {
+    .all_cards_wrapper app-survey-cards {
+        width: 100%; 
+    }
 }

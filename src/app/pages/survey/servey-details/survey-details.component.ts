@@ -15,6 +15,7 @@ export class SurveyDetailsComponent implements OnDestroy {
   route = inject(ActivatedRoute);
   router = inject(Router);                                     
   survey = signal<SurveyCreate | null>(null);
+  voteCounts = signal<Record<number, number>>({});
 
   constructor() {
     document.body.style.backgroundColor = 'white';

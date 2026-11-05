@@ -2,7 +2,7 @@
 
 <div class="detail_wrapper">
 
-    <div class="vote_section">
+    <div class="vote_section" [class.survey_expired]="!isSurveyActive()">
         <span class="published">Published</span>
         <div class="vote_section--infos displayflex_space--between">
             <p class="survey-14">Ends in {{ survey()!.endDate }}</p>
@@ -39,12 +39,13 @@
             }
         </div>
 
+        @if(isSurveyActive()) {
         <div class="button_wrapper displayflex_space--end">
-            <div class="btn_complete" (click)="completeSurvey()"
-                [class.disable]="!isSurveyActive() || !surveyCreateService.hasSelection()">
+            <div class="btn_complete" (click)="completeSurvey()" [class.disable]="!surveyCreateService.hasSelection()">
                 <a>Complete survey</a>
             </div>
         </div>
+        }
     </div>
 
     <div class="survey-info"></div>
@@ -52,9 +53,10 @@
     <div class="result_section">
         <h2 class="result_title">Survey results <span class="result_live">LIVE</span></h2>
 
+        @if(surveyCreateService.hasVotes()) {
+
         @for(question of survey()!.questions; track $index; let i = $index) {
         <div class="result_question">
-
             <h3>{{ i + 1 }}. {{ question.questionText }}</h3>
 
             @for(answer of question.answers; track $index; let ai = $index) {
@@ -69,6 +71,17 @@
             </div>
             }
         </div>
+        }
+
+        } @else {
+
+        <div class="result_empty">
+            <p class="result_empty--info">
+                Results will be shown here after participants complete the survey.
+            </p>
+            <p class="result_empty--text">There are no answers yet.</p>
+        </div>
+
         }
     </div>
 </div>
