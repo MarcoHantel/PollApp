@@ -6,7 +6,7 @@
 }
 
 app-survey-cards {
-    width: calc(50% - 8px); 
+    width: calc(50% - 8px);
 }
 
 .card_wrapper {
@@ -46,6 +46,11 @@ app-survey-cards {
             color: var(--white);
             margin: 0px;
             padding: 5px 10px;
+
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
     }
 
@@ -85,6 +90,6 @@ app-survey-cards {
 
 @media (max-width: 600px) {
     .all_cards_wrapper app-survey-cards {
-        width: 100%; 
+        width: 100%;
     }
 }

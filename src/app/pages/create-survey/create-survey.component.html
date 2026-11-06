@@ -15,9 +15,16 @@
                 <div class="survey_card--name displayflex_column">
                     <div class="survey_name_wrapper">
                         <label for="surveyName">Survey name</label>
-                        <div class="margin_spacer displayflex">
-                            <input id="surveyName" type="text" [formControl]="surveyName">
+                        <div class="displayflex">
+                            <input id="surveyName" type="text" maxlength="80" [formControl]="surveyName">
                             <img class="img_waist" (click)="deleteInput(surveyName)" src="images/delete.svg">
+                        </div>
+
+                        @let length = surveyName.value?.length ?? 0;
+                        <div class="warning_text">
+                            @if(length >= 60) {
+                            <p class="warning_text">{{ length }} / 80 characters limit</p>
+                            }
                         </div>
 
                         <div class="date_category_row align_start displayflex_space--between">
@@ -27,8 +34,10 @@
                                     <input id="surveySetEndDate" type="date" [formControl]="surveyEndDate"
                                         [min]="today">
                                     <img class="img_waist" (click)="deleteInput(surveyEndDate)" src="images/delete.svg">
+                                </div>
+                                <div class="error_text">
                                     @if(surveyEndDate.hasError('pastDate')) {
-                                    <p class="error_text">The end date cannot be in the past</p>
+                                    <p>The end date cannot be in the past</p>
                                     }
                                 </div>
                             </div>
@@ -41,12 +50,13 @@
                                 <ul class="custom_select--options">
                                     @for(option of dropDown.categoryOptions; track option.value) {
                                     <li class="custom_select--option"
-                                        (click)="dropDown.selectOption(option); surveyCreateService.setCategory(option.value)">
+                                        (click)="dropDown.selectOption(option); surveyCreateService.setCategory(option.value); checkErrorsResolved()">
                                         <p class="custom_select--option--text">{{ option.label }}</p>
                                     </li>
                                     }
                                 </ul>
                                 }
+
                             </div>
                         </div>
                     </div>
@@ -55,9 +65,17 @@
                 <div class="survey_card--description displayflex_column margin_spacer">
                     <label for="surveyDescription">Describing text (optional)</label>
                     <div class="displayflex margin_spacer">
-                        <textarea id="surveyDescription" [formControl]="surveyDescription" maxlength="500"></textarea>
+                        <textarea id="surveyDescription" [formControl]="surveyDescription" maxlength="300"></textarea>
                         <img class="img_waist" (click)="deleteInput(surveyDescription)" src="images/delete.svg">
                     </div>
+
+                    @let descriptionLength = surveyDescription.value?.length ?? 0;
+                    <div class="warning_text">
+                        @if(descriptionLength >= 250) {
+                        <p>{{ descriptionLength }} / 300 characters limit</p>
+                        }
+                    </div>
+
                 </div>
             </div>
 
@@ -72,10 +90,17 @@
                             <img class="img_waist" (click)="deleteQuestion(qi)" src="images/delete.svg">
                         </div>
 
-                        <div class="margin_spacer displayflex">
-                            <input class="font_styling" type="text" [formControl]="$any(question.get('questionText'))">
+                        <div class="displayflex">
+                            <input class="font_styling" type="text" maxlength="50"
+                                [formControl]="$any(question.get('questionText'))">
                         </div>
 
+                        @let length = question.get('questionText')?.value?.length ?? 0;
+                        <div class="warning_text">
+                            @if(length >= 40) {
+                            <p class="warning_text">{{ length }} / 50 characters limit</p>
+                            }
+                        </div>
                         <div class="displayflex displayflex_space--between">
                             <label>Answers</label>
                             <div class="displayflex">
@@ -86,11 +111,17 @@
 
 
                         @for(answer of getAnswers(qi).controls; track ai; let ai = $index) {
+                        @let length = answer.value?.length ?? 0;
+
                         <div class="margin_spacer displayflex">
                             {{ getLetter(ai) }}.
-                            <input class="font_styling" type="text" [formControl]="$any(answer)">
+                            <input class="font_styling" type="text" maxlength="80" [formControl]="$any(answer)">
                             <img class="img_waist" (click)="deleteAnswer(qi, ai)" src="images/delete.svg">
                         </div>
+
+                        @if(length >= 50) {
+                        <p class="warning_text">{{ length }} / 80 characters</p>
+                        }
                         }
 
 
@@ -101,7 +132,6 @@
                                 <img src="images/add_circle.svg">
                             </div>
                             }
-
                             @if(!canAddAnswer(qi)){
                             <div>
                                 <p>You can add up to 6 answer fields!</p>
@@ -109,6 +139,7 @@
                             }
 
                         </div>
+
                     </div>
                     }
                     <button class="secondary_button displayflex" (click)="addQuestion()">
@@ -121,8 +152,21 @@
 
         </div>
     </div>
-<div class="btn_publish--wrapper">
-        <button class="btn btn_text displayflex_center" (click)="updateInput()" [disabled]="!canPublish()">Publish
-        <img class="button-addon btn_text" src="images/check.svg"></button>
-</div>
-</div>
+    <div class="btn_publish--wrapper">
+        <button class="btn btn_text displayflex_center" (click)="onPublishClick()" [class.btn_inactive]="!canPublish()">
+            Publish
+            <img class="button-addon btn_text" src="images/check.svg">
+        </button>
+    </div>
+
+    @let errors = getErrors();
+    @if(showErrors && errors.length > 0) {
+    <div class="publish_errors" role="alert">
+        <p class="publish_errors--title">Please complete the following before publishing:</p>
+        <ul>
+            @for(error of errors; track error) {
+            <li>{{ error }}</li>
+            }
+        </ul>
+    </div>
+    }
