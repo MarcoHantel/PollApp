@@ -21,7 +21,6 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 export class CreateSurveyComponent {
 
   constructor() {
-  // bei jeder Eingabe prüfen, ob alle Fehler behoben sind
   merge(
     this.surveyName.valueChanges,
     this.surveyEndDate.valueChanges,
@@ -184,11 +183,8 @@ checkErrorsResolved() {
     return this.getAnswers(qIndex).length < this.maxAnswers;
   }
 
-  showErrors = false;   // ← erst nach dem ersten Klick Fehler zeigen
+  showErrors = false;  
 
- // ================================================
-// FEHLERLISTE
-// ================================================
 
 getErrors(): string[] {
   return [
@@ -245,16 +241,13 @@ private getAnswerErrors(qi: number): string[] {
   return errors;
 }
 
-  
-
-  // Klick auf Publish
   onPublishClick() {
     if (this.canPublish()) {
       this.showErrors = false;
       this.updateInput();
     } else {
       this.showErrors = true;
-      this.surveyName.markAsTouched();     // ← Felder rot markieren
+      this.surveyName.markAsTouched();     
       this.questions.markAllAsTouched();
     }
   }
